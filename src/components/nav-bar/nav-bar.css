@@ -1,0 +1,117 @@
+.navbar {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #fff;
+
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 24px;
+    color: #000;
+    font-weight: bold;
+}
+
+.logo img {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.logo a {
+    text-decoration: none;
+    color: #333;
+}
+
+.nav-links {
+    display: flex;
+    list-style-type: none;
+    gap: 5px;
+}
+
+.nav-links li {
+
+    padding: 5px 10px;
+}
+
+.nav-links .tabs-nav:hover {
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    color: #444;
+    border-radius: 10px;
+
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #000;
+    font-size: 13px;
+}
+
+.nav-search-cart-login {
+    display: flex;
+    align-items: center;
+}
+
+.nav-search {
+    padding: 5px 10px;
+    border: 1px solid #444;
+    border-radius: 3px;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.nav-cart,
+.nav-login {
+    text-decoration: none;
+    color: #fff;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.account {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 14px;
+    color: #212A3E;
+    font-weight: bold;
+}
+
+.login a {
+    color: var(--color-primary);
+}
+
+.login a:hover {
+    text-decoration: underline;
+}
+
+.register a {
+    background-color: var(--color-primary);
+
+    border-radius: .5rem;
+    color: #fff;
+    font-family: ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: .875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    padding: .75rem 1rem;
+    text-align: center;
+    -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+}
+
+.register,
+.login:active {
+    transform: translate(1px, 1px);
+    transition-duration: .2s;
+}
