@@ -1,25 +1,799 @@
-html {
-  -webkit-text-size-adjust: 100%;
-  -moz-tab-size: 4;
-  -o-tab-size: 4;
-  tab-size: 4;
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol', 'Noto Color Emoji';
+* {
+  padding: 0;
+  margin: 0;
 }
 
 :root {
+  font-family: -apple-system;
+
+
+
   --color-primary: #0d47a1;
   --color-secondary: #2c3e50;
 
+  --color-logo-secondary: #0d47a1;
+  --color-logo-highlight: #FBD316;
+
+  --color-background-white: #fff;
+  --color-background-down: #f1f5f9;
+  --color-background-light: #fcfcfc;
+  --color-background-lightest: #f4f4f4;
+  --color-background-card: rgba(247, 248, 248, 0.952);
+
+  --color-button-pay: #008080;
+  --color-button-cart: #1a49ab;
+  --color-stars: #008080;
+  --color-action-show-more: #008080;
+
+  --color-text-dark: rgba(0, 0, 0, .8);
+  --color-text-medium-dark: rgba(0, 0, 0, .45);
+  --color-text-medium-light: #565959;
+  --color-text-light: #333333;
+  --color-text-lightest: #0f1111;
+
+
+  --color-text-opaque: #3C4048;
+  --color-text-highlight-secondary: #202123;
+
+
+  --color-blue-clear: #2185D5;
+  --color-blue: #0b347b;
+  --color-blue-vibrant: #2146C7;
+  --color-black: #212529;
+  --color-white: #fff;
+  --color-grey: var(--color-text-opaque)666;
+  --color-orange: #e84118;
+  --color-green: #38E54D;
+  --color-green-2: #06738f;
+  --color-green-3: #00a650;
+  --color-violet: #1613d3;
+  --color-rose: #F8485E;
+  --color-red: #EE2B47;
+
+  --border-width-0: #00000008;
+  --border-width-1: #00000010;
+  --border-width-2: #00000018;
+  --border-width-3: #00000024;
+  --border-width-4: #d9d9d9;
+
+  --font-size-xxs: 10px;
+  --font-size-xs: 13px;
+  --font-size-sm: 15px;
+  --font-size-md: 17.5px;
+  --font-size-lg: 18px;
+  --font-size-xl: 18px;
+
+  --font-weight-light: 400;
+  --font-weight-normal: 500;
+  --font-weight-bold: 600;
+}
+
+.swiper {
+  width: 600px;
+  height: 300px;
 }
 
 body {
-  padding: 0;
-  line-height: inherit;
+  margin: 0 auto;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  font-family: "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Roboto",
+    "Oxygen",
+    "Ubuntu",
+    "Cantarell",
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
+    sans-serif;
+
 }
+
+input {
+  outline: none;
+}
+
 
 a {
   text-decoration: none;
-  color: #000;
+}
+
+.App {
+  text-align: center;
+
+}
+
+main {
+  flex: 1;
+  min-height: 100rem;
+
+}
+
+strong {
+  font-weight: 600;
+  color: var(--color-black);
+}
+
+html {
+  box-sizing: border-box;
+  height: 100%;
+  font-size: 15px;
+  line-height: 1.5;
+  tab-size: 4;
+  -webkit-text-size-adjust: 100%;
+}
+
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  text-decoration: none;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.size-w-10 {
+  width: 10px;
+}
+
+.size-h-10 {
+  height: 10px;
+}
+
+.show-more-a {
+  font-size: 12px;
+  color: var(--color-action-show-more);
+}
+
+.show-more-a:hover {
+  text-decoration: underline;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-text-light);
+  margin: 0;
+
+}
+
+button {
+  background-color: #fff;
+  border: 1px solid #d5d9d9;
+  border-radius: 8px;
+  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+  box-sizing: border-box;
+  color: #0f1111;
+  cursor: pointer;
+  display: inline-block;
+
+  font-size: 13px;
+  line-height: 29px;
+  padding: 0 10px 0 11px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  width: 100%;
+  max-width: 200px;
+}
+
+p {
+  color: var(--color-text-light);
+  margin: 0;
+}
+
+/** Title label in different sizes */
+.hs-sr1 {
+  font-size: 14px;
+  font-weight: var(--font-weight-normal);
+  color: #030303;
+}
+
+.hs-sr2 {
+  font-size: 14.92px;
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-highlight-secondary);
+}
+
+hs-sr2 {
+  font-size: 14.92px;
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-highlight-secondary);
+}
+
+hs-sr3 {
+  font-size: 20.92px;
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-highlight-secondary);
+}
+
+.hs-sr3 {
+  font-size: 20.92px;
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-highlight-secondary);
+}
+
+.agg-pd-left-10 {
+  padding-left: 10px;
+}
+
+/** Paragraph label */
+
+p-sr1 {
+  font-size: 13.5px;
+  color: #313131;
+}
+
+.ps-sr1 {
+  font-size: 13.4PX;
+  color: #313131;
+}
+
+p-sr2 {
+  font-size: 15px;
+  color: var(--color-text-opaque);
+}
+
+p-sr3 {
+  font-size: 18px;
+  color: var(--color-text-opaque);
+}
+
+p-sr4 {
+  font-size: 20px;
+  color: var(--color-text-opaque);
+}
+
+/** A label */
+
+.as-sr1-info {
+  font-size: 13.5px;
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+
+.show-more a {
+  color: #008080;
+  font-size: 12.5px;
+}
+
+.show-more a:hover {
+  color: #008080;
+  text-decoration: underline;
+}
+
+
+/** Etiq product card */
+
+et-sr1 {
+  margin: 5px 5px;
+  font-size: 12.5px;
+  color: var(--color-text-opaque);
+  text-align: center;
+  width: 30%;
+  background-color: var(--color-background-light);
+  color: #6466e8;
+  border: 1PX SOLID #6466e8;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-radius: 5px;
+}
+
+et-sr2 {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  font-size: 12.5px;
+  color: var(--color-text-opaque);
+  text-align: center;
+  width: 100%;
+  background-color: #2940D3;
+  color: #fff;
+  border: 1PX SOLID #fff;
+  position: relative;
+
+  margin-top: 10PX;
+  border-radius: 5px;
+
+}
+
+/** Icon verified  brand*/
+
+vrf-drv {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  font-size: 12.5px;
+
+  text-align: center;
+  width: 100%;
+  color: #2940D3;
+  fill: #2940D3;
+  position: relative;
+
+
+  border-radius: 5px;
+}
+
+f-srt1 {
+  font-size: 13.5px;
+  color: var(--color-text-opaque);
+  text-align: end;
+  width: 100%;
+  padding: 2PX 20px 2px 20px;
+  background-color: transparent;
+  color: #332C39;
+  font-weight: 500;
+  position: relative;
+  bottom: 0;
+  border-radius: 5px;
+}
+
+f-srt-f-r {
+
+  font-size: 13.5px;
+  color: var(--color-text-opaque);
+  text-align: center;
+  width: 100%;
+  padding: 2PX 20px 2px 20px;
+  background-color: #2B3A55;
+  color: var(--color-white);
+  position: relative;
+  bottom: 0;
+  border-radius: 5px;
+}
+
+
+srw-sr1 {
+  font-size: small;
+  color: var(--color-blue);
+  fill: var(--color-black);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+html {
+  min-height: 100%;
+  background-color: var(--color-background-down);
+}
+
+/** Etiq texto degrad */
+
+ctr-opa {
+  color: #ececf1;
+  font-size: 15px;
+}
+
+.ctr-opa {
+  color: #ececf1;
+  font-size: 15px;
+}
+
+/** Etiq br lvl*/
+
+
+
+*,
+button,
+input {
+  border: 0;
+  background-color: none;
+  font-size: var(--family);
+}
+
+.tach {
+  text-decoration: line-through;
+
+}
+
+.envio {
+  font-size: var(--font-size-xs);
+  color: var(--color-blue-clear);
+  font-weight: var(--font-weight-bold);
+
+}
+
+.margin-left {
+  margin-left: 10.1px
+}
+
+.eftHover:hover {
+  opacity: 1;
+  background-color: #01050a04;
+}
+
+.active-prev-view {
+  border: 1px solid var(--color-primary);
+  border-radius: 5px;
+}
+
+.shr-srhd {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10000000;
+}
+
+.button-primary {
+  width: 100%;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 5px;
+  padding: 10px 30px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.loa-s {
+  display: block;
+  margin-top: 5px;
+  font-size: 14px;
+  color: #008000;
+
+}
+
+.error {
+  display: block;
+  margin-top: 5px;
+  font-size: 14px;
+  color: #c00;
+
+}
+
+.parp {
+  animation: parpadeo 2.5s 2;
+}
+
+@keyframes parpadeo {
+  0% {
+    opacity: 1;
+  }
+
+  25% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  75% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes smoApp {
+  0% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+.loader {
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 0.5s infinite linear;
+  margin: auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loaderLine {
+  width: 100%;
+  height: 4px;
+
+  position: relative;
+  background: var(--color-background-light);
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.loaderLine::after {
+  border-radius: 10px;
+  content: '';
+  width: 206px;
+  height: 2px;
+  background: var(--color-primary);
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  animation: hitZak 10s linear infinite;
+}
+
+@keyframes hitZak {
+  0% {
+    left: 0;
+    transform: translateX(-1%);
+  }
+
+  100% {
+    left: 100%;
+    transform: translateX(-99%);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(-10%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+
+.loader-snog {
+  width: 100%;
+  height: 19.5px;
+  background:
+    linear-gradient(0.25turn, transparent, #FFF, transparent),
+    linear-gradient(#E8F0FE, #E8F0FE);
+  background-repeat: no-repeat;
+  background-size: 315px 200px, 315px 130px, 100px 100px, 225px 30px;
+  background-position: -315px 0, 0 0, 15px 140px, 65px 145px;
+  animation: loading-sss 1.5s infinite;
+}
+
+@keyframes loading-sss {
+  to {
+    background-position: 315px 0, 0 0, 15px 140px, 65px 145px;
+  }
+}
+
+
+
+
+@-moz-keyframes animation-42 {
+  from {
+    transform: scale(1, 1);
+  }
+
+  30% {
+    transform: scale(1.25, 0.75);
+  }
+
+  40% {
+    transform: scale(0.75, 1.25);
+  }
+
+  50% {
+    transform: scale(1.15, 0.85);
+  }
+
+  65% {
+    transform: scale(0.95, 1.05);
+  }
+
+  75% {
+    transform: scale(1.05, 0.95);
+  }
+
+  to {
+    transform: scale(1, 1);
+  }
+}
+
+@-webkit-keyframes animation-42 {
+  from {
+    transform: scale(1, 1);
+  }
+
+  30% {
+    transform: scale(1.25, 0.75);
+  }
+
+  40% {
+    transform: scale(0.75, 1.25);
+  }
+
+  50% {
+    transform: scale(1.15, 0.85);
+  }
+
+  65% {
+    transform: scale(0.95, 1.05);
+  }
+
+  75% {
+    transform: scale(1.05, 0.95);
+  }
+
+  to {
+    transform: scale(1, 1);
+  }
+}
+
+@-o-keyframes animation-42 {
+  from {
+    transform: scale(1, 1);
+  }
+
+  30% {
+    transform: scale(1.25, 0.75);
+  }
+
+  40% {
+    transform: scale(0.75, 1.25);
+  }
+
+  50% {
+    transform: scale(1.15, 0.85);
+  }
+
+  65% {
+    transform: scale(0.95, 1.05);
+  }
+
+  75% {
+    transform: scale(1.05, 0.95);
+  }
+
+  to {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes animation-42 {
+  from {
+    transform: scale(1, 1);
+  }
+
+  30% {
+    transform: scale(1.25, 0.75);
+  }
+
+  40% {
+    transform: scale(0.75, 1.25);
+  }
+
+  50% {
+    transform: scale(1.15, 0.85);
+  }
+
+  65% {
+    transform: scale(0.95, 1.05);
+  }
+
+  75% {
+    transform: scale(1.05, 0.95);
+  }
+
+  to {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes change-background-color-blue {
+  0% {
+    background-color: rgb(102, 204, 255);
+  }
+
+  50% {
+    background-color: rgb(51, 153, 255);
+  }
+
+  100% {
+    background-color: rgb(102, 204, 255);
+  }
+}
+
+@keyframes change-background-color-green {
+  0% {
+    background-color: rgb(102, 255, 204);
+  }
+
+  50% {
+    background-color: rgb(51, 204, 153);
+  }
+
+  100% {
+    background-color: rgb(102, 255, 204);
+  }
+}
+
+@keyframes change-background-color-violet {
+  0% {
+    background-color: rgb(204, 102, 255);
+  }
+
+  50% {
+    background-color: rgb(153, 51, 255);
+  }
+
+  100% {
+    background-color: rgb(204, 102, 255);
+  }
+}
+
+@keyframes change-background-orange {
+  0% {
+    background-color: rgb(255, 153, 102);
+  }
+
+  50% {
+    background-color: rgb(255, 102, 51);
+  }
+
+  100% {
+    background-color: rgb(255, 153, 102);
+  }
+}
+
+@keyframes change-background-color-rose {
+  0% {
+    background-color: rgb(255, 102, 204);
+  }
+
+  50% {
+    background-color: rgb(255, 51, 153);
+  }
+
+  100% {
+    background-color: rgb(255, 102, 204);
+  }
+}
+
+@keyframes change-background-color-red {
+  0% {
+    background-color: rgb(255, 102, 102);
+  }
+
+  50% {
+    background-color: rgb(255, 51, 51);
+  }
+
+  100% {
+    background-color: rgb(255, 102, 102);
+  }
 }

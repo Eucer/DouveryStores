@@ -3,6 +3,7 @@
     justify-content: space-evenly;
     align-items: center;
     background-color: #fff;
+    padding: 20px 0px;
 
 }
 
@@ -30,6 +31,8 @@
     display: flex;
     list-style-type: none;
     gap: 5px;
+    padding: 0px;
+    margin: 0px;
 }
 
 .nav-links li {
@@ -110,8 +113,21 @@
     touch-action: manipulation;
 }
 
+.register a:hover {
+    opacity: 0.8;
+
+}
+
 .register,
 .login:active {
     transform: translate(1px, 1px);
     transition-duration: .2s;
+}
+
+@media screen and (max-width: 1268px) {
+    .navbar {
+
+        justify-content: space-evenly;
+
+    }
 }

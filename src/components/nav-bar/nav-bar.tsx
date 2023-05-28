@@ -28,12 +28,6 @@ export const NavBar = component$(() => {
           <li class={`tabs-nav`}>
             <a href="/faq">Preguntas frecuentes</a>
           </li>
-          <li class={`tabs-nav`}>
-            <a href="/login">Inicio de sesión</a>
-          </li>
-          <li class={`tabs-nav`}>
-            <a href="/registro">Crear una cuenta</a>
-          </li>
         </ul>
 
         <div class="nav-search-cart-login">

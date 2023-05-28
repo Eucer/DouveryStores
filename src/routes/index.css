@@ -1,0 +1,27 @@
+.container-all {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    height: 100vh;
+    background-color: var(--color-background-white);
+}
+
+.ct-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 0PX 50PX;
+    width: 100%;
+    height: 250px;
+    background-color: rgb(51, 204, 153);
+    animation: change-background-color-GREEn 10s linear infinite;
+}
+
+h1 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #FFF;
+}
