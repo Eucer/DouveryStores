@@ -7,17 +7,13 @@ export default component$(() => {
   return (
     <div class="container-all">
       <div class="carousel__image-container">
-        <img
+        <video
           width={1800}
           height={350}
           class="carousel__image"
-          src="https://res.cloudinary.com/douvery/image/upload/v1685302262/tbynxiwauwhpdcdyovk9.png"
-          alt="Imagen del carrusel"
+          src="https://res.cloudinary.com/douvery/video/upload/v1685535268/buekoycwawhflxvbk3rz.mp4"
+          autoPlay
         />
-        <div class="container__title">
-          <h1> Recursos infinitos para tu tienda.</h1>
-          <h1> Vende con facilidad en nuestra plataforma.</h1>
-        </div>
 
         <button class="carousel__button carousel__button--link">
           Crear mi Store
@@ -32,7 +28,7 @@ export const head: DocumentHead = {
   meta: [
     {
       name: 'description',
-      content: 'Qwik site description',
+      content: 'Inicio - Douvery Stores',
     },
   ],
 };
