@@ -18,7 +18,7 @@
 .carousel__image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     transition: opacity 0.5s;
     /* Ajusta el tiempo de la animación si lo deseas */
 }
@@ -71,8 +71,17 @@ button {
     height: 38px;
 }
 
+@media screen and (max-width: 1636px) {
+    .carousel__button--link {
+        right: 18%;
+    }
+}
 
-
+@media screen and (max-width: 1400px) {
+    .carousel__button--link {
+        right: 10%;
+    }
+}
 
 @media screen and (max-width: 1300px) {
     .carousel__image {
@@ -97,14 +106,6 @@ button {
     }
 }
 
-@media screen and (max-width: 1636px) {
-    .carousel__button--link {
-        right: 10%;
-    }
-}
 
-@media screen and (min-width: 1956px) {
-    .carousel__button--link {
-        right: 25%;
-    }
-}
+
+/* Vector *
