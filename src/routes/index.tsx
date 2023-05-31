@@ -13,6 +13,7 @@ export default component$(() => {
           class="carousel__image"
           src="https://res.cloudinary.com/douvery/video/upload/v1685535268/buekoycwawhflxvbk3rz.mp4"
           autoPlay
+          muted
         />
 
         <button class="carousel__button carousel__button--link">
