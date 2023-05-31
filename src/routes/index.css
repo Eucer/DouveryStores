@@ -18,7 +18,7 @@
 .carousel__image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     transition: opacity 0.5s;
     /* Ajusta el tiempo de la animación si lo deseas */
 }
@@ -69,4 +69,27 @@
 
 button {
     height: 38px;
+}
+
+@media screen and (max-width: 1636px) {
+    .carousel__button--link {
+        right: 15%;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .carousel__button--link {
+        right: 14%;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .carousel__button--link {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+
+        top: 80%;
+
+    }
 }
