@@ -9,6 +9,7 @@
 
 
 .carousel__image-container {
+    cursor: pointer;
     position: relative;
     width: 100%;
     height: 400px;
@@ -18,7 +19,7 @@
 .carousel__image {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+
     transition: opacity 0.5s;
     /* Ajusta el tiempo de la animación si lo deseas */
 }
@@ -62,9 +63,9 @@
 
 .carousel__button--link {
     position: absolute;
-    right: 18%;
+    left: 50%;
     transform: translateX(-50%);
-    top: 45%;
+    bottom: 15%;
 }
 
 button {
