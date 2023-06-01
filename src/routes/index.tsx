@@ -27,7 +27,7 @@ export default component$(() => {
     'resize',
     $(() => {
       videoSrc.value =
-        windowWidth.value > 1550
+        windowWidth.value < 1550
           ? 'https://res.cloudinary.com/douvery/video/upload/v1685621641/ifr5yndpanqlrptc1gwr.mp4'
           : 'https://res.cloudinary.com/douvery/video/upload/v1685637514/xlxzh6aln0o8jaylrolh.mp4';
     })
@@ -40,7 +40,11 @@ export default component$(() => {
           width={1800}
           height={350}
           class="carousel__image"
-          src={videoSrc.value}
+          src={
+            windowWidth.value > 1550
+              ? 'https://res.cloudinary.com/douvery/video/upload/v1685621641/ifr5yndpanqlrptc1gwr.mp4'
+              : 'https://res.cloudinary.com/douvery/video/upload/v1685637514/xlxzh6aln0o8jaylrolh.mp4'
+          }
           autoPlay
           muted
         />
