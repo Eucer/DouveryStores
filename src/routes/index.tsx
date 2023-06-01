@@ -1,9 +1,27 @@
-import { component$, useStylesScoped$ } from '@builder.io/qwik';
+import {
+  component$,
+  useStore,
+  useStylesScoped$,
+  useVisibleTask$,
+} from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import styles from './index.css?inline';
 
 export default component$(() => {
   useStylesScoped$(styles);
+  const store = useStore({
+    count: 0,
+  });
+
+  useVisibleTask$(() => {
+    // Only runs in the client
+    const timer = setInterval(() => {
+      store.count++;
+    }, 2);
+    return () => {
+      clearInterval(timer);
+    };
+  });
   return (
     <div class="container-all">
       <div class="carousel__image-container">
@@ -11,7 +29,7 @@ export default component$(() => {
           width={1800}
           height={350}
           class="carousel__image"
-          src="https://res.cloudinary.com/douvery/video/upload/v1685535268/buekoycwawhflxvbk3rz.mp4"
+          src="https://res.cloudinary.com/douvery/video/upload/v1685621641/ifr5yndpanqlrptc1gwr.mp4"
           autoPlay
           muted
         />
