@@ -27,7 +27,7 @@ export default component$(() => {
     'resize',
     $(() => {
       videoSrc.value =
-        windowWidth.value > 1400
+        windowWidth.value > 1550
           ? 'https://res.cloudinary.com/douvery/video/upload/v1685621641/ifr5yndpanqlrptc1gwr.mp4'
           : 'https://res.cloudinary.com/douvery/video/upload/v1685637514/xlxzh6aln0o8jaylrolh.mp4';
     })
