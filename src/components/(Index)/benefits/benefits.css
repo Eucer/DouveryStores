@@ -61,9 +61,18 @@
     background-color: #FFFFFF;
     border: 1px solid #0159d3;
     border-radius: 10px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    display: flex;
+    gap: 20px;
 }
 
+.icon {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .benefits li h3 {
     margin: 0 0 10px;
