@@ -9,7 +9,7 @@ export const BenefitsINDEX = component$(() => {
   return (
     <div class="benefits">
       <div class="title">
-        <h1>¿Por qué vender en Douvery?</h1>
+        <h1>Te ofrecemos:</h1>
 
         <div class="container__video">
           <video
