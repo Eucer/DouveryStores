@@ -3,6 +3,7 @@
     margin: 0 auto;
     max-width: 1500px;
     margin: 50px;
+    gap: 20PX;
 
 }
 
@@ -21,7 +22,7 @@
     height: 150px;
     display: flex;
     justify-content: center;
-    align-items: start;
+    align-items: flex-start;
 }
 
 .container__video video {
