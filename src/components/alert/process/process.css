@@ -1,0 +1,24 @@
+.alert-procss {
+    background-color: var(--color-background-light);
+    border: 1px solid #e9ecef;
+    border-radius: 0.25rem;
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-black);
+
+}
+
+@media only screen and (max-width: 885px) {
+    .alert-procss {
+        display: grid;
+
+    }
+
+    .icrt-info {
+        display: none;
+    }
+}

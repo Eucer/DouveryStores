@@ -1,0 +1,53 @@
+import { component$, useStylesScoped$ } from '@builder.io/qwik';
+import styles from './benefits.css?inline';
+export const BenefitsINDEX = component$(() => {
+  useStylesScoped$(styles);
+  return (
+    <div class="benefits">
+      <div class="title">
+        <h1>¿Por qué vender en Douvery?</h1>
+
+        <div class="container__video">
+          <video
+            src="https://res.cloudinary.com/douvery/video/upload/v1685701327/irvzyjzlvyvsdmrf6l3b.mp4"
+            autoPlay
+            muted
+          />
+        </div>
+        <a href="">Ver mas beneficios</a>
+      </div>
+      <ul>
+        <li>
+          <h3>Mayor Visibilidad</h3>
+          <p>
+            En Douvery Stores, tu producto tiene el potencial de ser descubierto
+            por un público en crecimiento. Únete hoy y crece con nosotros.
+          </p>
+        </li>
+        <li>
+          <h3>Acceso a Clientes Diversos</h3>
+          <p>
+            Nuestra plataforma atrae a clientes de diferentes ubicaciones,
+            edades e intereses. Hay un lugar para tu tienda en Douvery, sin
+            importar lo que vendas.
+          </p>
+        </li>
+        <li>
+          <h3>Herramientas Intuitivas de Gestión de Productos</h3>
+          <p>
+            Nuestro sistema de gestión de productos facilita la adición y
+            administración de tus productos. Vende con facilidad en Douvery.
+          </p>
+        </li>
+        <li>
+          <h3>Soporte al Vendedor</h3>
+          <p>
+            Nuestro equipo de soporte está disponible para responder a tus
+            preguntas y proporcionarte la ayuda que necesites. Estamos aquí para
+            ayudarte a tener éxito.
+          </p>
+        </li>
+      </ul>
+    </div>
+  );
+});
