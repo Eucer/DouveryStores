@@ -3,6 +3,7 @@ import type { DocumentHead } from '@builder.io/qwik-city';
 import styles from './index.css?inline';
 import { Banner } from '~/components/(Index)/banner/banner';
 import { BenefitsINDEX } from '~/components/(Index)/benefits/benefits';
+import { HowItWorksIndex } from '~/components/(Index)/how-it-works/how-it-works';
 
 export default component$(() => {
   useStylesScoped$(styles);
@@ -11,6 +12,9 @@ export default component$(() => {
     <div class="container-all">
       <Banner />
       <BenefitsINDEX />
+      <div class="hr-div" />
+      <HowItWorksIndex />
+      <div class="hr-div" />
     </div>
   );
 });
