@@ -1,15 +1,11 @@
-.carousel {
-    position: relative;
-    width: 100%;
-    /* Ajusta el ancho y alto según tu necesidad */
-    height: 350px;
-    overflow: hidden;
-}
-
 .carousel__image-container {
+
+    cursor: pointer;
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 400px;
+    background: linear-gradient(90deg, rgb(0, 74, 173) 0%, rgb(227, 133, 236) 100%);
+
 }
 
 .carousel__image {
@@ -19,7 +15,6 @@
     transition: opacity 0.5s;
     /* Ajusta el tiempo de la animación si lo deseas */
 }
-
 
 .carousel__button--previous,
 .carousel__button--next {
@@ -36,12 +31,58 @@
     right: 10px;
 }
 
+.container__title {
+    padding: 0px 20px;
+    background-color: #97979724;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+
+
+    color: var(--color-background-white);
+    top: 30%;
+
+}
+
+.container__title h1 {
+    font-size: 35px;
+    color: var(--color-background-white);
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #fff;
+}
+
 .carousel__button--link {
     position: absolute;
-    left: 43%;
-    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 15%;
 }
 
 button {
-    height: 35px;
+    height: 38px;
+}
+
+button:hover {
+    box-shadow: 0 0 0 4px #c0c0c069;
+    transition: all 0.2s;
+}
+
+button:active {
+    box-shadow: 0 0 0 4px #c0c0c0d3;
+
+}
+
+@media only screen and (max-width: 600px) {
+    .carousel__image-container {
+        height: 200px;
+    }
+
+    .container__title h1 {
+        font-size: 20px;
+    }
+
+    .carousel__button--link {
+        bottom: 10%;
+    }
 }
