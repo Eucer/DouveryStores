@@ -9,7 +9,7 @@
 }
 
 .hr-div {
-    width: 100%;
+    width: 80%;
     height: 1px;
-    background: linear-gradient(90deg, rgb(0, 74, 173) 0%, rgb(227, 133, 236) 100%);
+    background: #00000053;
 }

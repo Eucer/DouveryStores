@@ -59,16 +59,38 @@
     bottom: 15%;
 }
 
-button {
+a {
+    background-color: #fff;
+    border: 1px solid #d5d9d9;
+    border-radius: 8px;
+    box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+    box-sizing: border-box;
+    color: #0f1111;
+    cursor: pointer;
+    display: grid;
+    align-items: center;
+
+    font-size: 13px;
+
+    padding: 0 10px 0 11px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    width: 100%;
+    max-width: 200px;
     height: 38px;
 }
 
-button:hover {
+a:hover {
     box-shadow: 0 0 0 4px #c0c0c069;
     transition: all 0.2s;
 }
 
-button:active {
+a:active {
     box-shadow: 0 0 0 4px #c0c0c0d3;
 
 }

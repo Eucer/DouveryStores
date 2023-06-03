@@ -18,7 +18,7 @@ export const BenefitsINDEX = component$(() => {
             muted
           />
         </div>
-        <a href="">Ver mas beneficios</a>
+        <a class="show-more" href="">Ver mas beneficios</a>
       </div>
       <ul>
         <li>

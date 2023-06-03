@@ -6,15 +6,16 @@ export const NavBar = component$(() => {
   return (
     <>
       <nav class="navbar">
-        <div class="logo">
+        <a href="/"><div class="logo" >
           <img
             width={200}
             height={100}
             src="https://res.cloudinary.com/douvery/image/upload/v1682700013/users/PEPITO-635c0ac87482cdf128be119a/moupkmy3bqsmwczvjggs.svg"
             alt="Logo Douvery Stores"
           />
-          <a href="">Douvery Stores</a>
-        </div>
+          <p >Douvery Stores</p>
+        </div></a>
+
         <ul class="nav-links">
           <li class={`tabs-nav`}>
             <a href="/gestion-productos">Gestión de productos</a>
@@ -33,11 +34,11 @@ export const NavBar = component$(() => {
         <div class="nav-search-cart-login">
           <div class="account">
             <div class="login">
-              <a href="/a/login"> Iniciar sesión</a>
+              <a href="/auth/login"> Iniciar sesión</a>
             </div>
             Or
             <div class="register">
-              <a href="/a/register">Registrarme</a>
+              <a href="/auth/register">Registrarme</a>
             </div>
           </div>
         </div>
