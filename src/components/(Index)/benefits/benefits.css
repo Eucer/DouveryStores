@@ -86,3 +86,8 @@
     color: #000;
     line-height: 1.6;
 }
+
+.show-more {
+    text-decoration: underline;
+    color: var(--color-primary);
+}

@@ -14,7 +14,7 @@ export default component$(() => {
       <BenefitsINDEX />
       <div class="hr-div" />
       <HowItWorksIndex />
-      <div class="hr-div" />
+
     </div>
   );
 });

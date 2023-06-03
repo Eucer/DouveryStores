@@ -46,9 +46,9 @@ export const Banner = component$(() => {
         muted
       />
 
-      <button class="carousel__button carousel__button--link">
+      <a href="/auth/register" class="carousel__button carousel__button--link">
         Crear mi Store
-      </button>
+      </a>
     </div>
   );
 });
