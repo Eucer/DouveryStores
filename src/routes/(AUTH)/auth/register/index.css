@@ -79,6 +79,7 @@ label {
 input[type="email"],
 input[type="password"],
 input[type="text"],
+input[type="tel"],
 textarea {
     display: block;
     width: 100%;
@@ -98,6 +99,19 @@ textarea {
 
 }
 
+#elegant-select {
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #333;
+    background-color: #f5f5f5;
+    border: 1px solid #66666611;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
 .button-text {
     color: #fff;
     font-size: 16px;
@@ -105,13 +119,20 @@ textarea {
 }
 
 .need-account {
+
+    color: #000;
+    font-weight: 500;
+
     margin-bottom: 20px;
+    margin-top: 20px;
+
 }
 
 .forgot-new-account-link {
     font-size: 14px;
     color: #0066cc;
     text-decoration: none;
+    margin-left: 5px;
 }
 
 .top-sections {
