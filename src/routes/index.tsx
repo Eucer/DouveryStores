@@ -1,21 +1,34 @@
 import { component$, useStylesScoped$ } from '@builder.io/qwik';
-import type { DocumentHead } from '@builder.io/qwik-city';
+import type { DocumentHead, RequestHandler } from '@builder.io/qwik-city';
 import styles from './index.css?inline';
 import { Banner } from '~/components/(Index)/banner/banner';
 import { BenefitsINDEX } from '~/components/(Index)/benefits/benefits';
 import { HowItWorksIndex } from '~/components/(Index)/how-it-works/how-it-works';
+import { DATA_ACCESS_COOKIE_SESSION_USER } from '~/services/session/dataRequests';
+import { NavBar } from '~/components/nav-bar/nav-bar';
+
+export const onGet: RequestHandler = async ({ cookie, redirect }) => {
+  const acccessToken = cookie.get(DATA_ACCESS_COOKIE_SESSION_USER)?.value;
+  if (acccessToken) {
+    throw redirect(302, '/center');
+  }
+};
 
 export default component$(() => {
   useStylesScoped$(styles);
 
   return (
-    <div class="container-all">
-      <Banner />
-      <BenefitsINDEX />
-      <div class="hr-div" />
-      <HowItWorksIndex />
-
-    </div>
+    <>
+      <header>
+        <NavBar />
+      </header>
+      <div class="container-all">
+        <Banner />
+        <BenefitsINDEX />
+        <div class="hr-div" />
+        <HowItWorksIndex />
+      </div>
+    </>
   );
 });
 

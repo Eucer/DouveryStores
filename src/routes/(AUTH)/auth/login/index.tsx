@@ -26,7 +26,7 @@ export const onGet: RequestHandler = async ({ cookie, redirect }) => {
 
 export const useLogin = globalAction$(
   async ({ nameStore, email, password }, { fail, cookie, headers, url }) => {
-    const response = await fetch(`${urlServerLocal}/api-store/signin`, {
+    const response = await fetch(`${urlServerLocal}/douvery/api-store/signin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -46,8 +46,8 @@ export const useLogin = globalAction$(
       });
     }
 
-    setCookiesDataUser(dataAccess.user, cookie);
-    setCookiesDataStore(dataAccess.store, cookie);
+    setCookiesDataUser(dataAccess.userInfo, cookie);
+    setCookiesDataStore(dataAccess.storeInfo, cookie);
 
     const query = url.searchParams.get('rr') || '/';
     headers.set('location', query);

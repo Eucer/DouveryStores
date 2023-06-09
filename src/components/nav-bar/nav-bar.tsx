@@ -1,10 +1,12 @@
 import { component$, useStylesScoped$ } from '@builder.io/qwik';
 
 import styles from './nav-bar.css?inline';
-import { useGetCurrentUser } from '~/routes/layout';
+import { useGetCurrentStore, useGetCurrentUser } from '~/routes/layout';
+import { ProfileDropdownNavBar } from '../dropdowns/dropdown-navbar/dropdown-navbar';
 export const NavBar = component$(() => {
   useStylesScoped$(styles);
   const user = useGetCurrentUser().value;
+  const store = useGetCurrentStore().value;
   return (
     <>
       <nav class="navbar">
@@ -36,15 +38,24 @@ export const NavBar = component$(() => {
         </ul>
 
         <div class="nav-search-cart-login">
-          <div class="account">
-            <div class="login">
-              <a href="/auth/login"> {user?.name} Iniciar sesión</a>
-            </div>
-            Or
-            <div class="register">
-              <a href="/auth/register">Registrarme</a>
-            </div>
-          </div>
+          {user ? (
+            <>
+              <ProfileDropdownNavBar user={user} store={store} />
+            </>
+          ) : (
+            <>
+              {' '}
+              <div class="account">
+                <div class="login">
+                  <a href="/auth/login"> Iniciar sesión</a>
+                </div>
+                Or
+                <div class="register">
+                  <a href="/auth/register">Registrarme</a>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </nav>
     </>
