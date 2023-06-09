@@ -1,20 +1,24 @@
 import { component$, useStylesScoped$ } from '@builder.io/qwik';
 
 import styles from './nav-bar.css?inline';
+import { useGetCurrentUser } from '~/routes/layout';
 export const NavBar = component$(() => {
   useStylesScoped$(styles);
+  const user = useGetCurrentUser().value;
   return (
     <>
       <nav class="navbar">
-        <a href="/"><div class="logo" >
-          <img
-            width={200}
-            height={100}
-            src="https://res.cloudinary.com/douvery/image/upload/v1682700013/users/PEPITO-635c0ac87482cdf128be119a/moupkmy3bqsmwczvjggs.svg"
-            alt="Logo Douvery Stores"
-          />
-          <p >Douvery Stores</p>
-        </div></a>
+        <a href="/">
+          <div class="logo">
+            <img
+              width={200}
+              height={100}
+              src="https://res.cloudinary.com/douvery/image/upload/v1682700013/users/PEPITO-635c0ac87482cdf128be119a/moupkmy3bqsmwczvjggs.svg"
+              alt="Logo Douvery Stores"
+            />
+            <p>Douvery Stores</p>
+          </div>
+        </a>
 
         <ul class="nav-links">
           <li class={`tabs-nav`}>
@@ -34,7 +38,7 @@ export const NavBar = component$(() => {
         <div class="nav-search-cart-login">
           <div class="account">
             <div class="login">
-              <a href="/auth/login"> Iniciar sesión</a>
+              <a href="/auth/login"> {user?.name} Iniciar sesión</a>
             </div>
             Or
             <div class="register">

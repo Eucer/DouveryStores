@@ -15,6 +15,10 @@ import style from './index.css?inline';
 import { DouveryAuthLogo } from '~/components/DouveryAuthLogo/douvery-auth-logo';
 import { TermsConditions } from '~/components/Terms&Conditions/terms-Conditions';
 import { urlServerLocal } from '~/services/util/server/server';
+import {
+  setCookiesDataStore,
+  setCookiesDataUser,
+} from '~/services/session/dataRequests';
 
 export const useAction = globalAction$(
   async (
@@ -31,7 +35,7 @@ export const useAction = globalAction$(
       storeCountry,
       storeLocation,
     },
-    { fail, headers }
+    { fail, headers, cookie }
   ) => {
     const res = await fetch(`${urlServerLocal}/api/store-request`, {
       method: 'POST',
@@ -55,6 +59,9 @@ export const useAction = globalAction$(
     });
 
     const response = await res.json();
+    console.log(response);
+    setCookiesDataUser(response.userInfo, cookie);
+    setCookiesDataStore(response.storeInfo, cookie);
     if (res.status !== 200) {
       // Utilizar el mensaje de error proporcionado por la API si está disponible
       const errorMessage =
@@ -165,7 +172,6 @@ export default component$(() => {
       store.storeLocation = e.target.value;
     }),
   };
-  console.log(store.storeType, store.storeCountry, store.storeLocation);
   const action = useAction();
   const handleSubmit = $(async () => {
     const { value } = await action.submit({
@@ -477,7 +483,7 @@ const ShippingInfo = ({ action, handlersStore, store }: any) => {
         </div>
         <div class="form-group">
           <label for="storeLocation">Ubicación de establecimiento</label>
-          {store.storeLocation}
+
           <input
             type="text"
             id="storeLocation"
