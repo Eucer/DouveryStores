@@ -9,9 +9,7 @@ export const NavBarCenter = component$(() => {
   const store = useGetCurrentStore().value;
   const isSearchOpen = useStore({ setIsSearchOpen: false });
   const isOpenDraw = useStore({ isOpenDraw: false });
-  const handleSearchClick = $(() => {
-    isSearchOpen.setIsSearchOpen = !isSearchOpen.setIsSearchOpen;
-  }); const handleMenuToggle  = $(() => {
+   const handleMenuToggle  = $(() => {
     isOpenDraw.isOpenDraw = !isOpenDraw.isOpenDraw ;
   });
   const avatarSrc = user?.avatar || 'https://res.cloudinary.com/douvery/image/upload/v1686355888/vnzd3ccdmwigt2z7ihb2.png';
