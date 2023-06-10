@@ -1,0 +1,236 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px 20px;
+    border-bottom: 1px solid rgba(72, 94, 144, 0.16);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    color: #000;
+    font-weight: bold;
+}
+
+.logo img {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.logo a {
+    text-decoration: none;
+    color: #333;
+}
+
+.nav-links {
+    display: flex;
+    list-style-type: none;
+    gap: 5px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.nav-links li {
+
+    padding: 5px 10px;
+}
+
+.nav-links .tabs-nav:hover {
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    color: #444;
+    border-radius: 10px;
+
+}
+
+.nav-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+    color: #000;
+    font-size: 13.5px;
+}
+
+.nav-links a:hover {
+    color: var(--color-primary);
+}
+
+.nav-links svg {
+    color: #b8b6b6;
+}
+
+.nav-links a:hover svg {
+    color: var(--color-primary);
+}
+
+.nav-search-cart-login {
+    display: flex;
+    align-items: center;
+}
+
+.nav-search {
+    padding: 5px 10px;
+    border: 1px solid #444;
+    border-radius: 3px;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.nav-cart,
+.nav-login {
+    text-decoration: none;
+    color: #fff;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.account {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 14px;
+    color: #212A3E;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}
+
+.search-input {
+    width: 200px;
+    height: 30px;
+    overflow: hidden;
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: width 0.3s ease-in-out;
+}
+
+.nav-search-user-login {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    /* Aumenta este valor para aumentar el espacio entre los elementos */
+}
+
+.nav-search-user-login i {
+    cursor: pointer;
+}
+
+/* Estilos para el campo de búsqueda */
+.nav-search-user-login #search {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    transition: all 0.3s ease;
+}
+
+
+.inputs {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.inputs svg {
+    cursor: pointer;
+    border-radius: 10%;
+    padding: 2px;
+    width: 40px;
+    height: 30px;
+}
+
+.inputs svg:hover {
+
+    background-color: #ebedee;
+}
+
+
+.order-notification-container {
+    position: relative;
+    display: inline-block;
+}
+
+.order-notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #e84118;
+    color: white;
+    padding: 3px 5px;
+    border-radius: 50%;
+    font-size: 0.8em;
+    font-weight: bold;
+    line-height: 1;
+    text-align: center;
+    min-width: 20px;
+}
+
+.notification-container {
+    position: relative;
+    display: inline-block;
+    /* puedes ajustar el tamaño y la posición según tus necesidades */
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -0px;
+    background-color: #008080;
+    color: white;
+    padding: 3px 5px;
+    border-radius: 50%;
+    font-size: 0.8em;
+    font-weight: bold;
+    line-height: 1;
+    text-align: center;
+    min-width: 20px;
+}
+
+/* Estilos para la información del usuario */
+.user-info {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+
+}
+
+.user-info img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 20%;
+    border: 1px solid rgba(72, 94, 144, 0.16);
+}
+
+.user-name {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: flex-start;
+    font-weight: bold;
+    color: #333;
+}
+
+.user-company {
+    font-size: 0.9em;
+    color: #999;
+}
+
+@media screen and (max-width: 1268px) {
+    .navbar {
+
+        justify-content: space-evenly;
+
+    }
+}

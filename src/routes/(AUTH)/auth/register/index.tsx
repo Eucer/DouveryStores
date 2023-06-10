@@ -14,7 +14,7 @@ import {
 import style from './index.css?inline';
 import { DouveryAuthLogo } from '~/components/DouveryAuthLogo/douvery-auth-logo';
 import { TermsConditions } from '~/components/Terms&Conditions/terms-Conditions';
-import { urlServerLocal } from '~/services/util/server/server';
+import { urlServerNode } from '~/services/util/server/server';
 import {
   setCookiesDataStore,
   setCookiesDataUser,
@@ -37,7 +37,7 @@ export const useAction = globalAction$(
     },
     { fail, headers, cookie }
   ) => {
-    const res = await fetch(`${urlServerLocal}/api/store-request`, {
+    const res = await fetch(`${urlServerNode}/api/store-request`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

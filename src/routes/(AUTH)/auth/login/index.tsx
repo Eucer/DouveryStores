@@ -11,7 +11,7 @@ import {
   setCookiesDataStore,
   setCookiesDataUser,
 } from '~/services/session/dataRequests';
-import { urlServerLocal } from '~/services/util/server/server';
+import { urlServerNode } from '~/services/util/server/server';
 
 export interface Store {
   email: string;
@@ -26,7 +26,7 @@ export const onGet: RequestHandler = async ({ cookie, redirect }) => {
 
 export const useLogin = globalAction$(
   async ({ nameStore, email, password }, { fail, cookie, headers, url }) => {
-    const response = await fetch(`${urlServerLocal}/douvery/api-store/signin`, {
+    const response = await fetch(`${urlServerNode}/douvery/api-store/signin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

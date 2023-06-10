@@ -4,6 +4,6 @@ export type UserACC = {
 	id:string;
     token:string;
 	email:string;
-	
+	avatar:string;
 
 };
