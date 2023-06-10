@@ -1,0 +1,137 @@
+.crtr-brts {
+    width: 100%;
+    height: 100%;
+
+}
+
+.trl-drs {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: var(--color-background-light);
+}
+
+
+
+.trl-drs .arrow-up {
+    transform: rotate(360deg);
+    transition: transform 300ms ease-in-out;
+
+}
+
+.dropdown-menu {
+    display: none;
+    min-width: 250px;
+    min-height: 500px;
+}
+
+.dropdown-menu.show {
+    display: block;
+
+
+
+
+}
+
+
+
+.crt-drpd {
+
+    position: absolute;
+    z-index: 10;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+
+}
+
+.shad-modal {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+.dropdown-menu {
+    width: 100%;
+    min-height: 100%;
+    position: absolute;
+    top: 100%;
+    left: -10px;
+    background-color: var(--color-background-light);
+    padding: 8px 0;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    z-index: 1;
+    margin-top: 10px;
+}
+
+.dropdown-menu {
+    animation: smoApp 0.5s ease-in-out;
+}
+
+.dropdown-menu li {
+    padding: 12px;
+    cursor: pointer;
+
+}
+
+.dropdown-menu li:hover {
+    background-color: #e2e2e2;
+}
+
+.list-container {
+    margin: 16px;
+}
+
+.list-title {
+    margin-bottom: 8px;
+}
+
+.list-item {
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-title {
+    font-weight: bold;
+}
+
+.item-subtitle {
+    color: #8c8c8c;
+    font-size: 12px;
+}
+
+.item-time {
+    color: #8c8c8c;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.tolst-tip {
+
+    display: block;
+    border-bottom: 7px solid var(--color-background-light);
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    position: absolute;
+    top: -7px;
+    left: calc(50% - 7px);
+
+}
+
+@media (max-width: 850px) {
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: -120px;
+    }
+
+    .tolst-tip {
+        left: calc(80% - 7px);
+
+    }
+}
