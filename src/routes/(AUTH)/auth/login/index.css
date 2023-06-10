@@ -122,6 +122,13 @@ input[type="text"] {
     max-width: NONE;
 }
 
+.login-button:focus {
+    outline: none;
+
+    box-shadow: 0 0 10px #719ECE;
+
+}
+
 .button-text {
     color: #fff;
     font-size: 16px;
