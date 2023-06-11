@@ -81,15 +81,17 @@
 }
 
 .tabs-nav:hover .tab-content {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 5px;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
 }
 
 .content {
     padding: 10px;
-    display: grid;
+    display: flex;
+    flex-direction: column;
 }
 
 .content p {
