@@ -25,12 +25,17 @@
 }
 
 .container__all img,
-iframe {
+.card_aboutstore {
     object-fit: contain;
     object-position: top;
     border-radius: 10px;
     padding: 10px;
+    height: 400px;
     border: 1px solid #00000015;
+}
+
+.card_aboutstore {
+    width: 400px;
 }
 
 .container__all img:hover {

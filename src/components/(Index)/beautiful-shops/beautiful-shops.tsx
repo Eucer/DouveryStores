@@ -1,5 +1,7 @@
 import { component$, useStylesScoped$ } from '@builder.io/qwik';
 import styles from './beautiful-shops.css?inline';
+
+import { CardAboutStore } from '~/components/cards/about-store/about-store';
 export const BeautifulShops = component$(() => {
   useStylesScoped$(styles);
   return (
@@ -8,23 +10,22 @@ export const BeautifulShops = component$(() => {
         <p>Beautiful shops in douvery</p>
         <a href="/">Ver mas</a>
       </div>
-      <a href="https://www.douvery.com/Douvery/STORE-3465460B-51D47297-87C20FED/h/">
+      <div>
         <div class="store">
           {' '}
-          <img
-            width={800}
-            height={400}
-            src="https://res.cloudinary.com/douvery/image/upload/v1687110092/sllypsjy0j6ct181fnxw.webp"
-            alt=""
-          />
-          <img
-            width={400}
-            height={200}
-            src="https://res.cloudinary.com/douvery/image/upload/v1687111072/l4xmfk5pqnj6ioyzrvon.webp"
-            alt=""
-          />
+          <a href="">
+            <img
+              width={800}
+              height={400}
+              src="../../../../public/img/store.png"
+              alt=""
+            />
+          </a>
+          <div class="card_aboutstore">
+            <CardAboutStore />
+          </div>
         </div>
-      </a>
+      </div>
     </div>
   );
 });

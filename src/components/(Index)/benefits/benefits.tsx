@@ -15,6 +15,7 @@ export const BenefitsINDEX = component$(() => {
           Ver mas beneficios
         </a>
       </div>
+      <br />
       <ul>
         <li>
           <div class="icon">
@@ -69,6 +70,7 @@ export const BenefitsINDEX = component$(() => {
           </div>
         </li>
       </ul>
+      <br />
     </div>
   );
 });
