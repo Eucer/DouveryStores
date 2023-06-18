@@ -6,15 +6,12 @@
  }
 
  .how-it-works h1 {
-     color: var(--color-primary);
-
-
+     font-size: 30px;
      font-weight: 600;
-     font-size: 40px;
-     padding-bottom: 20px;
+     color: var(--color-primary);
      text-align: center;
-     text-transform: uppercase;
-     letter-spacing: 2px;
+     margin: 0;
+     padding: 0;
  }
 
  .timeline {
