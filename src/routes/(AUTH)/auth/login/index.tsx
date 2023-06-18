@@ -1,4 +1,10 @@
-import { component$, useStylesScoped$ } from '@builder.io/qwik';
+import {
+  $,
+  component$,
+  useStore,
+  useStylesScoped$,
+  useTask$,
+} from '@builder.io/qwik';
 import { Form, globalAction$, z, zod$ } from '@builder.io/qwik-city';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import type { RequestHandler } from '@builder.io/qwik-city';
@@ -12,6 +18,8 @@ import {
   setCookiesDataUser,
 } from '~/services/session/dataRequests';
 import { urlServerLocal } from '~/services/util/server/server';
+import { fetchSuggestionsName } from '~/services/fetch/suggestions/store/fech-suggestions-store';
+import { IconsSearch } from '~/components/icons/search';
 
 export interface Store {
   email: string;
@@ -68,11 +76,53 @@ export const useLogin = globalAction$(
     }),
   })
 );
-
+interface IState {
+  searchInput: string;
+  searchResults: string[];
+  selectedValue: string;
+  showSuggestions: boolean;
+}
 export default component$(() => {
   useStylesScoped$(styles);
 
   const action = useLogin();
+
+  const state = useStore<IState>({
+    searchInput: '',
+    searchResults: [],
+    selectedValue: '',
+    showSuggestions: true,
+  });
+
+  useTask$(async ({ track }) => {
+    const searchInput = track(() => state.searchInput);
+
+    if (!searchInput) {
+      state.searchResults = [];
+      return;
+    }
+
+    const controller = new AbortController();
+    state.searchResults = await fetchSuggestionsName(
+      state.searchInput,
+      controller
+    );
+
+    return () => {
+      controller.abort();
+    };
+  });
+
+  const handleKeyUp = $((e: any) => {
+    state.showSuggestions = true;
+    state.searchInput = e.target.value;
+    state.searchResults = [];
+  });
+
+  const handleSuggestionClick = $((suggestion: any) => {
+    state.searchInput = suggestion;
+    state.showSuggestions = false;
+  });
 
   return (
     <div class="ctr-login">
@@ -86,10 +136,37 @@ export default component$(() => {
 
         <Form action={action}>
           <div class="form-group">
-            <label for="email">Name Store</label>
-            <input type="text" id="nameStore" name="nameStore" />
+            <label for="nameStore">Name Store</label>
+            <input
+              onKeyUp$={handleKeyUp}
+              type="text"
+              id="nameStore"
+              name="nameStore"
+              class="form-control"
+              value={state.searchInput}
+            />
             {action.value?.fieldErrors?.nameStore && (
               <span class="error">{action.value?.fieldErrors?.nameStore}</span>
+            )}
+
+            {state.showSuggestions && state.searchResults?.length > 0 && (
+              <div class="suggestions">
+                <ul>
+                  {state.searchResults.map((suggestion) => (
+                    <li class="crrtrSrers" key={suggestion}>
+                      <div
+                        class="suggestion"
+                        onClick$={() => {
+                          handleSuggestionClick(suggestion);
+                        }}
+                      >
+                        <IconsSearch />
+                        <span class="lis-sgrs">{suggestion}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             )}
           </div>
           <div class="form-group">
