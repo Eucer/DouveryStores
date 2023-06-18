@@ -26,7 +26,7 @@
 
 .container__all img,
 .card_aboutstore {
-    object-fit: contain;
+    object-fit: cover;
     object-position: top;
     border-radius: 10px;
     padding: 10px;

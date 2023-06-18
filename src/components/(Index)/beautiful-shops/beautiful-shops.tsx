@@ -17,7 +17,7 @@ export const BeautifulShops = component$(() => {
             <img
               width={800}
               height={400}
-              src="../../../../public/img/store.png"
+              src="https://res.cloudinary.com/douvery/image/upload/v1687113719/wxzffcr7iaxsggvfdw9w.png"
               alt=""
             />
           </a>
