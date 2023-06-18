@@ -9,17 +9,13 @@ export const BenefitsINDEX = component$(() => {
   return (
     <div class="benefits">
       <div class="title">
-        <h1>Te ofrecemos:</h1>
+        <h1>Te ofrecemos</h1>
 
-        <div class="container__video">
-          <video
-            src="https://res.cloudinary.com/douvery/video/upload/v1685706994/uijjsbjtbsoqqg7hiksg.mp4"
-            autoPlay
-            muted
-          />
-        </div>
-        <a class="show-more" href="">Ver mas beneficios</a>
+        <a class="show-more" href="">
+          Ver mas beneficios
+        </a>
       </div>
+      <br />
       <ul>
         <li>
           <div class="icon">
@@ -74,6 +70,7 @@ export const BenefitsINDEX = component$(() => {
           </div>
         </li>
       </ul>
+      <br />
     </div>
   );
 });

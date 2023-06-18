@@ -33,18 +33,23 @@ export const Banner = component$(() => {
 
   return (
     <div class="carousel__image-container">
-      <video
-        width={1800}
-        height={350}
-        class="carousel__image"
-        src={
-          windowWidth.value > 1550
-            ? 'https://res.cloudinary.com/douvery/video/upload/v1685621641/ifr5yndpanqlrptc1gwr.mp4'
-            : 'https://res.cloudinary.com/douvery/video/upload/v1685637514/xlxzh6aln0o8jaylrolh.mp4'
-        }
-        autoPlay
-        muted
-      />
+      <div class="iframe-container">
+        <iframe src="https://www.douvery.com/" class="blurred-frame"></iframe>
+        <div class="conten">
+          <div class="overlay">
+            <h1 class="title">Recursos infinitos para tu tienda</h1>
+          </div>
+          <div class="overlay__promo">
+            <img
+              width={200}
+              height={200}
+              src="https://res.cloudinary.com/douvery/image/upload/v1687106559/mcm5tbzxazxzqi2xk5yi.webp"
+              alt=""
+            />
+            <h4 class="subtitle">Vende con facilidad en Douvery...</h4>
+          </div>
+        </div>
+      </div>
 
       <a href="/auth/register" class="carousel__button carousel__button--link">
         Crear mi Store

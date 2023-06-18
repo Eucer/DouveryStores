@@ -1,0 +1,58 @@
+.container__all {
+    margin: 50px 0px;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    gap: 30px;
+    background-color: var(--color-background-white);
+
+}
+
+.container__all p {
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.container__all a:hover {
+    text-decoration: underline;
+}
+
+.container__all img,
+.card_aboutstore {
+    object-fit: contain;
+    object-position: top;
+    border-radius: 10px;
+    padding: 10px;
+    height: 400px;
+    border: 1px solid #00000015;
+}
+
+.card_aboutstore {
+    width: 400px;
+}
+
+.container__all img:hover {
+    filter: brightness(0.6);
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 10px;
+}
+
+.store {
+    display: flex;
+    gap: 20px;
+}
+
+.container__all iframe:hover {
+    filter: brightness(0.6);
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 10px;
+}
