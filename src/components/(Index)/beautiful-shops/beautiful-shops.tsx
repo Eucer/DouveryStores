@@ -13,7 +13,7 @@ export const BeautifulShops = component$(() => {
       <div>
         <div class="store">
           {' '}
-          <a href="">
+          <a href="https://www.douvery.com/Douvery/STORE-3465460B-51D47297-87C20FED/a/">
             <img
               width={800}
               height={400}
