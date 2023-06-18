@@ -3,15 +3,16 @@
     cursor: pointer;
     position: relative;
     width: 100%;
-    height: 400px;
-    background: linear-gradient(90deg, rgb(0, 74, 173) 0%, rgb(227, 133, 236) 100%);
-
+    height: 310px;
+    overflow: hidden;
+    background-color: #212a3e;
 }
 
 .carousel__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top;
     transition: opacity 0.5s;
     /* Ajusta el tiempo de la animación si lo deseas */
 }
@@ -54,9 +55,9 @@
 
 .carousel__button--link {
     position: absolute;
-    left: 50%;
+    left: 40%;
     transform: translateX(-50%);
-    bottom: 15%;
+    bottom: 25%;
 }
 
 a {
@@ -93,6 +94,66 @@ a:hover {
 a:active {
     box-shadow: 0 0 0 4px #c0c0c0d3;
 
+}
+
+.iframe-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.blurred-frame {
+    filter: brightness(0.6);
+    width: 100%;
+    height: 100%;
+    border: 0px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    right: 10%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay__promo {
+    position: absolute;
+    top: 30px;
+    right: 20%;
+    width: 300px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    font-size: 3em;
+    color: #fff;
+}
+
+.overlay h1 {
+    color: #fff;
+    font-size: 40px;
+    font-weight: 1000;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 1px #000;
+}
+
+
+
+.overlay__promo h4 {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 1000;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 1px #000;
 }
 
 @media only screen and (max-width: 600px) {
