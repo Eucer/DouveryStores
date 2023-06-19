@@ -143,6 +143,7 @@ a:active {
     gap: 0px;
     justify-content: center;
     align-items: center;
+
 }
 
 
@@ -164,6 +165,7 @@ a:active {
     color: #fff;
     font-size: 16px;
     font-weight: 900;
+    text-align: center;
     text-transform: uppercase;
     text-shadow: 1px 1px 1px #000;
 }

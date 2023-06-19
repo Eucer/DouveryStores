@@ -26,24 +26,21 @@ export const CardAboutStore = component$(() => {
             is exceptional.
           </p>
         </div>
-        <div class="information">
-          <p>
-            <strong>Registrada en douvery.com:</strong> Apr 29, 2023
-          </p>
-        </div>
-        <div class="container-info-store">
+
+        <div class="container_infostore">
           <br />
-          <p>
-            <strong>Dirección:</strong>
-            Tenares Hermanas Mirabal 34000 , Dominican Republic
-          </p>
 
           <p>
-            <strong>Email:</strong> Tenares Hermanas Mirabal 34000 , Dominican
-            Republic
+            <strong>Email:</strong> douvery@douvery.com
           </p>
           <p>
             <strong>Phone:</strong> +1 809 670 4346
+          </p>
+          <br />
+        </div>
+        <div class="information">
+          <p>
+            <strong>Registrada en douvery.com:</strong> Apr 29, 2023
           </p>
         </div>
       </div>{' '}
