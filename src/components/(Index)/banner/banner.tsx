@@ -37,7 +37,7 @@ export const Banner = component$(() => {
         <img
           width={1500}
           height={250}
-          src="https://res.cloudinary.com/douvery/image/upload/v1685304113/eqqjyggjmogzbfny0rgu.webp"
+          src="https://res.cloudinary.com/douvery/image/upload/v1686858193/aoy0brpbrrupoon9jakh.webp"
           class="blurred-frame"
         ></img>
         <div class="data_content">
