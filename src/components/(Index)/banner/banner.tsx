@@ -34,8 +34,11 @@ export const Banner = component$(() => {
   return (
     <div class="carousel__image-container">
       <div class="iframe-container">
-        <iframe src="https://www.douvery.com/" class="blurred-frame"></iframe>
-        <div class="conten">
+        <iframe
+          src="https://www.douvery.com/s/?or-c=all&q=apple&ref=iframe"
+          class="blurred-frame"
+        ></iframe>
+        <div class="data_content">
           <div class="overlay">
             <h1 class="title">Recursos infinitos para tu tienda</h1>
           </div>
