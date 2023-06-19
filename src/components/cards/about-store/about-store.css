@@ -76,7 +76,7 @@ h1 {
 }
 
 .information {
-    height: 600px;
+
     background-color: #fff;
     border-radius: 8px;
     display: flex;
@@ -87,16 +87,21 @@ h1 {
     text-align: start;
 }
 
+.container_infostore {
+    width: 100%;
+    margin: 10px 0px;
+}
+
 h2 {
     font-size: 14px;
-    margin-bottom: 1rem;
+
 }
 
 p {
     display: flex;
     gap: 10px;
     font-size: 14px;
-    margin-bottom: 1.5rem;
+
 }
 
 @media (max-width: 800px) {
