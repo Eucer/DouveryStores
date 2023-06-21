@@ -1,17 +1,10 @@
 import { component$ } from '@builder.io/qwik';
-import {
-  BreadcrumbItem,
-  Style1_breadcrumb,
-} from '~/components/breadcrumb/style1_breadcrumb/style1_breadcrumb';
+import { BreadcrumbsSTL1 } from '~/components/breadcrumb/style1_breadcrumb/BreadcrumbsSTL1';
 
 export default component$(() => {
   return (
     <div>
-      <Style1_breadcrumb>
-        <BreadcrumbItem to="/">Inicio</BreadcrumbItem>
-        <BreadcrumbItem to="/section">Sección</BreadcrumbItem>
-        <BreadcrumbItem to="/section/subsection">Subsección</BreadcrumbItem>
-      </Style1_breadcrumb>
+      <BreadcrumbsSTL1 />
     </div>
   );
 });
