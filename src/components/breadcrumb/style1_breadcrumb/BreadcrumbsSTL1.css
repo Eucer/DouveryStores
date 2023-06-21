@@ -1,0 +1,18 @@
+.breadcrumb {
+    font-size: 13px;
+    color: #6e6e73;
+    font-family: 'San Francisco', Arial, sans-serif;
+}
+
+.breadcrumb a {
+    color: #0070c9;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb span:last-child {
+    color: #6e6e73;
+}

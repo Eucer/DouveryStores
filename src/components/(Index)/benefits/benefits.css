@@ -75,13 +75,14 @@
 
 .benefits li h3 {
     margin: 0 0 10px;
-    color: #256d85;
+    color: var(--color-primary);
     font-weight: bold;
 }
 
 .benefits li p {
     margin: 0;
     color: #000;
+    opacity: 0.8;
     line-height: 1.6;
 }
 
