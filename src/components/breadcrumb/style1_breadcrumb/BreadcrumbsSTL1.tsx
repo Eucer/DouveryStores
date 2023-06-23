@@ -16,7 +16,7 @@ export const BreadcrumbsSTL1 = component$(() => {
   const pathnames = location.url.pathname.split('/').filter((x) => x);
 
   return (
-    <div>
+    <div class="breadcrumb">
       {pathnames.map((value, index) => {
         const to = `/${pathnames.slice(0, index + 1).join('/')}`;
 
