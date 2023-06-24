@@ -15,6 +15,13 @@ ul.progress-bar li {
     color: #00000093;
     border-bottom: 3px solid #ddd;
     transition: all 0.3s;
+
+}
+
+ul.progress-bar li:hover {
+    color: #19376D;
+
+    cursor: pointer;
 }
 
 ul.progress-bar li.active {

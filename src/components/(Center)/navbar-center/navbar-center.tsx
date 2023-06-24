@@ -49,7 +49,7 @@ export const NavBarCenter = component$(() => {
               {' '}
               <div class="content">
                 <p>Creación y Configuración de Productos </p>
-                <a href="/center/products/new/create-product">
+                <a href="/center/products/new/generate-product">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"

@@ -98,11 +98,49 @@ export const useAction = globalAction$(
     storeLocation: z.string().min(1, { message: 'Store location is required' }),
   })
 );
+const categories = [
+  {
+    id: 1,
+    name: 'Electrónica',
+    subcategories: ['Teléfonos', 'Televisores', 'Laptops'],
+  },
+  {
+    id: 2,
+    name: 'Ropa',
+    subcategories: ['Hombres', 'Mujeres', 'Niños'],
+  },
+];
 
+const ProductMaxQty = [
+  {
+    id: 0,
+    name: 'Unlimited',
+  },
+  {
+    id: 1,
+    name: '1',
+  },
+  {
+    id: 2,
+    name: '2',
+  },
+  {
+    id: 3,
+    name: '3',
+  },
+  {
+    id: 4,
+    name: '4',
+  },
+  {
+    id: 5,
+    name: '5',
+  },
+];
 export default component$(() => {
   useStylesScoped$(style);
 
-  const step = useSignal(1);
+  const step = useSignal(2);
   const nextStep = $(() => {
     step.value++;
   });
@@ -113,22 +151,43 @@ export default component$(() => {
   const productStore = useStore({
     productCategory: '',
     productSubCategory: '',
+    selectedCategoryIndex: -1, // Índice de la categoría seleccionada (-1 significa no seleccionada)
+    selectedSubCategoryIndex: -1, // Índice de la subcategoría seleccionada (-1 significa no seleccionada)
     productName: '',
     productPrice: 0,
+    productBrand: '',
+    productGTIN: '',
+    productDiscount: 0,
+    productMaxQty: '',
+    productQty: 0,
+    dimensionUnit: '',
+    productHeight: 0,
+    productWidth: 0,
+    productDepth: 0,
+    weightUnit: '',
+    productWeight: 0,
     productDescription: '',
     productKeywords: [],
     productBullets: [],
     productHighlights: [],
     productSEO: '',
   });
+
+  /// 1. Product Category Handlers
   const productCategoryHandlers = {
     onProductCategoryChange: $((e: any) => {
-      productStore.productCategory = e.target.value;
+      const selectedCatIndex = Number(e.target.value);
+      productStore.selectedCategoryIndex = selectedCatIndex;
+      if (selectedCatIndex === -1) {
+        productStore.selectedSubCategoryIndex = -1;
+      }
     }),
     onProductSubCategoryChange: $((e: any) => {
-      productStore.productSubCategory = e.target.value;
+      const selectedSubCatIndex = Number(e.target.value);
+      productStore.selectedSubCategoryIndex = selectedSubCatIndex;
     }),
   };
+
   const productDataHandlers = {
     onProductNameChange: $((e: any) => {
       productStore.productName = e.target.value;
@@ -136,7 +195,42 @@ export default component$(() => {
     onProductPriceChange: $((e: any) => {
       productStore.productPrice = e.target.value;
     }),
+    onProductBrandChange: $((e: any) => {
+      productStore.productBrand = e.target.value;
+    }),
+    onProductGTINChange: $((e: any) => {
+      productStore.productGTIN = e.target.value;
+    }),
+    onProductDiscountChange: $((e: any) => {
+      productStore.productDiscount = e.target.value;
+    }),
+    onProductMaxQtyChange: $((e: any) => {
+      productStore.productMaxQty = e.target.value;
+    }),
+    onProductInventoryChange: $((e: any) => {
+      productStore.productQty = e.target.value;
+    }),
+    onDimensionUnitChange: $((e: any) => {
+      productStore.dimensionUnit = e.target.value;
+    }),
+
+    onProductWeightChange: $((e: any) => {
+      productStore.productWeight = e.target.value;
+    }),
+    onProductHeightChange: $((e: any) => {
+      productStore.productHeight = e.target.value;
+    }),
+    onProductWidthChange: $((e: any) => {
+      productStore.productWidth = e.target.value;
+    }),
+    onProductDepthChange: $((e: any) => {
+      productStore.productDepth = e.target.value;
+    }),
+    onWeightUnitChange: $((e: any) => {
+      productStore.weightUnit = e.target.value;
+    }),
   };
+  productDataHandlers;
   const productProductDetailsHandlers = {
     onProductDescriptionChange: $((e: any) => {
       productStore.productDescription = e.target.value;
@@ -151,12 +245,15 @@ export default component$(() => {
       productStore.productHighlights = e.target.value.split(',');
     }),
   };
+  productProductDetailsHandlers;
   const productSEOHandlers = {
     onProductSEOChange: $((e: any) => {
       productStore.productSEO = e.target.value;
     }),
   };
+  productSEOHandlers;
   const action = useAction();
+  action;
   return (
     <>
       <div class="container__all">
@@ -167,7 +264,7 @@ export default component$(() => {
           </div>
 
           <div class="progress__bar">
-            <ProgressBarSteps />
+            <ProgressBarSteps step={step.value} setStep={step} />
           </div>
         </div>
         <div class="container__form">
@@ -176,9 +273,19 @@ export default component$(() => {
               {' '}
               <h1>Selección de categoría y subcategoría</h1>
               <ProductCategory
-                action={action}
                 productStore={productStore}
                 productCategoryHandlers={productCategoryHandlers}
+                nextStep={nextStep}
+              />
+            </>
+          )}
+          {step.value === 2 && (
+            <>
+              <h1>Datos del producto</h1>
+              <ProductData
+                productStore={productStore}
+                productDataHandlers={productDataHandlers}
+                prevStep={prevStep}
                 nextStep={nextStep}
               />
             </>
@@ -190,36 +297,268 @@ export default component$(() => {
 });
 
 const ProductCategory = ({
-  action,
   nextStep,
   productStore,
   productCategoryHandlers,
 }: any) => {
-  const { productCategory } = productCategoryHandlers;
+  const { onProductCategoryChange, onProductSubCategoryChange } =
+    productCategoryHandlers;
 
   return (
-    <div class="form-container">
-      <div class="info-section">
-        <br />
-        <div class="form-group">
-          <label for="adminName">Nombre de Administrador</label>
-          <input
-            type="text"
-            value={productStore.productName}
-            id="adminName"
-            name="adminName"
-            required
-            onInput$={productCategory}
-          />
-          {action.value?.fieldErrors?.adminName && (
-            <span class="error">{action.value?.fieldErrors?.adminName}</span>
-          )}
+    <div class="SELECT-container">
+      <label class="label__select">Selecciona una categoría:</label>
+      <select
+        value={productStore.selectedCategoryIndex}
+        onChange$={onProductCategoryChange}
+      >
+        <option value="-1">Seleccione una categoría</option>
+        {categories.map((category, index) => (
+          <option key={index} value={index}>
+            {category.name}
+          </option>
+        ))}
+      </select>
+
+      {productStore.selectedCategoryIndex !== -1 && (
+        <div class="sub__subcategory">
+          <label>Selecciona una subcategoría:</label>
+          <select
+            value={productStore.selectedSubCategoryIndex}
+            onChange$={onProductSubCategoryChange}
+          >
+            <option value="-1">Seleccione una subcategoría</option>
+            {categories[productStore.selectedCategoryIndex].subcategories.map(
+              (subCat, index) => (
+                <option key={index} value={index}>
+                  {subCat}
+                </option>
+              )
+            )}
+          </select>
         </div>
-      </div>
+      )}
 
       <br />
-      <div class="buttons-container">
-        <button type="button" class="next-button" onClick$={nextStep}>
+      <div class="button__selects">
+        <button
+          type="button"
+          class="next-button"
+          onClick$={nextStep}
+          disabled={
+            productStore.selectedCategoryIndex === -1 ||
+            productStore.selectedSubCategoryIndex === -1
+          }
+        >
+          Siguiente
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const ProductData = ({
+  prevStep,
+  nextStep,
+  productStore,
+  productDataHandlers,
+}: any) => {
+  const {
+    onProductNameChange,
+    onProductPriceChange,
+    onProductGTINChange,
+    onProductDiscountChange,
+    onProductInventoryChange,
+    onProductMaxQtyChange,
+    onProductWeightChange,
+    onProductHeightChange,
+    onProductWidthChange,
+    onProductDepthChange,
+    onWeightUnitChange,
+    onDimensionUnitChange,
+  } = productDataHandlers;
+
+  return (
+    <div class="Form__DATAPRODUCTS">
+      <div>
+        <label>Nombre del producto:</label>
+        <textarea
+          value={productStore.productName}
+          onChange$={onProductNameChange}
+        />
+      </div>
+      <br />
+      <div class="content__imputs">
+        <div>
+          <label>Precio</label>
+          <div class="input__price">
+            $
+            <input
+              type="number"
+              value={productStore.productPrice}
+              onChange$={onProductPriceChange}
+            />
+            <span class="input__hint">
+              Puedes cambiar el precio en cualquier momento.
+            </span>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="content__inputs_discount">
+        <div>
+          <label>Descuento </label>
+          <div class="input_discount">
+            %
+            <input
+              type="number"
+              value={productStore.productDiscount}
+              onChange$={onProductDiscountChange}
+            />
+            <span class="input__hint">
+              Iniciar con un descuento puede aumentar la posibilidad de venta.
+            </span>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div>
+        <label>Marca registrada en el producto</label>
+        <input
+          type="text"
+          value={productStore.productBrand}
+          onChange$={onProductPriceChange}
+        />
+      </div>
+      <br />
+      <div class="content__inputs_gtin_qty">
+        <div>
+          <label>Cantidad disponible</label>
+          <input
+            type="number"
+            value={productStore.productQty}
+            onChange$={onProductInventoryChange}
+          />
+        </div>
+        <div>
+          <label>Cantidad máxima por compra</label>
+          <select
+            class="select__max_qty"
+            value={productStore.selectedCategoryIndex}
+            onChange$={onProductMaxQtyChange}
+          >
+            {ProductMaxQty.map((data, index) => (
+              <option key={index} value={index}>
+                {data.name}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+      <div>
+        <label>GTIN del producto:</label>
+        <input
+          type="text"
+          value={productStore.productGTIN}
+          onChange$={onProductGTINChange}
+        />
+      </div>
+      <br />
+      <br />
+      <span class="input__hint">
+        *Proporcione datos precisos para su producto. Estos detalles son
+        importantes para sus clientes y para la logística de envío.
+      </span>
+      <br />
+
+      <select
+        class="select__weight"
+        id="dimension"
+        value={productStore.dimensionUnit}
+        onChange$={onDimensionUnitChange}
+      >
+        <option value="cm">Centímetros (cm)</option>
+        <option value="in">Pulgadas (in)</option>
+      </select>
+      <div class="inputs_dimension">
+        <div>
+          <label for="height">Altura ({productStore.dimensionUnit}):</label>
+          <input
+            id="height"
+            type="number"
+            value={productStore.productHeight}
+            onChange$={onProductHeightChange}
+          />
+        </div>
+        <br />
+        <div>
+          <label for="width">Anchura ({productStore.dimensionUnit}):</label>
+          <input
+            id="width"
+            type="number"
+            value={productStore.productWidth}
+            onChange$={onProductWidthChange}
+          />
+        </div>
+        <br />
+        <div>
+          <label for="depth">Profundidad ({productStore.dimensionUnit}):</label>
+          <input
+            id="depth"
+            type="number"
+            value={productStore.productDepth}
+            onChange$={onProductDepthChange}
+          />
+        </div>
+      </div>
+      <br />
+      <br />
+      <div class="inputs_widths">
+        <label>Peso del producto:</label>
+        <div class="input_wei">
+          <input
+            type="number"
+            value={productStore.productWeight}
+            onChange$={onProductWeightChange}
+          />
+
+          <select
+            class="select__weight"
+            id="weight"
+            value={productStore.weightUnit}
+            onChange$={onWeightUnitChange}
+          >
+            <option value="kg">Kg</option>
+            <option value="lb">Lb</option>
+          </select>
+        </div>
+      </div>
+      <br />
+      <br />
+      <br />
+      <div class="buttons__container">
+        <button type="button" class="prev-button" onClick$={prevStep}>
+          Anterior
+        </button>
+        <button
+          type="button"
+          class="next-button"
+          onClick$={nextStep}
+          disabled={
+            !productStore.productName ||
+            !productStore.productPrice ||
+            !productStore.productGTIN ||
+            !productStore.productDiscount ||
+            !productStore.productQty ||
+            !productStore.productBrand ||
+            !productStore.selectedCategoryIndex ||
+            !productStore.productWeight ||
+            !productStore.productHeight ||
+            !productStore.productWidth ||
+            !productStore.productDepth ||
+            !productStore.dimensionUnit ||
+            !productStore.weightUnit
+          }
+        >
           Siguiente
         </button>
       </div>
