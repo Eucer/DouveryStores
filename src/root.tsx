@@ -1,5 +1,9 @@
 import { component$ } from '@builder.io/qwik';
-import { QwikCityProvider, RouterOutlet, ServiceWorkerRegister } from '@builder.io/qwik-city';
+import {
+  QwikCityProvider,
+  RouterOutlet,
+  ServiceWorkerRegister,
+} from '@builder.io/qwik-city';
 import { RouterHead } from './components/router-head/router-head';
 
 import './global.css';
@@ -17,12 +21,18 @@ export default component$(() => {
       <head>
         <meta charSet="utf-8" />
         <link rel="manifest" href="/manifest.json" />
+
         <RouterHead />
       </head>
       <body lang="en">
+        <script
+          src="https://cdn.tiny.cloud/1/gpfm1czm9uffph4gth3ugnsuj980qbls0ovvvni4ozog6pn3/tinymce/6/tinymce.min.js"
+          referrerPolicy="origin"
+        ></script>
         <RouterOutlet />
         <ServiceWorkerRegister />
-      </body>
+        <script src="./tiny.js"></script>
+      </body>{' '}
     </QwikCityProvider>
   );
 });

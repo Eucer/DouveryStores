@@ -15,6 +15,10 @@ import {
   globalAction$,
 } from '@builder.io/qwik-city';
 import { urlServerNode } from '~/services/util/server/server';
+import { Vertical_img } from '~/components/(Center)/products/generate-product/upload_img/vertical_img/vertical_img';
+import { Horizontal_img } from '~/components/(Center)/products/generate-product/upload_img/horizontal_img/horizontal_img';
+import { Grid4_img } from '~/components/(Center)/products/generate-product/upload_img/grid4_img/grid4_img';
+import { Description_full } from '~/components/(Center)/products/generate-product/description_full/description_full';
 
 export const useAction = globalAction$(
   async (
@@ -140,7 +144,7 @@ const ProductMaxQty = [
 export default component$(() => {
   useStylesScoped$(style);
 
-  const step = useSignal(2);
+  const step = useSignal(1);
   const nextStep = $(() => {
     step.value++;
   });
@@ -166,13 +170,23 @@ export default component$(() => {
     productDepth: 0,
     weightUnit: '',
     productWeight: 0,
+    pd_deatilImgBox: '',
     productDescription: '',
+    productDescriptionFull: '',
     productKeywords: [],
     productBullets: [],
     productHighlights: [],
     productSEO: '',
   });
-
+  const previewIMG = useStore({
+    previewIMGPrimary: [],
+  });
+  const previewIMG1 = useStore({
+    previewIMG1: [],
+  });
+  const previewIMGs = useStore({
+    previewIMGs: Array(7).fill([]), // Suponiendo que tienes hasta 7 imágenes
+  });
   /// 1. Product Category Handlers
   const productCategoryHandlers = {
     onProductCategoryChange: $((e: any) => {
@@ -244,6 +258,77 @@ export default component$(() => {
     onProductHighlightsChange: $((e: any) => {
       productStore.productHighlights = e.target.value.split(',');
     }),
+    onProductOrientationChange: $((e: any) => {
+      productStore.pd_deatilImgBox = e.target.value;
+    }),
+    onHandleFileChange: $((e: any) => {
+      const files = e.target.files;
+      if (files) {
+        // Start with a new array
+        const newPreview = [] as never[];
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            newPreview.push(reader.result as never);
+            // Only update the state after all files are read
+            if (newPreview.length === files.length) {
+              previewIMG.previewIMGPrimary = newPreview as any;
+            }
+          };
+          reader.readAsDataURL(file);
+        }
+      } else {
+        previewIMG.previewIMGPrimary = ['Error fatal' as never];
+      }
+    }),
+    onHandlePreviewImg1Change: $((e: any) => {
+      const files = e.target.files;
+      if (files) {
+        // Start with a new array
+        const newPreview = [] as never[];
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            newPreview.push(reader.result as never);
+            // Only update the state after all files are read
+            if (newPreview.length === files.length) {
+              previewIMG1.previewIMG1 = newPreview as any;
+            }
+          };
+          reader.readAsDataURL(file);
+        }
+      } else {
+        previewIMG1.previewIMG1 = ['Error fatal' as never];
+      }
+    }),
+
+    onHandlePreviewImgChange: $((e: any, index: number) => {
+      const files = e.target.files;
+      if (files) {
+        const newPreview = [] as never[];
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            newPreview.push(reader.result as never);
+            if (newPreview.length === files.length) {
+              previewIMGs.previewIMGs[index] = newPreview as any;
+            }
+          };
+          reader.readAsDataURL(file);
+        }
+      } else {
+        previewIMGs.previewIMGs[index] = ['Error fatal' as never];
+      }
+    }),
+  };
+
+  const productDetailsDescriptionFullHandlers = {
+    onProductDescriptionFullChange: $((e: any) => {
+      productStore.productDescriptionFull = e.target.value;
+    }),
   };
   productProductDetailsHandlers;
   const productSEOHandlers = {
@@ -251,9 +336,21 @@ export default component$(() => {
       productStore.productSEO = e.target.value;
     }),
   };
+
   productSEOHandlers;
   const action = useAction();
   action;
+
+  // const editorRef = useSignal<Element>();
+  // const handleBoldClick = $(() => {
+  //   document.execCommand('bold') as any;
+  //   const editorContent = editorRef.value && editorRef.value.innerHTML;
+  //   console.log(editorContent);
+  // });
+
+  // console.log(editorRef.value);
+  console.log(step.value);
+
   return (
     <>
       <div class="container__all">
@@ -262,7 +359,15 @@ export default component$(() => {
             <BreadcrumbsSTL1 />
             <div class="product_new__title">Generate product</div>
           </div>
-
+          {/* <button onClick$={handleBoldClick}>Bold</button>
+          <div
+            ref={editorRef.value as any}
+            contentEditable={true as any}
+            style={{
+              border: '1px solid #000',
+              minHeight: '10px',
+            }}
+          /> */}
           <div class="progress__bar">
             <ProgressBarSteps step={step.value} setStep={step} />
           </div>
@@ -285,6 +390,31 @@ export default component$(() => {
               <ProductData
                 productStore={productStore}
                 productDataHandlers={productDataHandlers}
+                prevStep={prevStep}
+                nextStep={nextStep}
+              />
+            </>
+          )}
+          {step.value === 3 && (
+            <>
+              <ProductDetails
+                previewIMG={previewIMG}
+                previewIMG1={previewIMG1}
+                previewIMGs={previewIMGs}
+                productStore={productStore}
+                productProductDetailsHandlers={productProductDetailsHandlers}
+                prevStep={prevStep}
+                nextStep={nextStep}
+              />
+            </>
+          )}
+          {step.value === 4 && (
+            <>
+              <ProductDetailsDescriptionFull
+                productStore={productStore}
+                productDetailsDescriptionFullHandlers={
+                  productDetailsDescriptionFullHandlers
+                }
                 prevStep={prevStep}
                 nextStep={nextStep}
               />
@@ -375,6 +505,7 @@ const ProductData = ({
     onProductDepthChange,
     onWeightUnitChange,
     onDimensionUnitChange,
+    onProductBrandChange,
   } = productDataHandlers;
 
   return (
@@ -426,7 +557,7 @@ const ProductData = ({
         <input
           type="text"
           value={productStore.productBrand}
-          onChange$={onProductPriceChange}
+          onChange$={onProductBrandChange}
         />
       </div>
       <br />
@@ -547,7 +678,7 @@ const ProductData = ({
             !productStore.productName ||
             !productStore.productPrice ||
             !productStore.productGTIN ||
-            !productStore.productDiscount ||
+            productStore.productDiscount < 0 || // Permitimos descuento de 0, pero no negativo
             !productStore.productQty ||
             !productStore.productBrand ||
             !productStore.selectedCategoryIndex ||
@@ -556,7 +687,190 @@ const ProductData = ({
             !productStore.productWidth ||
             !productStore.productDepth ||
             !productStore.dimensionUnit ||
-            !productStore.weightUnit
+            !productStore.weightUnit ||
+            productStore.productPrice <= 0 || // Comprobamos si el precio es mayor que 0
+            productStore.productQty <= 0 || // Comprobamos si la cantidad es mayor que 0
+            productStore.productWeight <= 0 || // Comprobamos si el peso es mayor que 0
+            productStore.productHeight <= 0 || // Comprobamos si la altura es mayor que 0
+            productStore.productWidth <= 0 || // Comprobamos si la anchura es mayor que 0
+            productStore.productDepth <= 0 // Comprobamos si la profundidad es mayor que 0
+          }
+        >
+          Siguiente
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const ProductDetails = ({
+  prevStep,
+  nextStep,
+  productStore,
+  productProductDetailsHandlers,
+  previewIMG,
+  previewIMG1,
+  previewIMGs,
+}: any) => {
+  const {
+    onProductOrientationChange,
+    onHandleFileChange,
+    onHandlePreviewImg1Change,
+    onHandlePreviewImgChange,
+  } = productProductDetailsHandlers;
+
+  function selectComponent() {
+    switch (productStore.pd_deatilImgBox) {
+      case 'horizontal_view':
+        return (
+          <>
+            <Horizontal_img
+              preview={previewIMG}
+              previewIMG1={previewIMG1}
+              onChange={onHandleFileChange}
+              onHandlePreviewImg1Change={onHandlePreviewImg1Change}
+              previewIMGs={previewIMGs}
+              onHandlePreviewImgChange={onHandlePreviewImgChange}
+            />
+          </>
+        );
+
+      case 'vertical_view':
+        return (
+          <>
+            <Vertical_img
+              preview={previewIMG}
+              previewIMG1={previewIMG1}
+              onChange={onHandleFileChange}
+              onHandlePreviewImg1Change={onHandlePreviewImg1Change}
+              previewIMGs={previewIMGs}
+              onHandlePreviewImgChange={onHandlePreviewImgChange}
+            />
+          </>
+        );
+
+      case 'grid4_view':
+        return (
+          <>
+            <Grid4_img
+              preview={previewIMG}
+              previewIMG1={previewIMG1}
+              onChange={onHandleFileChange}
+              onHandlePreviewImg1Change={onHandlePreviewImg1Change}
+              previewIMGs={previewIMGs}
+              onHandlePreviewImgChange={onHandlePreviewImgChange}
+            />
+          </>
+        );
+      default:
+        return (
+          <>
+            <Vertical_img
+              preview={previewIMG}
+              previewIMG1={previewIMG1}
+              onChange={onHandleFileChange}
+              onHandlePreviewImg1Change={onHandlePreviewImg1Change}
+              previewIMGs={previewIMGs}
+              onHandlePreviewImgChange={onHandlePreviewImgChange}
+            />
+          </>
+        );
+    }
+  }
+
+  return (
+    <div class="Form__DETAILSPRODUCTS">
+      <div class="detailImages">
+        <div class="content_img">{selectComponent()}</div>
+        <div class="content_select_orientation">
+          <label for="orientation">Orientación del producto:</label>
+          <select
+            id="orientation"
+            value={productStore.pd_deatilImgBox}
+            onChange$={onProductOrientationChange}
+          >
+            <option value="vertical_view">Vertical</option>
+            <option value="horizontal_view">Horizontal</option>
+            <option value="grid4_view">Grid 4 Images</option>
+          </select>
+        </div>
+      </div>
+      <br />
+      <br />
+
+      <br />
+      <div class="buttons__container">
+        <button type="button" class="prev-button" onClick$={prevStep}>
+          Anterior
+        </button>
+        <button
+          type="button"
+          class="next-button"
+          onClick$={nextStep}
+          disabled={
+            !productStore.productName ||
+            !productStore.productPrice ||
+            !productStore.productGTIN ||
+            productStore.productDiscount < 0 || // Permitimos descuento de 0, pero no negativo
+            !productStore.productQty ||
+            !productStore.productBrand ||
+            !productStore.selectedCategoryIndex ||
+            !productStore.productWeight ||
+            !productStore.productHeight ||
+            !productStore.productWidth ||
+            !productStore.productDepth ||
+            !productStore.dimensionUnit ||
+            !productStore.weightUnit ||
+            productStore.productPrice <= 0 || // Comprobamos si el precio es mayor que 0
+            productStore.productQty <= 0 || // Comprobamos si la cantidad es mayor que 0
+            productStore.productWeight <= 0 || // Comprobamos si el peso es mayor que 0
+            productStore.productHeight <= 0 || // Comprobamos si la altura es mayor que 0
+            productStore.productWidth <= 0 || // Comprobamos si la anchura es mayor que 0
+            productStore.productDepth <= 0 // Comprobamos si la profundidad es mayor que 0
+          }
+        >
+          Siguiente
+        </button>
+      </div>
+    </div>
+  );
+};
+const ProductDetailsDescriptionFull = ({
+  prevStep,
+  nextStep,
+  productStore,
+  productDetailsDescriptionFullHandlers,
+}: any) => {
+  const { onProductDescriptionFullChange } =
+    productDetailsDescriptionFullHandlers;
+
+  return (
+    <div class="Form__DETAILSPRODUCTS">
+      <br />
+
+      <div class="detailDescription">
+        <label for="description">Descripción del producto:</label>
+        <Description_full
+          productStore={productStore}
+          onChange$={onProductDescriptionFullChange}
+          nextStep={nextStep}
+        />
+      </div>
+      <br />
+      <div class="buttons__container">
+        <button type="button" class="prev-button" onClick$={prevStep}>
+          Anterior
+        </button>
+        <button
+          type="button"
+          class="next-button"
+          onClick$={nextStep}
+          disabled={
+            !productStore.productName ||
+            !productStore.productPrice ||
+            !productStore.productGTIN ||
+            productStore.productDiscount < 0 || // Permitimos descuento de 0, pero no negativo
+            !productStore.productQty
           }
         >
           Siguiente
@@ -571,7 +885,7 @@ export const head: DocumentHead = {
     {
       name: 'description',
       content:
-        'Genera un producto para tu tienda, vende con facilidad en Douvery.',
+        'Genera un producto para tu tienda, vende con facilidad en Douvery. ',
     },
   ],
 };
