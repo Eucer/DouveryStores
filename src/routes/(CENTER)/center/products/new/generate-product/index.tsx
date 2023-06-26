@@ -19,6 +19,7 @@ import { Vertical_img } from '~/components/(Center)/products/generate-product/up
 import { Horizontal_img } from '~/components/(Center)/products/generate-product/upload_img/horizontal_img/horizontal_img';
 import { Grid4_img } from '~/components/(Center)/products/generate-product/upload_img/grid4_img/grid4_img';
 import { Description_full } from '~/components/(Center)/products/generate-product/description_full/description_full';
+import { BulletProduct } from '~/components/(Center)/products/bullet-product/bullet-product';
 
 export const useAction = globalAction$(
   async (
@@ -144,7 +145,7 @@ const ProductMaxQty = [
 export default component$(() => {
   useStylesScoped$(style);
 
-  const step = useSignal(1);
+  const step = useSignal(3);
   const nextStep = $(() => {
     step.value++;
   });
@@ -171,7 +172,7 @@ export default component$(() => {
     weightUnit: '',
     productWeight: 0,
     pd_deatilImgBox: '',
-    productDescription: '',
+    productShortDescription: '',
     productDescriptionFull: '',
     productKeywords: [],
     productBullets: [],
@@ -246,8 +247,8 @@ export default component$(() => {
   };
   productDataHandlers;
   const productProductDetailsHandlers = {
-    onProductDescriptionChange: $((e: any) => {
-      productStore.productDescription = e.target.value;
+    onProductShortDescriptionChange: $((e: any) => {
+      productStore.productShortDescription = e.target.value;
     }),
     onProductKeywordsChange: $((e: any) => {
       productStore.productKeywords = e.target.value.split(',');
@@ -349,7 +350,6 @@ export default component$(() => {
   // });
 
   // console.log(editorRef.value);
-  console.log(step.value);
 
   return (
     <>
@@ -359,6 +359,7 @@ export default component$(() => {
             <BreadcrumbsSTL1 />
             <div class="product_new__title">Generate product</div>
           </div>
+
           {/* <button onClick$={handleBoldClick}>Bold</button>
           <div
             ref={editorRef.value as any}
@@ -377,6 +378,7 @@ export default component$(() => {
             <>
               {' '}
               <h1>Selección de categoría y subcategoría</h1>
+              <div class="separator_w100_m10_bgr24 "></div>
               <ProductCategory
                 productStore={productStore}
                 productCategoryHandlers={productCategoryHandlers}
@@ -387,6 +389,7 @@ export default component$(() => {
           {step.value === 2 && (
             <>
               <h1>Datos del producto</h1>
+              <div class="separator_w100_m10_bgr24 "></div>
               <ProductData
                 productStore={productStore}
                 productDataHandlers={productDataHandlers}
@@ -397,6 +400,11 @@ export default component$(() => {
           )}
           {step.value === 3 && (
             <>
+              <span class="title_subtitle">
+                <h1> Product Details:</h1>
+                <p> Insertar imágenes, descripción y viñetas.</p>
+              </span>
+              <div class="separator_w100_m10_bgr24 "></div>
               <ProductDetails
                 previewIMG={previewIMG}
                 previewIMG1={previewIMG1}
@@ -513,6 +521,8 @@ const ProductData = ({
       <div>
         <label>Nombre del producto:</label>
         <textarea
+          id="textarea__name"
+          placeholder='TCL 32" HD Smart TV 32S6500'
           value={productStore.productName}
           onChange$={onProductNameChange}
         />
@@ -527,6 +537,7 @@ const ProductData = ({
               type="number"
               value={productStore.productPrice}
               onChange$={onProductPriceChange}
+              min={0}
             />
             <span class="input__hint">
               Puedes cambiar el precio en cualquier momento.
@@ -544,6 +555,7 @@ const ProductData = ({
               type="number"
               value={productStore.productDiscount}
               onChange$={onProductDiscountChange}
+              min={0}
             />
             <span class="input__hint">
               Iniciar con un descuento puede aumentar la posibilidad de venta.
@@ -558,6 +570,7 @@ const ProductData = ({
           type="text"
           value={productStore.productBrand}
           onChange$={onProductBrandChange}
+          placeholder="TCL"
         />
       </div>
       <br />
@@ -568,6 +581,7 @@ const ProductData = ({
             type="number"
             value={productStore.productQty}
             onChange$={onProductInventoryChange}
+            min={0}
           />
         </div>
         <div>
@@ -591,6 +605,7 @@ const ProductData = ({
           type="text"
           value={productStore.productGTIN}
           onChange$={onProductGTINChange}
+          placeholder="9780201379624"
         />
       </div>
       <br />
@@ -618,6 +633,7 @@ const ProductData = ({
             type="number"
             value={productStore.productHeight}
             onChange$={onProductHeightChange}
+            min={0}
           />
         </div>
         <br />
@@ -628,6 +644,7 @@ const ProductData = ({
             type="number"
             value={productStore.productWidth}
             onChange$={onProductWidthChange}
+            min={0}
           />
         </div>
         <br />
@@ -638,6 +655,7 @@ const ProductData = ({
             type="number"
             value={productStore.productDepth}
             onChange$={onProductDepthChange}
+            min={0}
           />
         </div>
       </div>
@@ -650,6 +668,7 @@ const ProductData = ({
             type="number"
             value={productStore.productWeight}
             onChange$={onProductWeightChange}
+            min={0}
           />
 
           <select
@@ -717,6 +736,7 @@ const ProductDetails = ({
     onHandleFileChange,
     onHandlePreviewImg1Change,
     onHandlePreviewImgChange,
+    onProductShortDescriptionChange,
   } = productProductDetailsHandlers;
 
   function selectComponent() {
@@ -780,19 +800,43 @@ const ProductDetails = ({
 
   return (
     <div class="Form__DETAILSPRODUCTS">
-      <div class="detailImages">
-        <div class="content_img">{selectComponent()}</div>
-        <div class="content_select_orientation">
-          <label for="orientation">Orientación del producto:</label>
-          <select
-            id="orientation"
-            value={productStore.pd_deatilImgBox}
-            onChange$={onProductOrientationChange}
-          >
-            <option value="vertical_view">Vertical</option>
-            <option value="horizontal_view">Horizontal</option>
-            <option value="grid4_view">Grid 4 Images</option>
-          </select>
+      <div class="conten_form">
+        <div class="detailImages">
+          <div class="content_select_orientation">
+            <label for="orientation">Orientación del producto:</label>
+            <select
+              id="orientation"
+              value={productStore.pd_deatilImgBox}
+              onChange$={onProductOrientationChange}
+            >
+              <option value="vertical_view">Vertical</option>
+              <option value="horizontal_view">Horizontal</option>
+              <option value="grid4_view">Grid 4 Images</option>
+            </select>
+          </div>
+          <div class="content_img">{selectComponent()}</div>
+        </div>
+        <div class="detailDescriptionshort">
+          <br />
+          <br />
+          <label for="description_short">
+            Descripción corta: (Máximo 400 caracteres)
+          </label>
+          <textarea
+            id="description_short"
+            value={productStore.productShortDescription}
+            onChange$={onProductShortDescriptionChange}
+            placeholder='The Televisor TCL 32" is the perfect choice for your entertainment needs. Featuring a 32" LED display ...'
+            minLength={100}
+            maxLength={400}
+          ></textarea>
+          <br />
+
+          <div class="separator_w100_m10_bgr24 "></div>
+          <br />
+
+          <label for="vinetas_product">Viñetas sobre el producto:</label>
+          <BulletProduct productStore={productStore} />
         </div>
       </div>
       <br />

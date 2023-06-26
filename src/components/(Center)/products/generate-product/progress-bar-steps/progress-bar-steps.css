@@ -13,9 +13,7 @@ ul.progress-bar li {
     position: relative;
     text-align: center;
     color: #00000093;
-    border-bottom: 3px solid #ddd;
-    transition: all 0.3s;
-
+    height: 40px;
 }
 
 ul.progress-bar li:hover {
@@ -26,5 +24,5 @@ ul.progress-bar li:hover {
 
 ul.progress-bar li.active {
     color: #19376D;
-    border-bottom: 3px solid var(--color-blue);
+    border-bottom: 2px solid var(--color-blue);
 }
