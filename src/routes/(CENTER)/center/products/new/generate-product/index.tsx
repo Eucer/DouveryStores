@@ -853,15 +853,15 @@ const ProductDetails = ({
           onClick$={nextStep}
           disabled={
             !productStore.productName ||
-            !productStore.productPrice ||
+          
             !productStore.productGTIN ||
             productStore.productDiscount < 0 || // Permitimos descuento de 0, pero no negativo
-            !productStore.productQty ||
+           
             !productStore.productBrand ||
             !productStore.selectedCategoryIndex ||
-            !productStore.productWeight ||
-            !productStore.productHeight ||
-            !productStore.productWidth ||
+         
+         
+   
             !productStore.productDepth ||
             !productStore.dimensionUnit ||
             !productStore.weightUnit ||
@@ -869,7 +869,7 @@ const ProductDetails = ({
             productStore.productQty <= 0 || // Comprobamos si la cantidad es mayor que 0
             productStore.productWeight <= 0 || // Comprobamos si el peso es mayor que 0
             productStore.productHeight <= 0 || // Comprobamos si la altura es mayor que 0
-            productStore.productWidth <= 0 || // Comprobamos si la anchura es mayor que 0
+        
             productStore.productDepth <= 0 // Comprobamos si la profundidad es mayor que 0
           }
         >
