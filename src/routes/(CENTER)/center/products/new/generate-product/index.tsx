@@ -145,7 +145,7 @@ const ProductMaxQty = [
 export default component$(() => {
   useStylesScoped$(style);
 
-  const step = useSignal(3);
+  const step = useSignal(1);
   const nextStep = $(() => {
     step.value++;
   });

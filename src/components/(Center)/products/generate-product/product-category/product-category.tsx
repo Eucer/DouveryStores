@@ -20,6 +20,7 @@ export const ProductCategory = component$(
     return (
       <div class="form-container">
         <label>Selecciona una categoría:</label>
+        <br />
         <select
           value={productStore.selectedCategoryIndex}
           onChange$={onProductCategoryChange}
