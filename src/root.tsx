@@ -21,14 +21,15 @@ export default component$(() => {
       <head>
         <meta charSet="utf-8" />
         <link rel="manifest" href="/manifest.json" />
-
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest/dist/editorjs.min.css"
+        />
         <RouterHead />
       </head>
       <body lang="en">
-        <script
-          src="https://cdn.tiny.cloud/1/gpfm1czm9uffph4gth3ugnsuj980qbls0ovvvni4ozog6pn3/tinymce/6/tinymce.min.js"
-          referrerPolicy="origin"
-        ></script>
+        <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
         <RouterOutlet />
         <ServiceWorkerRegister />
         <script src="./tiny.js"></script>

@@ -19,7 +19,7 @@ import { Vertical_img } from '~/components/(Center)/products/generate-product/up
 import { Horizontal_img } from '~/components/(Center)/products/generate-product/upload_img/horizontal_img/horizontal_img';
 import { Grid4_img } from '~/components/(Center)/products/generate-product/upload_img/grid4_img/grid4_img';
 import { Description_full } from '~/components/(Center)/products/generate-product/description_full/description_full';
-import { BulletProduct } from '~/components/(Center)/products/bullet-product/bullet-product';
+import { BulletProduct } from '~/components/(Center)/products/generate-product/bullet-product/bullet-product';
 
 export const useAction = globalAction$(
   async (
@@ -145,7 +145,7 @@ const ProductMaxQty = [
 export default component$(() => {
   useStylesScoped$(style);
 
-  const step = useSignal(1);
+  const step = useSignal(4);
   const nextStep = $(() => {
     step.value++;
   });
@@ -889,38 +889,11 @@ const ProductDetailsDescriptionFull = ({
     productDetailsDescriptionFullHandlers;
 
   return (
-    <div class="Form__DETAILSPRODUCTS">
-      <br />
-
-      <div class="detailDescription">
-        <label for="description">Descripción del producto:</label>
-        <Description_full
-          productStore={productStore}
-          onChange$={onProductDescriptionFullChange}
-          nextStep={nextStep}
-        />
-      </div>
-      <br />
-      <div class="buttons__container">
-        <button type="button" class="prev-button" onClick$={prevStep}>
-          Anterior
-        </button>
-        <button
-          type="button"
-          class="next-button"
-          onClick$={nextStep}
-          disabled={
-            !productStore.productName ||
-            !productStore.productPrice ||
-            !productStore.productGTIN ||
-            productStore.productDiscount < 0 || // Permitimos descuento de 0, pero no negativo
-            !productStore.productQty
-          }
-        >
-          Siguiente
-        </button>
-      </div>
-    </div>
+    <Description_full
+      productStore={productStore}
+      onChange$={onProductDescriptionFullChange}
+      nextStep={nextStep}
+    />
   );
 };
 export const head: DocumentHead = {

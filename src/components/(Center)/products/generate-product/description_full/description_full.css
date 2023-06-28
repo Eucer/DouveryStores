@@ -1,0 +1,13 @@
+   body,
+   html {
+       height: 100%;
+       margin: 0;
+   }
+
+   #editorjs {
+       width: 1000PX;
+       height: 100%;
+       color: #333;
+       background-color: var(--color-background-light);
+       border: 1px solid #E0E0E0;
+   }
