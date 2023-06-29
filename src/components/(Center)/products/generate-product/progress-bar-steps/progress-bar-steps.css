@@ -9,11 +9,13 @@ ul.progress-bar {
 
 ul.progress-bar li {
     background-color: transparent;
-    padding: 10px 30px;
+    padding: 0px 30px;
     position: relative;
     text-align: center;
     color: #00000093;
-    height: 40px;
+    height: 30px;
+    margin-bottom: 10px;
+
 }
 
 ul.progress-bar li:hover {

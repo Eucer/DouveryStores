@@ -20,14 +20,11 @@ export const ProgressBarSteps = component$(({ step, setStep }: any) => {
         </li>
 
         <li class={step === 3 ? 'active' : ''} onClick$={() => handleClick(3)}>
-          Product Details
-        </li>
-        <li class={step === 4 ? 'active' : ''} onClick$={() => handleClick(4)}>
-          Product Details Description
+          Product Images
         </li>
 
-        <li class={step === 5 ? 'active' : ''} onClick$={() => handleClick(5)}>
-          Product SEO
+        <li class={step === 4 ? 'active' : ''} onClick$={() => handleClick(4)}>
+          Product Details
         </li>
       </ul>
     </>

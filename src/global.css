@@ -252,6 +252,23 @@ p {
   margin: 0;
 }
 
+
+ul {
+  list-style-type: disc;
+  padding-left: 10px;
+  color: var(--color-text-light);
+
+}
+
+li {
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
 /** Title label in different sizes */
 .hs-sr1 {
   font-size: 14px;
