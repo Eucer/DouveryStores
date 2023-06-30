@@ -38,9 +38,9 @@ export const CardAboutStore = component$(() => {
           </p>
           <br />
         </div>
-        <div class="information">
+        <div class="register">
           <p>
-            <strong>Registrada en douvery.com:</strong> Apr 29, 2023
+            <strong>Registrada en Douvery:</strong> Apr 29, 2023
           </p>
         </div>
       </div>{' '}

@@ -59,7 +59,7 @@ export const useAction = globalAction$(
     });
 
     const response = await res.json();
-    console.log(response);
+
     setCookiesDataUser(response.userInfo, cookie);
     setCookiesDataStore(response.storeInfo, cookie);
     if (res.status !== 200) {

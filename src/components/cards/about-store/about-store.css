@@ -89,8 +89,7 @@ h1 {
 
 .container_infostore {
     width: 100%;
-    margin: 10px 0px;
-}
+    }
 
 h2 {
     font-size: 14px;
@@ -102,6 +101,10 @@ p {
     gap: 10px;
     font-size: 14px;
 
+}
+
+.register{
+    padding: 10px 0;
 }
 
 @media (max-width: 800px) {

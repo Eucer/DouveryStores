@@ -17,6 +17,9 @@
     width: 100%;
     text-align: start;
 }
+.show_more{
+    color: var(--color-secondary);
+}
 
 .container__all p {
     font-size: 30px;
@@ -37,17 +40,23 @@
     gap: 20px;
     align-items: center;
     justify-content: center;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--color-background-down);
 }
 
 .container__all img,
 .card_aboutstore {
     width: auto;
+    -o-object-fit: contain;
     object-fit: contain;
-    object-position: top;
+    -o-object-position: top;
+    object-position: center;
     border-radius: 10px;
     padding: 10px;
     height: 400px;
-    border: 1px solid #00000015;
+    border: 1px solid #e8f0fe;
+    background-color: #fff;
 }
 
 

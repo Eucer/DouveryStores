@@ -8,7 +8,7 @@ export const BeautifulShops = component$(() => {
     <div class="container__all">
       <div class="title">
         <p>Beautiful shops in Douvery</p>
-        <a href="/">Ver mas</a>
+        <a href="/" class="show_more">Ver mas</a>
       </div>
       <div>
         <div class="store">
