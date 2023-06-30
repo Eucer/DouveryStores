@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #fff;
+    background-color: var(--color-background-light);
     padding: 20px 20px;
     border-bottom: 1px solid rgba(72, 94, 144, 0.16);
 }
@@ -68,7 +68,6 @@
     display: none;
     position: absolute;
     top: 105%;
-    /* Ajusta este valor para controlar la distancia vertical desde el elemento 'span' */
     left: 0;
     right: 0;
     padding: 10px;
