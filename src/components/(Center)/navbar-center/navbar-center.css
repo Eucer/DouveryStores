@@ -45,8 +45,12 @@
 }
 
 .nav-links li {
-
+    margin-bottom: 0px;
     padding: 5px 10px;
+}
+
+.tabs-nav {
+    height: 30px;
 }
 
 .nav-links .tabs-nav:hover {

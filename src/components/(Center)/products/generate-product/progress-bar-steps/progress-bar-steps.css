@@ -15,7 +15,7 @@ ul.progress-bar li {
     color: #00000093;
     height: 30px;
     margin-bottom: 10px;
-
+    font-size: 14px;
 }
 
 ul.progress-bar li:hover {

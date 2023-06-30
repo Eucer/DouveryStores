@@ -14,57 +14,66 @@ import {
   z,
   globalAction$,
 } from '@builder.io/qwik-city';
-import { urlServerNode } from '~/services/util/server/server';
+import { urlServerLocal } from '~/services/util/server/server';
 import { Vertical_img } from '~/components/(Center)/products/generate-product/upload_img/vertical_img/vertical_img';
 import { Horizontal_img } from '~/components/(Center)/products/generate-product/upload_img/horizontal_img/horizontal_img';
 import { Grid4_img } from '~/components/(Center)/products/generate-product/upload_img/grid4_img/grid4_img';
 import { BulletProduct } from '~/components/(Center)/products/bullet-product/bullet-product';
 
 import { DouveryRight3 } from '~/components/icons/arrow-right-3';
+import { useGetCurrentUser } from '~/routes/layout';
 
 export const useAction = globalAction$(
   async (
     {
-      adminName,
-      adminEmail,
-      adminPhone,
-      password,
-      storeName,
-      storeDescription,
-      storeEmail,
-      storePhone,
-      storeType,
-      storeCountry,
-      storeLocation,
+      tquser,
+      gtin,
+      name,
+      brand,
+      description,
+      images,
+      quantity,
+      maxQuantitySale,
+      price,
+      discount,
+      category,
+      subCategory,
+      productDetails,
+      item_condition,
+      bullets,
+      basicFeatures,
     },
     { fail, headers }
   ) => {
-    const res = await fetch(`${urlServerNode}/api/store-request`, {
+    const formData = new FormData();
+    formData.append('gtin', gtin);
+    formData.append('name', name);
+    formData.append('brand', brand);
+    formData.append('description', description);
+    formData.append('images', images);
+    formData.append('quantity', quantity.toString());
+    formData.append('maxQuantitySale', maxQuantitySale);
+    formData.append('price', price.toString());
+    formData.append('discount', discount.toString());
+    formData.append('category', category);
+    formData.append('subCategory', subCategory);
+    formData.append('productDetails', JSON.stringify(productDetails));
+    formData.append('item_condition', item_condition);
+    formData.append('bullets', JSON.stringify(bullets));
+    formData.append('basicFeatures', JSON.stringify(basicFeatures));
+
+    const res = await fetch(`${urlServerLocal}/api-store/product-request`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'x-auth-token': tquser,
       },
-
-      body: JSON.stringify({
-        adminName,
-        adminEmail,
-        adminPhone,
-        password,
-        storeName,
-        storeDescription,
-        storeEmail,
-        storePhone,
-        storeType,
-        storeCountry,
-        storeLocation,
-      }),
+      body: formData,
     });
 
     const response = await res.json();
     console.log(response);
 
     if (res.status !== 200) {
-      // Utilizar el mensaje de error proporcionado por la API si está disponible
       const errorMessage =
         response.error || response.msg || 'Hubo un error, intente de nuevo';
       return fail(res.status, {
@@ -75,33 +84,22 @@ export const useAction = globalAction$(
     headers.set('location', '/success/request-store');
   },
   zod$({
-    adminName: z
-      .string({
-        required_error: 'Required',
-      })
-      .min(1, {
-        message: 'Upps! Your adminName is too short',
-      })
-      .max(20, {
-        message: 'upps! Your adminName is too long',
-      }),
-    adminEmail: z.string().email({ message: 'Invalid email address' }),
-    adminPhone: z.string().min(1, { message: 'Phone number is required' }),
-    password: z
-      .string()
-      .min(8, { message: 'Password must be at least 8 characters long' }),
-
-    storeName: z.string().min(1, { message: 'Store name is required' }),
-    storeDescription: z.string().min(1, {
-      message: 'Store description is required',
-    }),
-    storeEmail: z.string().email({ message: 'Invalid store email address' }),
-    storePhone: z
-      .string()
-      .min(1, { message: 'Store phone number is required' }),
-    storeType: z.string().min(1, { message: 'Store type is required' }),
-    storeCountry: z.string().min(1, { message: 'Country is required' }),
-    storeLocation: z.string().min(1, { message: 'Store location is required' }),
+    tquser: z.string(),
+    gtin: z.string(),
+    name: z.string(),
+    brand: z.string(),
+    description: z.string(),
+    images: z.instanceof(Blob),
+    quantity: z.string(),
+    maxQuantitySale: z.string(),
+    price: z.string(),
+    discount: z.string(),
+    category: z.string(),
+    subCategory: z.string(),
+    productDetails: z.string(),
+    item_condition: z.string(),
+    bullets: z.string(),
+    basicFeatures: z.string(),
   })
 );
 const categories = [
@@ -157,20 +155,20 @@ export default component$(() => {
   const productStore = useStore({
     productCategory: '',
     productSubCategory: '',
-    selectedCategoryIndex: -1, // Índice de la categoría seleccionada (-1 significa no seleccionada)
-    selectedSubCategoryIndex: -1, // Índice de la subcategoría seleccionada (-1 significa no seleccionada)
+    selectedCategoryIndex: -1,
+    selectedSubCategoryIndex: -1,
     productName: '',
     productPrice: 0,
     productBrand: '',
     productGTIN: '',
     productDiscount: 0,
-    productMaxQty: '',
+    productMaxQty: 'Unlimited',
     productQty: 0,
-    dimensionUnit: '',
+    dimensionUnit: 'cm',
     productHeight: 0,
     productWidth: 0,
     productDepth: 0,
-    weightUnit: '',
+    weightUnit: 'lb',
     productWeight: 0,
     pd_deatilImgBox: '',
     productShortDescription: '',
@@ -178,7 +176,7 @@ export default component$(() => {
     productKeywords: [],
     productBullets: [],
     productHighlights: [],
-    productSEO: '',
+    productCondition: 'new',
   });
   const previewIMG = useStore({
     previewIMGPrimary: [],
@@ -192,22 +190,33 @@ export default component$(() => {
     onProductCategoryChange: $((e: any) => {
       const selectedCatIndex = Number(e.target.value);
       productStore.selectedCategoryIndex = selectedCatIndex;
-      if (selectedCatIndex === -1) {
+      if (selectedCatIndex >= 0) {
+        productStore.productCategory = categories[selectedCatIndex].name;
+      } else {
+        productStore.productCategory = '';
         productStore.selectedSubCategoryIndex = -1;
       }
     }),
     onProductSubCategoryChange: $((e: any) => {
       const selectedSubCatIndex = Number(e.target.value);
       productStore.selectedSubCategoryIndex = selectedSubCatIndex;
+      if (selectedSubCatIndex >= 0) {
+        productStore.productSubCategory =
+          categories[productStore.selectedCategoryIndex].subcategories[
+            selectedSubCatIndex
+          ];
+      } else {
+        productStore.productSubCategory = '';
+      }
     }),
   };
-
+  console.log(productStore.productCategory);
   const productDataHandlers = {
     onProductNameChange: $((e: any) => {
       productStore.productName = e.target.value;
     }),
     onProductPriceChange: $((e: any) => {
-      productStore.productPrice = e.target.value;
+      productStore.productPrice = Number(e.target.value);
     }),
     onProductBrandChange: $((e: any) => {
       productStore.productBrand = e.target.value;
@@ -216,18 +225,20 @@ export default component$(() => {
       productStore.productGTIN = e.target.value;
     }),
     onProductDiscountChange: $((e: any) => {
-      productStore.productDiscount = e.target.value;
+      productStore.productDiscount = Number(e.target.value);
     }),
     onProductMaxQtyChange: $((e: any) => {
       productStore.productMaxQty = e.target.value;
     }),
     onProductInventoryChange: $((e: any) => {
-      productStore.productQty = e.target.value;
+      productStore.productQty = Number(e.target.value);
     }),
     onDimensionUnitChange: $((e: any) => {
       productStore.dimensionUnit = e.target.value;
     }),
-
+    onProductConditionChange: $((e: any) => {
+      productStore.productCondition = e.target.value;
+    }),
     onProductWeightChange: $((e: any) => {
       productStore.productWeight = e.target.value;
     }),
@@ -304,16 +315,73 @@ export default component$(() => {
     }),
   };
 
-  productProductDetailsHandlers;
-  const productSEOHandlers = {
-    onProductSEOChange: $((e: any) => {
-      productStore.productSEO = e.target.value;
-    }),
-  };
-
-  productSEOHandlers;
   const action = useAction();
-  action;
+  const user = useGetCurrentUser().value;
+
+  //! AQUIIIII
+  const handleSend = $(async () => {
+    function base64ToBlob(base64: any) {
+      // Convertir base64 a cadena binaria
+      const binary = atob(base64.split(',')[1]);
+
+      // Crear un array para el blob
+      const array = [];
+      for (let i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i));
+      }
+
+      // Crear y retornar el blob
+      return new Blob([new Uint8Array(array)], { type: 'image/png' });
+    }
+
+    const base64 = previewIMG.previewIMGPrimary[0];
+    const blob = base64ToBlob(base64);
+
+    const formData = new FormData();
+    formData.append('tquser', user?.token as any);
+    formData.append('gtin', productStore.productGTIN);
+    formData.append('name', productStore.productName);
+    formData.append('brand', productStore.productBrand);
+    formData.append('description', productStore.productDescriptionFull);
+    formData.append('images', blob);
+    formData.append('quantity', JSON.stringify(productStore.productQty));
+    formData.append('maxQuantitySale', productStore.productMaxQty);
+    formData.append('price', JSON.stringify(productStore.productPrice));
+    formData.append('discount', JSON.stringify(productStore.productDiscount));
+    formData.append('category', productStore.productCategory);
+    formData.append('subCategory', productStore.productSubCategory);
+    formData.append(
+      'productDetails',
+      JSON.stringify([
+        {
+          pd_detailImgBox: productStore.pd_deatilImgBox as any,
+        },
+      ])
+    );
+    formData.append('item_condition', productStore.productCondition);
+    formData.append('bullets', JSON.stringify(productStore.productBullets));
+    formData.append(
+      'basicFeatures',
+      JSON.stringify([
+        {
+          width: (productStore.productWidth +
+            '' +
+            productStore.dimensionUnit) as any,
+          height: (productStore.productHeight +
+            '' +
+            productStore.dimensionUnit) as any,
+          depth: (productStore.productDepth +
+            '' +
+            productStore.dimensionUnit) as any,
+          weigth: (productStore.productWeight +
+            '' +
+            productStore.weightUnit) as any,
+        },
+      ])
+    );
+
+    await action.submit(formData);
+  });
 
   // const editorRef = useSignal<Element>();
   // const handleBoldClick = $(() => {
@@ -353,6 +421,7 @@ export default component$(() => {
               <h1>Selección de categoría y subcategoría</h1>
               <div class="separator_w100_m10_bgr24 "></div>
               <ProductCategory
+                action={action}
                 productStore={productStore}
                 productCategoryHandlers={productCategoryHandlers}
                 nextStep={nextStep}
@@ -364,6 +433,7 @@ export default component$(() => {
               <h1>Datos del producto</h1>
               <div class="separator_w100_m10_bgr24 "></div>
               <ProductData
+                action={action}
                 productStore={productStore}
                 productDataHandlers={productDataHandlers}
                 prevStep={prevStep}
@@ -378,6 +448,7 @@ export default component$(() => {
               </span>
               <div class="separator_w100_m10_bgr24 "></div>
               <ProductImages
+                action={action}
                 previewIMG={previewIMG}
                 previewIMGs={previewIMGs}
                 storeImagePrimary={previewIMG}
@@ -396,11 +467,17 @@ export default component$(() => {
               </span>
               <div class="separator_w100_m10_bgr24 "></div>
               <ProductDetails
+                action={action}
                 productStore={productStore}
                 productProductDetailsHandlers={productProductDetailsHandlers}
                 prevStep={prevStep}
-                nextStep={nextStep}
+                nextStep={handleSend}
               />
+              {action.value?.fieldErrors && (
+                <span class="error">
+                  Porfavor completa el formulario completamente.
+                </span>
+              )}
             </>
           )}
         </div>
@@ -410,6 +487,7 @@ export default component$(() => {
 });
 
 const ProductCategory = ({
+  action,
   nextStep,
   productStore,
   productCategoryHandlers,
@@ -431,6 +509,9 @@ const ProductCategory = ({
           </option>
         ))}
       </select>
+      {action.value?.fieldErrors?.category && (
+        <span class="error">{action.value?.fieldErrors?.category}</span>
+      )}
 
       {productStore.selectedCategoryIndex !== -1 && (
         <div class="sub__subcategory">
@@ -448,6 +529,9 @@ const ProductCategory = ({
               )
             )}
           </select>
+          {action.value?.fieldErrors?.subCategory && (
+            <span class="error">{action.value?.fieldErrors?.subCategory}</span>
+          )}
         </div>
       )}
 
@@ -475,6 +559,7 @@ const ProductData = ({
   nextStep,
   productStore,
   productDataHandlers,
+  action,
 }: any) => {
   const {
     onProductNameChange,
@@ -490,6 +575,7 @@ const ProductData = ({
     onWeightUnitChange,
     onDimensionUnitChange,
     onProductBrandChange,
+    onProductConditionChange,
   } = productDataHandlers;
 
   return (
@@ -504,6 +590,9 @@ const ProductData = ({
             value={productStore.productName}
             onChange$={onProductNameChange}
           />
+          {action.value?.fieldErrors?.name && (
+            <span class="error">{action.value?.fieldErrors?.name}</span>
+          )}
         </div>
         <br />
         <div class="content__imputs">
@@ -516,11 +605,15 @@ const ProductData = ({
                 value={productStore.productPrice}
                 onChange$={onProductPriceChange}
                 min={0}
+                max={999999999}
               />
               <span class="input__hint">
                 Puedes cambiar el precio en cualquier momento.
               </span>
             </div>
+            {action.value?.fieldErrors?.price && (
+              <span class="error">{action.value?.fieldErrors?.price}</span>
+            )}
           </div>
         </div>
         <br />
@@ -534,11 +627,15 @@ const ProductData = ({
                 value={productStore.productDiscount}
                 onChange$={onProductDiscountChange}
                 min={0}
+                max={99}
               />
               <span class="input__hint">
                 Iniciar con un descuento puede aumentar la posibilidad de venta.
               </span>
             </div>
+            {action.value?.fieldErrors?.discount && (
+              <span class="error">{action.value?.fieldErrors?.discount}</span>
+            )}
           </div>
         </div>
         <br />
@@ -550,6 +647,9 @@ const ProductData = ({
             onChange$={onProductBrandChange}
             placeholder="TCL"
           />
+          {action.value?.fieldErrors?.brand && (
+            <span class="error">{action.value?.fieldErrors?.brand}</span>
+          )}
         </div>
         <br />
         <div class="content__inputs_gtin_qty">
@@ -560,13 +660,17 @@ const ProductData = ({
               value={productStore.productQty}
               onChange$={onProductInventoryChange}
               min={0}
+              max={2500}
             />
+            {action.value?.fieldErrors?.quantity && (
+              <span class="error">{action.value?.fieldErrors?.quantity}</span>
+            )}
           </div>
           <div>
             <label>Cantidad máxima por compra</label>
             <select
               class="select__max_qty"
-              value={productStore.selectedCategoryIndex}
+              value={productStore.productMaxQty}
               onChange$={onProductMaxQtyChange}
             >
               {ProductMaxQty.map((data, index) => (
@@ -575,7 +679,29 @@ const ProductData = ({
                 </option>
               ))}
             </select>
+            {action.value?.fieldErrors?.maxQuantitySale && (
+              <span class="error">
+                {action.value?.fieldErrors?.maxQuantitySale}
+              </span>
+            )}
           </div>
+        </div>
+        <div>
+          <label>Condicion del producto</label>
+
+          <select
+            class="select__weight"
+            id="dimension"
+            value={productStore.productCondition}
+            onChange$={onProductConditionChange}
+          >
+            <option value="new">Nuevo</option>
+          </select>
+          {action.value?.fieldErrors?.item_condition && (
+            <span class="error">
+              {action.value?.fieldErrors?.item_condition}
+            </span>
+          )}
         </div>
         <div>
           <label>GTIN del producto:</label>
@@ -585,6 +711,9 @@ const ProductData = ({
             onChange$={onProductGTINChange}
             placeholder="9780201379624"
           />
+          {action.value?.fieldErrors?.gtin && (
+            <span class="error">{action.value?.fieldErrors?.gtin}</span>
+          )}
         </div>
         <br />
         <br />
@@ -611,7 +740,13 @@ const ProductData = ({
               value={productStore.productHeight}
               onChange$={onProductHeightChange}
               min={0}
+              max={100}
             />
+            {action.value?.fieldErrors?.basicFeatures.height && (
+              <span class="error">
+                {action.value?.fieldErrors?.basicFeatures.height}
+              </span>
+            )}
           </div>
           <br />
           <div>
@@ -622,7 +757,13 @@ const ProductData = ({
               value={productStore.productWidth}
               onChange$={onProductWidthChange}
               min={0}
+              max={100}
             />
+            {action.value?.fieldErrors?.basicFeatures.width && (
+              <span class="error">
+                {action.value?.fieldErrors?.basicFeatures.width}
+              </span>
+            )}
           </div>
           <br />
           <div>
@@ -635,7 +776,14 @@ const ProductData = ({
               value={productStore.productDepth}
               onChange$={onProductDepthChange}
               min={0}
+              max={100}
             />
+
+            {action.value?.fieldErrors?.basicFeatures.depth && (
+              <span class="error">
+                {action.value?.fieldErrors?.basicFeatures.depth}
+              </span>
+            )}
           </div>
         </div>
         <br />
@@ -648,8 +796,12 @@ const ProductData = ({
               value={productStore.productWeight}
               onChange$={onProductWeightChange}
               min={0}
-            />
-
+            />{' '}
+            {action.value?.fieldErrors?.basicFeatures.weigth && (
+              <span class="error">
+                {action.value?.fieldErrors?.basicFeatures.weigth}
+              </span>
+            )}
             <select
               class="select__weight"
               id="weight"
@@ -678,23 +830,13 @@ const ProductData = ({
               disabled={
                 !productStore.productName ||
                 !productStore.productPrice ||
-                !productStore.productGTIN ||
-                productStore.productDiscount < 0 || // Permitimos descuento de 0, pero no negativo
                 !productStore.productQty ||
-                !productStore.productBrand ||
-                !productStore.selectedCategoryIndex ||
-                !productStore.productWeight ||
+                !productStore.productMaxQty ||
+                !productStore.productGTIN ||
                 !productStore.productHeight ||
                 !productStore.productWidth ||
                 !productStore.productDepth ||
-                !productStore.dimensionUnit ||
-                !productStore.weightUnit ||
-                productStore.productPrice <= 0 || // Comprobamos si el precio es mayor que 0
-                productStore.productQty <= 0 || // Comprobamos si la cantidad es mayor que 0
-                productStore.productWeight <= 0 || // Comprobamos si el peso es mayor que 0
-                productStore.productHeight <= 0 || // Comprobamos si la altura es mayor que 0
-                productStore.productWidth <= 0 || // Comprobamos si la anchura es mayor que 0
-                productStore.productDepth <= 0 // Comprobamos si la profundidad es mayor que 0
+                !productStore.productWeight
               }
             >
               Siguiente
@@ -706,9 +848,9 @@ const ProductData = ({
               <strong>Información</strong>
             </div>
             <div class="information_BOX__content">
-              Por favor, complete los datos con la mayor precisión posible.
-              Estos datos son de suma importancia para nuestros clientes y para
-              la logística de envío. <a href="/">Consulta aquí</a>
+              Complete los datos con la mayor precisión posible. Estos datos son
+              de suma importancia para nuestros clientes y para la logística de
+              envío. <a href="/">Consulta aquí</a>
             </div>
             <br />
           </div>
@@ -719,6 +861,7 @@ const ProductData = ({
 };
 
 const ProductDetails = ({
+  action,
   prevStep,
   nextStep,
   productStore,
@@ -741,11 +884,17 @@ const ProductDetails = ({
             minLength={100}
             maxLength={400}
           ></textarea>
+          {action.value?.fieldErrors?.description && (
+            <span class="error">{action.value?.fieldErrors?.description}</span>
+          )}
         </div>
 
         <div class="contet_bullets">
           <label for="vinetas_product">Viñetas sobre el producto:</label>
           <BulletProduct productStore={productStore} />
+          {action.value?.fieldErrors?.bullets && (
+            <span class="error">{action.value?.fieldErrors?.bullets}</span>
+          )}
         </div>
       </div>
 
@@ -759,23 +908,9 @@ const ProductDetails = ({
           type="button"
           class="next-button"
           onClick$={nextStep}
-          disabled={
-            !productStore.productName ||
-            !productStore.productGTIN ||
-            productStore.productDiscount < 0 || // Permitimos descuento de 0, pero no negativo
-            !productStore.productBrand ||
-            !productStore.selectedCategoryIndex ||
-            !productStore.productDepth ||
-            !productStore.dimensionUnit ||
-            !productStore.weightUnit ||
-            productStore.productPrice <= 0 || // Comprobamos si el precio es mayor que 0
-            productStore.productQty <= 0 || // Comprobamos si la cantidad es mayor que 0
-            productStore.productWeight <= 0 || // Comprobamos si el peso es mayor que 0
-            productStore.productHeight <= 0 || // Comprobamos si la altura es mayor que 0
-            productStore.productDepth <= 0 // Comprobamos si la profundidad es mayor que 0
-          }
+          disabled={!productStore.productShortDescription}
         >
-          Siguiente
+          Enviar
           <DouveryRight3 size="14" />
         </button>
       </div>
@@ -784,6 +919,7 @@ const ProductDetails = ({
 };
 
 const ProductImages = ({
+  action,
   prevStep,
   nextStep,
   productStore,
@@ -872,6 +1008,9 @@ const ProductImages = ({
             </select>
           </div>
           <div class="content_img">{selectComponent()}</div>
+          {action.value?.fieldErrors?.images && (
+            <span class="error">{action.value?.fieldErrors?.images}</span>
+          )}
         </div>
       </div>
       <br />
@@ -906,9 +1045,9 @@ const ProductImages = ({
             </div>
             <div class="information_BOX__content">
               <p>
-                Por favor, asegúrese de que las imágenes que subas tengan un
-                fondo blanco o transparente. <a href="/">Consulta aquí</a> por
-                qué es necesario.
+                Asegúrese de que las imágenes que subas tengan un fondo blanco o
+                transparente. <a href="/">Consulta aquí</a> por qué es
+                necesario.
               </p>
 
               <br />
