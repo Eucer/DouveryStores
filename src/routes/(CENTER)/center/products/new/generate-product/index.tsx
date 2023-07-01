@@ -23,85 +23,6 @@ import { BulletProduct } from '~/components/(Center)/products/bullet-product/bul
 import { DouveryRight3 } from '~/components/icons/arrow-right-3';
 import { useGetCurrentUser } from '~/routes/layout';
 
-export const useAction = globalAction$(
-  async (
-    {
-      tquser,
-      gtin,
-      name,
-      brand,
-      description,
-      images,
-      quantity,
-      maxQuantitySale,
-      price,
-      discount,
-      category,
-      subCategory,
-      productDetails,
-      item_condition,
-      bullets,
-      basicFeatures,
-    },
-    { fail, headers }
-  ) => {
-    const formData = new FormData();
-    formData.append('gtin', gtin);
-    formData.append('name', name);
-    formData.append('brand', brand);
-    formData.append('description', description);
-    formData.append('images', images);
-    formData.append('quantity', quantity.toString());
-    formData.append('maxQuantitySale', maxQuantitySale);
-    formData.append('price', price.toString());
-    formData.append('discount', discount.toString());
-    formData.append('category', category);
-    formData.append('subCategory', subCategory);
-    formData.append('productDetails', JSON.stringify(productDetails));
-    formData.append('item_condition', item_condition);
-    formData.append('bullets', JSON.stringify(bullets));
-    formData.append('basicFeatures', JSON.stringify(basicFeatures));
-
-    const res = await fetch(`${urlServerLocal}/api-store/product-request`, {
-      method: 'POST',
-      headers: {
-        'x-auth-token': tquser,
-      },
-      body: formData,
-    });
-
-    const response = await res.json();
-    console.log(response);
-
-    if (res.status !== 200) {
-      const errorMessage =
-        response.error || response.msg || 'Hubo un error, intente de nuevo';
-      return fail(res.status, {
-        message: errorMessage,
-      });
-    }
-
-    headers.set('location', '/success/request-store');
-  },
-  zod$({
-    tquser: z.string(),
-    gtin: z.string(),
-    name: z.string(),
-    brand: z.string(),
-    description: z.string(),
-    images: z.instanceof(Blob),
-    quantity: z.string(),
-    maxQuantitySale: z.string(),
-    price: z.string(),
-    discount: z.string(),
-    category: z.string(),
-    subCategory: z.string(),
-    productDetails: z.string(),
-    item_condition: z.string(),
-    bullets: z.string(),
-    basicFeatures: z.string(),
-  })
-);
 const categories = [
   {
     id: 1,
@@ -141,6 +62,136 @@ const ProductMaxQty = [
     name: '5',
   },
 ];
+
+export const useAction = globalAction$(
+  async (
+    {
+      tquser,
+      gtin,
+      name,
+      brand,
+      description,
+      images,
+      quantity,
+      maxQuantitySale,
+      price,
+      discount,
+      category,
+      subCategory,
+      productDetails,
+      item_condition,
+      bullets,
+      basicFeatures,
+    },
+    { fail, headers }
+  ) => {
+    console.log(name);
+    const res = await fetch(`${urlServerLocal}/api-store/product-request`, {
+      method: 'POST',
+      headers: {
+        'x-auth-token': tquser,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        gtin,
+        name,
+        brand,
+        description,
+        images,
+        quantity,
+        maxQuantitySale,
+        price,
+        discount,
+        category,
+        subCategory,
+        productDetails,
+        item_condition,
+        bullets,
+        basicFeatures,
+      }),
+    });
+
+    const response = await res.json();
+
+    if (!response.ok) {
+      return fail(401, {
+        message: 'Invalid email or password',
+      });
+    }
+
+    headers.set('location', '/success/request-store');
+  },
+  zod$({
+    tquser: z.string({
+      required_error: 'Required',
+    }),
+    gtin: z.string({
+      required_error: 'Required',
+    }),
+    name: z.string({
+      description: 'Product name',
+      required_error: 'Required',
+      invalid_type_error: 'Invalid type',
+    }),
+    brand: z.string({
+      required_error: 'Required',
+    }),
+    description: z.string({
+      required_error: 'Required',
+    }),
+    images: z.array(
+      z.string({
+        required_error: 'Required',
+      })
+    ),
+    quantity: z.number({
+      required_error: 'Required',
+    }),
+    maxQuantitySale: z.string({
+      required_error: 'Required',
+    }),
+    price: z.number({
+      required_error: 'Required',
+    }),
+    discount: z.number({
+      required_error: 'Required',
+    }),
+    category: z.string({
+      required_error: 'Required',
+    }),
+    subCategory: z.string({
+      required_error: 'Required',
+    }),
+    productDetails: z.object({
+      pd_detailImgBox: z.string({
+        required_error: 'Required',
+      }),
+    }),
+    item_condition: z.string({
+      required_error: 'Required',
+    }),
+    bullets: z.array(
+      z.string({
+        required_error: 'Required',
+      })
+    ),
+    basicFeatures: z.object({
+      width: z.string({
+        required_error: 'Required',
+      }),
+      height: z.string({
+        required_error: 'Required',
+      }),
+      depth: z.string({
+        required_error: 'Required',
+      }),
+      weigth: z.string({
+        required_error: 'Required',
+      }),
+    }),
+  })
+);
+
 export default component$(() => {
   useStylesScoped$(style);
 
@@ -183,9 +234,9 @@ export default component$(() => {
   });
 
   const previewIMGs = useStore({
-    previewIMGs: Array(7).fill([]), // Suponiendo que tienes hasta 7 imágenes
+    previewIMGs: Array(7).fill([]),
   });
-  /// 1. Product Category Handlers
+
   const productCategoryHandlers = {
     onProductCategoryChange: $((e: any) => {
       const selectedCatIndex = Number(e.target.value);
@@ -210,7 +261,7 @@ export default component$(() => {
       }
     }),
   };
-  console.log(productStore.productCategory);
+
   const productDataHandlers = {
     onProductNameChange: $((e: any) => {
       productStore.productName = e.target.value;
@@ -314,73 +365,54 @@ export default component$(() => {
       }
     }),
   };
-
   const action = useAction();
   const user = useGetCurrentUser().value;
+  const images = previewIMGs.previewIMGs.flat().map((item) => item);
 
-  //! AQUIIIII
   const handleSend = $(async () => {
-    function base64ToBlob(base64: any) {
-      // Convertir base64 a cadena binaria
-      const binary = atob(base64.split(',')[1]);
-
-      // Crear un array para el blob
-      const array = [];
-      for (let i = 0; i < binary.length; i++) {
-        array.push(binary.charCodeAt(i));
-      }
-
-      // Crear y retornar el blob
-      return new Blob([new Uint8Array(array)], { type: 'image/png' });
-    }
-
-    const base64 = previewIMG.previewIMGPrimary[0];
-    const blob = base64ToBlob(base64);
-
-    const formData = new FormData();
-    formData.append('tquser', user?.token as any);
-    formData.append('gtin', productStore.productGTIN);
-    formData.append('name', productStore.productName);
-    formData.append('brand', productStore.productBrand);
-    formData.append('description', productStore.productDescriptionFull);
-    formData.append('images', blob);
-    formData.append('quantity', JSON.stringify(productStore.productQty));
-    formData.append('maxQuantitySale', productStore.productMaxQty);
-    formData.append('price', JSON.stringify(productStore.productPrice));
-    formData.append('discount', JSON.stringify(productStore.productDiscount));
-    formData.append('category', productStore.productCategory);
-    formData.append('subCategory', productStore.productSubCategory);
-    formData.append(
-      'productDetails',
-      JSON.stringify([
-        {
-          pd_detailImgBox: productStore.pd_deatilImgBox as any,
-        },
-      ])
-    );
-    formData.append('item_condition', productStore.productCondition);
-    formData.append('bullets', JSON.stringify(productStore.productBullets));
-    formData.append(
-      'basicFeatures',
-      JSON.stringify([
-        {
-          width: (productStore.productWidth +
-            '' +
-            productStore.dimensionUnit) as any,
-          height: (productStore.productHeight +
-            '' +
-            productStore.dimensionUnit) as any,
-          depth: (productStore.productDepth +
-            '' +
-            productStore.dimensionUnit) as any,
-          weigth: (productStore.productWeight +
-            '' +
-            productStore.weightUnit) as any,
-        },
-      ])
-    );
-
-    await action.submit(formData);
+    await action.submit({
+      tquser: user?.token as any,
+      gtin: productStore.productGTIN,
+      name: productStore.productName
+        ? productStore.productName
+        : (undefined as any),
+      brand: productStore.productBrand
+        ? productStore.productBrand
+        : (undefined as any),
+      description: productStore.productShortDescription
+        ? productStore.productShortDescription
+        : (undefined as any),
+      images: [...previewIMG.previewIMGPrimary, ...images],
+      quantity: productStore.productQty,
+      maxQuantitySale: productStore.productMaxQty,
+      price: productStore.productPrice
+        ? productStore.productPrice
+        : (undefined as any),
+      discount: productStore.productDiscount
+        ? productStore.productDiscount
+        : (undefined as any),
+      category: productStore.productCategory,
+      subCategory: productStore.productSubCategory,
+      productDetails: {
+        pd_detailImgBox: productStore.pd_deatilImgBox as any,
+      },
+      item_condition: productStore.productCondition,
+      bullets: productStore.productBullets,
+      basicFeatures: {
+        width: (productStore.productWidth +
+          '' +
+          productStore.dimensionUnit) as any,
+        height: (productStore.productHeight +
+          '' +
+          productStore.dimensionUnit) as any,
+        depth: (productStore.productDepth +
+          '' +
+          productStore.dimensionUnit) as any,
+        weigth: (productStore.productWeight +
+          '' +
+          productStore.weightUnit) as any,
+      },
+    });
   });
 
   // const editorRef = useSignal<Element>();
@@ -611,10 +643,10 @@ const ProductData = ({
                 Puedes cambiar el precio en cualquier momento.
               </span>
             </div>
-            {action.value?.fieldErrors?.price && (
-              <span class="error">{action.value?.fieldErrors?.price}</span>
-            )}
           </div>
+          {action.value?.fieldErrors?.price && (
+            <span class="error">{action.value?.fieldErrors?.price}</span>
+          )}
         </div>
         <br />
         <div class="content__inputs_discount">
@@ -633,10 +665,10 @@ const ProductData = ({
                 Iniciar con un descuento puede aumentar la posibilidad de venta.
               </span>
             </div>
-            {action.value?.fieldErrors?.discount && (
-              <span class="error">{action.value?.fieldErrors?.discount}</span>
-            )}
           </div>
+          {action.value?.fieldErrors?.discount && (
+            <span class="error">{action.value?.fieldErrors?.discount}</span>
+          )}
         </div>
         <br />
         <div>
@@ -647,9 +679,6 @@ const ProductData = ({
             onChange$={onProductBrandChange}
             placeholder="TCL"
           />
-          {action.value?.fieldErrors?.brand && (
-            <span class="error">{action.value?.fieldErrors?.brand}</span>
-          )}
         </div>
         <br />
         <div class="content__inputs_gtin_qty">
@@ -662,9 +691,6 @@ const ProductData = ({
               min={0}
               max={2500}
             />
-            {action.value?.fieldErrors?.quantity && (
-              <span class="error">{action.value?.fieldErrors?.quantity}</span>
-            )}
           </div>
           <div>
             <label>Cantidad máxima por compra</label>
@@ -679,11 +705,6 @@ const ProductData = ({
                 </option>
               ))}
             </select>
-            {action.value?.fieldErrors?.maxQuantitySale && (
-              <span class="error">
-                {action.value?.fieldErrors?.maxQuantitySale}
-              </span>
-            )}
           </div>
         </div>
         <div>
@@ -697,11 +718,6 @@ const ProductData = ({
           >
             <option value="new">Nuevo</option>
           </select>
-          {action.value?.fieldErrors?.item_condition && (
-            <span class="error">
-              {action.value?.fieldErrors?.item_condition}
-            </span>
-          )}
         </div>
         <div>
           <label>GTIN del producto:</label>
@@ -742,11 +758,6 @@ const ProductData = ({
               min={0}
               max={100}
             />
-            {action.value?.fieldErrors?.basicFeatures.height && (
-              <span class="error">
-                {action.value?.fieldErrors?.basicFeatures.height}
-              </span>
-            )}
           </div>
           <br />
           <div>
@@ -759,11 +770,6 @@ const ProductData = ({
               min={0}
               max={100}
             />
-            {action.value?.fieldErrors?.basicFeatures.width && (
-              <span class="error">
-                {action.value?.fieldErrors?.basicFeatures.width}
-              </span>
-            )}
           </div>
           <br />
           <div>
@@ -778,12 +784,6 @@ const ProductData = ({
               min={0}
               max={100}
             />
-
-            {action.value?.fieldErrors?.basicFeatures.depth && (
-              <span class="error">
-                {action.value?.fieldErrors?.basicFeatures.depth}
-              </span>
-            )}
           </div>
         </div>
         <br />
@@ -797,11 +797,6 @@ const ProductData = ({
               onChange$={onProductWeightChange}
               min={0}
             />{' '}
-            {action.value?.fieldErrors?.basicFeatures.weigth && (
-              <span class="error">
-                {action.value?.fieldErrors?.basicFeatures.weigth}
-              </span>
-            )}
             <select
               class="select__weight"
               id="weight"

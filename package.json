@@ -47,6 +47,7 @@
     "@types/react-draft-wysiwyg": "^1.13.4",
     "@types/tinymce": "^4.6.5",
     "draft-js": "^0.11.7",
+    "fs": "^0.0.1-security",
     "js-base64": "^3.7.5",
     "quill": "^1.3.7",
     "react-draft-wysiwyg": "^1.15.0",
