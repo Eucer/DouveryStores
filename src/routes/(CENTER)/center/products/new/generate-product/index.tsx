@@ -372,7 +372,9 @@ export default component$(() => {
   const handleSend = $(async () => {
     await action.submit({
       tquser: user?.token as any,
-      gtin: productStore.productGTIN,
+      gtin: productStore.productGTIN
+        ? productStore.productGTIN
+        : (undefined as any),
       name: productStore.productName
         ? productStore.productName
         : (undefined as any),
@@ -383,7 +385,9 @@ export default component$(() => {
         ? productStore.productShortDescription
         : (undefined as any),
       images: [...previewIMG.previewIMGPrimary, ...images],
-      quantity: productStore.productQty,
+      quantity: productStore.productQty
+        ? productStore.productQty
+        : (undefined as any),
       maxQuantitySale: productStore.productMaxQty,
       price: productStore.productPrice
         ? productStore.productPrice
@@ -391,17 +395,23 @@ export default component$(() => {
       discount: productStore.productDiscount
         ? productStore.productDiscount
         : (undefined as any),
-      category: productStore.productCategory,
-      subCategory: productStore.productSubCategory,
+      category: productStore.productCategory
+        ? productStore.productCategory
+        : (undefined as any),
+      subCategory: productStore.productSubCategory
+        ? productStore.productSubCategory
+        : (undefined as any),
       productDetails: {
         pd_detailImgBox: productStore.pd_deatilImgBox as any,
       },
-      item_condition: productStore.productCondition,
+      item_condition: productStore.productCondition
+        ? productStore.productCondition
+        : (undefined as any),
       bullets: productStore.productBullets,
       basicFeatures: {
-        width: (productStore.productWidth +
-          '' +
-          productStore.dimensionUnit) as any,
+        width: (productStore.productWidth
+          ? productStore.productWidth
+          : undefined + '' + productStore.dimensionUnit) as any,
         height: (productStore.productHeight +
           '' +
           productStore.dimensionUnit) as any,
@@ -443,7 +453,12 @@ export default component$(() => {
             }}
           /> */}
           <div class="progress__bar">
-            <ProgressBarSteps step={step.value} setStep={step} />
+            <ProgressBarSteps
+              action={action}
+              productStore={productStore}
+              step={step.value}
+              setStep={step}
+            />
           </div>
         </div>
         <div class="container__form">
@@ -679,6 +694,9 @@ const ProductData = ({
             onChange$={onProductBrandChange}
             placeholder="TCL"
           />
+          {action.value?.fieldErrors?.brand && (
+            <span class="error">{action.value?.fieldErrors?.brand}</span>
+          )}
         </div>
         <br />
         <div class="content__inputs_gtin_qty">
@@ -691,6 +709,9 @@ const ProductData = ({
               min={0}
               max={2500}
             />
+            {action.value?.fieldErrors?.quantity && (
+              <span class="error">{action.value?.fieldErrors?.quantity}</span>
+            )}
           </div>
           <div>
             <label>Cantidad máxima por compra</label>
