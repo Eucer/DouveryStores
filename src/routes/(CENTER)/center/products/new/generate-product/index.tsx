@@ -85,7 +85,6 @@ export const useAction = globalAction$(
     },
     { fail, headers }
   ) => {
-    console.log(name);
     const res = await fetch(`${urlServerLocal}/api-store/product-request`, {
       method: 'POST',
       headers: {
@@ -112,14 +111,14 @@ export const useAction = globalAction$(
     });
 
     const response = await res.json();
-
+    console.log(response);
     if (!response.ok) {
-      return fail(401, {
-        message: 'Invalid email or password',
+      return fail(400, {
+        message: 'Invalid credentials or user not found',
       });
     }
 
-    headers.set('location', '/success/request-store');
+    headers.set('location', '/center/success/request-product');
   },
   zod$({
     tquser: z.string({
@@ -368,7 +367,7 @@ export default component$(() => {
   const action = useAction();
   const user = useGetCurrentUser().value;
   const images = previewIMGs.previewIMGs.flat().map((item) => item);
-
+  console.log(user?.token);
   const handleSend = $(async () => {
     await action.submit({
       tquser: user?.token as any,
@@ -384,7 +383,10 @@ export default component$(() => {
       description: productStore.productShortDescription
         ? productStore.productShortDescription
         : (undefined as any),
-      images: [...previewIMG.previewIMGPrimary, ...images],
+      images:
+        previewIMG.previewIMGPrimary.length > 0
+          ? [...previewIMG.previewIMGPrimary, ...images]
+          : (undefined as any),
       quantity: productStore.productQty
         ? productStore.productQty
         : (undefined as any),
@@ -520,11 +522,60 @@ export default component$(() => {
                 prevStep={prevStep}
                 nextStep={handleSend}
               />
-              {action.value?.fieldErrors && (
-                <span class="error">
-                  Porfavor completa el formulario completamente.
-                </span>
-              )}
+              <div class="alt_messaje">
+                {action.value?.message && (
+                  <span class="error">{action.value?.message}</span>
+                )}
+                <ul>
+                  {action.value?.fieldErrors && (
+                    <>
+                      <li>
+                        {' '}
+                        <span class="error">
+                          Porfavor completa el formulario completamente.
+                        </span>
+                      </li>
+                      {!productStore.productName ||
+                      !productStore.productPrice ||
+                      !productStore.productQty ||
+                      !productStore.productMaxQty ||
+                      !productStore.productGTIN ||
+                      !productStore.productHeight ||
+                      !productStore.productWidth ||
+                      !productStore.productDepth ? (
+                        <li>
+                          <span class="error">
+                            Asegúrate de comprobar la sección de "Product Data"
+                          </span>
+                        </li>
+                      ) : (
+                        ''
+                      )}{' '}
+                      {!productStore.productCategory ||
+                      !productStore.productSubCategory ? (
+                        <li>
+                          <span class="error">
+                            Asegúrate de comprobar la sección de "Product
+                            Category"
+                          </span>
+                        </li>
+                      ) : (
+                        ''
+                      )}{' '}
+                      {previewIMG.previewIMGPrimary.length > 0 ? (
+                        ''
+                      ) : (
+                        <li>
+                          <span class="error">
+                            Asegúrate de comprobar la sección de "Product
+                            Images".
+                          </span>
+                        </li>
+                      )}{' '}
+                    </>
+                  )}
+                </ul>
+              </div>
             </>
           )}
         </div>
@@ -926,15 +977,28 @@ const ProductDetails = ({
           onClick$={nextStep}
           disabled={!productStore.productShortDescription}
         >
-          Enviar
-          <DouveryRight3 size="14" />
+          {action.isRunning ? (
+            <>
+              {' '}
+              <div class="loader"></div>
+              Un momento...
+            </>
+          ) : action.value?.message ? (
+            'Error'
+          ) : (
+            <>
+              {' '}
+              Enviar
+              <DouveryRight3 size="14" />
+            </>
+          )}{' '}
         </button>
       </div>
     </div>
   );
 };
 
-const ProductImages = ({
+export const ProductImages = ({
   action,
   prevStep,
   nextStep,

@@ -34,8 +34,8 @@ ul.progress-bar li.active {
 }
 
 .circle-red {
-    width: 10px;
-    height: 10px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
     background-color: var(--color-red);
     opacity: 0.5;

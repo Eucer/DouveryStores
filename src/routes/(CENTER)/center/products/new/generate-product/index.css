@@ -293,6 +293,12 @@ select {
 }
 
 
+.alt_messaje {
+    font-size: 12px;
+
+    margin-top: 10px;
+    text-align: start;
+}
 
 button {
     background-color: #fff;

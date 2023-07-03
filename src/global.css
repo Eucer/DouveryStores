@@ -247,6 +247,19 @@ button {
   max-width: 200px;
 }
 
+button:hover {
+  background-color: rgb(249, 250, 251);
+}
+
+button:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+button:focus-visible {
+  box-shadow: none;
+}
+
 p {
   color: var(--color-text-light);
   margin: 0;

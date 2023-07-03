@@ -1,0 +1,254 @@
+.container-all {
+    display: grid;
+    gap: 5px;
+}
+
+.card {
+    display: flex;
+    align-items: flex-start;
+    background-color: #ffffff;
+
+    border-radius: 10px;
+    gap: 10px;
+    padding: 1rem;
+    margin: 0.5rem;
+    position: relative;
+}
+
+.product_image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.product-image {
+
+    position: sticky;
+    top: 0px;
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-right: 1rem;
+    border-radius: 10px;
+    background-color: var(--color-background-card);
+    padding: 10px;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.product-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 0 0.5rem 0;
+}
+
+.product-title:hover {
+    text-decoration: underline;
+}
+
+.product_brand {
+    font-size: 13px;
+    color: var(--color-black);
+    opacity: 0.8;
+    margin: 0 0 0.5rem 0;
+}
+
+
+.product-price {
+    display: flex;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 600;
+
+}
+
+.price-t {
+    font-weight: 400;
+    color: #5e5e5e;
+}
+
+.product-stock {
+    display: flex;
+    margin: 2px 0px;
+
+}
+
+.product-no-stock {
+    color: #332FD0;
+}
+
+
+
+.button--show-shopping-cell {
+    display: none;
+}
+
+.container-expert-cell {
+    font-size: 10px;
+    padding: 20px 0px;
+}
+
+.ctr-free-shipping {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.ctr-free-shipping p {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    fill: #008000;
+    color: #008000;
+}
+
+
+.separator {
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-background-card);
+    margin: 10px 0px;
+}
+
+
+.in_product {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.product_quantity_number {
+
+    font-weight: 500;
+}
+
+.product_quantity {
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+
+}
+
+.product_quantity_text {
+
+    color: #5e5e5e;
+}
+
+.product_dui {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+}
+
+.product_dui_text {
+    display: flex;
+    gap: 5px;
+    font-size: 12px;
+    color: #5e5e5e;
+}
+
+.status-card {
+    width: 110px;
+    height: 30px;
+    display: flex;
+    gap: 10px;
+
+    border-radius: 5px;
+    justify-content: flex-start;
+    align-items: center;
+
+    text-align: center;
+}
+
+.status-title {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.status-text {
+    font-size: 12px;
+}
+
+.pending {
+    color: #F2BE22;
+
+}
+
+.approved {
+    color: #03940a;
+
+}
+
+.rejected {
+    background-color: #ef5350;
+
+}
+
+@media only screen and (max-width: 885px) {
+    .card {
+        display: flex;
+        align-items: flex-start;
+        background-color: #ffffff;
+        border-top: 1px solid #E8F0FE;
+        gap: 3px;
+        padding: 20px 0rem;
+        margin: 0.2rem;
+        position: relative;
+    }
+
+    .button--show-shopping-cell {
+        background-color: #fff;
+        border: 1px solid #d5d9d9;
+        border-radius: 8px;
+        box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+        box-sizing: border-box;
+        color: #0f1111;
+        cursor: pointer;
+        display: inline-block;
+
+        font-size: 13px;
+        line-height: 29px;
+        padding: 0 10px 0 11px;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+        width: 90%;
+    }
+
+    .product-image {
+        width: 120px;
+        height: 130px;
+    }
+
+    .product-title {
+        font-size: 14px;
+        width: 250px;
+        height: 2.4em;
+
+        line-height: 1.2em;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+
+    }
+
+    .card .container-expert {
+        display: none;
+    }
+}
