@@ -7,7 +7,7 @@ import {
 } from '@builder.io/qwik';
 import style from './index.css?inline';
 import { Header_info } from '~/components/(Center)/header_info/header_info';
-import { ProductImages } from '../../new/generate-product';
+
 import { Product_images } from '~/components/(Index)/modify/product_images/product_images';
 export default component$(() => {
   useStylesScoped$(style);

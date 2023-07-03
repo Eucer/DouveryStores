@@ -367,7 +367,7 @@ export default component$(() => {
   const action = useAction();
   const user = useGetCurrentUser().value;
   const images = previewIMGs.previewIMGs.flat().map((item) => item);
-  console.log(user?.token);
+
   const handleSend = $(async () => {
     await action.submit({
       tquser: user?.token as any,
