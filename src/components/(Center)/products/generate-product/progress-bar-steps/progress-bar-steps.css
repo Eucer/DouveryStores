@@ -8,6 +8,10 @@ ul.progress-bar {
 }
 
 ul.progress-bar li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
     background-color: transparent;
     padding: 0px 30px;
     position: relative;
@@ -27,4 +31,12 @@ ul.progress-bar li:hover {
 ul.progress-bar li.active {
     color: #19376D;
     border-bottom: 2px solid var(--color-blue);
+}
+
+.circle-red {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: var(--color-red);
+    opacity: 0.5;
 }

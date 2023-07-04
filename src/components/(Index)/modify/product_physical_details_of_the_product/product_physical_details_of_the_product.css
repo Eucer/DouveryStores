@@ -1,0 +1,171 @@
+.container_all {
+    width: 100%;
+    max-width: 600px;
+
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+}
+
+
+label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #2B2730;
+
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #313131;
+    margin-top: 15px;
+    background-color: var(--color-background-light);
+    border: 1px solid var(--border-width-1);
+    box-sizing: border-box;
+    border-radius: 5px;
+
+}
+
+textarea {
+    height: 100px;
+}
+
+.Form__DATAPRODUCTS {
+    display: flex;
+    gap: 50px;
+
+}
+
+.content {
+    position: sticky;
+    top: 0;
+
+}
+
+.btn_Data {
+
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    max-width: none;
+
+}
+
+.btn_Data button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.content__imputs {
+    display: grid;
+    width: 400px;
+    gap: 20px;
+
+}
+
+
+.price_discount__container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.content__inputs_discount {
+    display: grid;
+    width: 600px;
+    gap: 20px;
+
+}
+
+.input__price,
+.input_discount {
+    display: flex;
+    gap: 10px;
+    font-size: 20px;
+    align-items: center;
+    color: #0f11119a;
+
+}
+
+.input__hint {
+    font-size: 12px;
+    color: #0f11119a;
+}
+
+
+
+.content__inputs_gtin_qty {
+    display: flex;
+    gap: 20px;
+}
+
+.input_wei {
+    display: flex;
+    gap: 2px;
+
+}
+
+.input_wei input {
+    margin: 0px;
+}
+
+.select__weight {
+    padding: 10px 30px 10px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    background-color: rgba(247, 248, 248, 0.952);
+    border: 1px solid #E0E0E0;
+    margin-bottom: 20px;
+}
+
+.select__max_qty {
+    padding: 10px 30px 10px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    background-color: rgba(247, 248, 248, 0.952);
+    border: 1px solid #E0E0E0;
+    margin-bottom: 20px;
+}
+
+.inputs_dimension {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.inputs_widths {
+    display: flex;
+    gap: 20px;
+}
+
+.content_title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.separator {
+    width: 100%;
+    height: 1px;
+
+    background-color: rgba(10, 10, 10, 0.096);
+    margin: 10px 0;
+}

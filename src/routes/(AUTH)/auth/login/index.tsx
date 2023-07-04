@@ -53,6 +53,7 @@ export const useLogin = globalAction$(
         message: 'Email o password no válidos',
       });
     }
+    console.log(response);
 
     setCookiesDataUser(dataAccess.userInfo, cookie);
     setCookiesDataStore(dataAccess.storeInfo, cookie);

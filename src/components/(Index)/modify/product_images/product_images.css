@@ -1,0 +1,16 @@
+.content_select_orientation {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+
+}
+
+select {
+    padding: 10px 30px 10px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    background-color: rgba(247, 248, 248, 0.952);
+    border: 1px solid #E0E0E0;
+    margin-bottom: 20px;
+    width: 150px;
+}

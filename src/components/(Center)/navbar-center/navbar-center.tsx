@@ -266,7 +266,7 @@ export const NavBarCenter = component$(() => {
               </div>
               <div class="content">
                 <p>Gestión de Inventario </p>
-                <a href="#">
+                <a href="/center/inventory/">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="32"
@@ -279,9 +279,9 @@ export const NavBarCenter = component$(() => {
                       d="M26 4H6a2.002 2.002 0 0 0-2 2v20a2.002 2.002 0 0 0 2 2h20a2.002 2.002 0 0 0 2-2V6a2.002 2.002 0 0 0-2-2Zm-8 2v4h-4V6ZM6 26V6h6v6h8V6h6l.001 20Z"
                     />
                   </svg>{' '}
-                  Inventatio
+                  Inventario
                 </a>
-                <a href="/">
+                {/* <a href="/">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -298,7 +298,7 @@ export const NavBarCenter = component$(() => {
                     </g>
                   </svg>
                   Listado de productos
-                </a>
+                </a> */}
                 <a href="#">
                   {' '}
                   <svg

@@ -1,0 +1,54 @@
+.crtr-charac-bs {
+    display: grid;
+    width: 100%;
+
+    gap: 10px;
+    padding: 10px 0px;
+}
+
+.crrts-title {
+    display: grid;
+    padding: 0px;
+    padding-bottom: 15px;
+}
+
+li {
+    color: var(--color-black);
+
+    min-width: 200px;
+    font-size: 14px;
+    display: grid;
+    grid-template-columns: 120px auto;
+    padding: 10px 0px;
+    align-items: center;
+    gap: 30px;
+    border-bottom: 1px solid var(--border-width-1);
+}
+
+.ofrs {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+}
+
+.srs-md {
+    display: none;
+}
+
+.text_consult {
+    color: #008CBA;
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 885px) {
+    .crtr-charac-bs {
+        padding: 0px 10px;
+
+    }
+
+    li {
+
+        max-width: 850px;
+    }
+}
