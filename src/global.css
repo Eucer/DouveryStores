@@ -282,6 +282,45 @@ button:active {
   transform: scale(0.95);
 }
 
+
+select {
+
+  padding: 3px 40px 3px 12px;
+  width: 100%;
+  border: 1px solid #E8EAED;
+  border-radius: 5px;
+  background: white;
+  box-shadow: 0 1px 3px -2px #9098A9;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  transition: all 150ms ease;
+  color: #5b5d63;
+}
+
+select:required:invalid {
+  color: #5A667F;
+}
+
+select option {
+  color: #223254;
+  font-size: 12px;
+}
+
+select option[value=""][disabled] {
+  display: none;
+}
+
+select:focus {
+  outline: none;
+  border-color: #0077FF;
+  box-shadow: 0 0 0 2px rgba(0, 119, 255, 0.2);
+}
+
+select:hover svg {
+  stroke: #0077FF;
+}
+
 /** Title label in different sizes */
 .hs-sr1 {
   font-size: 14px;

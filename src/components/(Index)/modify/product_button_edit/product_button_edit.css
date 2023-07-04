@@ -1,0 +1,256 @@
+button {
+    background-color: #fff;
+    border: 1px solid #d5d9d9;
+    border-radius: 8px;
+    box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+    box-sizing: border-box;
+    color: #0f1111;
+    cursor: pointer;
+    display: inline-block;
+
+    font-size: 13px;
+    line-height: 40px;
+    padding: 0 10px 0 11px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    width: 100%;
+
+}
+
+
+
+.buttons__container {
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    justify-content: center;
+
+    gap: 20px;
+    padding: 20px 0;
+    border-top: 1px solid var(--border-width-1);
+    border-bottom: 1px solid var(--border-width-1);
+}
+
+
+
+
+
+
+
+.next-button:disabled {
+    background-color: #fff;
+    border: 1px solid #d5d9d9;
+    border-radius: 8px;
+    box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+    box-sizing: border-box;
+    color: #0f1111;
+    display: inline-block;
+
+    font-size: 13px;
+    line-height: 40px;
+    padding: 0 10px 0 11px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    width: 100%;
+    cursor: not-allowed;
+    opacity: .5;
+}
+
+.next-button:hover:not(:disabled) {
+
+    border: 1px solid var(--color-primary);
+}
+
+.Form__IMAGESPRODUCTS {
+    display: flex;
+    gap: 80px;
+}
+
+.conten_form_IMAGES {
+    display:
+        grid;
+
+    gap: 120px;
+
+}
+
+.btn_images {
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    max-width: none;
+
+}
+
+.btn_images button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.detailImages {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: auto;
+}
+
+.content_select_orientation {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.content_img {
+    width: 600px;
+}
+
+
+.show-more {
+    text-align: end;
+    color: #005580;
+    cursor: pointer;
+
+}
+
+.show-more:hover {
+
+    text-decoration: underline;
+}
+
+.Form__DETAILSPRODUCTS {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20PX 0;
+    gap: 50px;
+}
+
+.detailDescriptionshort {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+
+}
+
+.content_descriptionShort {
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contet_bullets {
+    width: 100%;
+    max-width: 700px;
+
+}
+
+.cirle-bg {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--color-text-light);
+}
+
+
+
+#vinetas_product {
+    border-radius: 0px;
+    border: none;
+    border-bottom: 1px solid var(--border-width-1);
+    background-color: var(--color-background-white);
+    margin: 5px 0;
+}
+
+.conten_newvineta {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    width: 100%;
+    margin: 5px;
+}
+
+.btn_new_vineta {
+    background-color: #fff;
+    box-shadow: none;
+    border: none;
+    width: 100%;
+    text-align: end;
+    color: var(--color-blue-vibrant);
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.btn_new_vineta:hover {
+    text-decoration: underline;
+}
+
+.container_Button_Info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.information_BOX {
+    position: relative;
+    top: 20px;
+    background-color: var(--color-background-light);
+    border-radius: 15px;
+    border: 1px solid var(--border-width-1);
+    padding: 20px;
+
+}
+
+.information_BOX__title {
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.information_BOX__title strong {
+    font-weight: bold;
+}
+
+.information_BOX__content {
+    color: #666;
+    font-size: 13px;
+}
+
+.information_BOX__content p {
+    margin-bottom: 10px;
+}
+
+.information_BOX__content a {
+    color: #008CBA;
+    /* Cambia a tu color de preferencia */
+    text-decoration: none;
+}
+
+.information_BOX__content a:hover {
+    color: #005580;
+    /* Cambia a tu color de preferencia */
+    text-decoration: underline;
+}

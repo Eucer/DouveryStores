@@ -1,6 +1,6 @@
 import { urlServerLocal } from '~/services/util/server/server';
 
-export async function fetchViewProducts(
+export async function fetchViewProductDui(
   dui: string,
   user: string,
 

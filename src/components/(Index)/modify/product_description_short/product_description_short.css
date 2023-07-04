@@ -1,0 +1,79 @@
+.Form__DETAILSPRODUCTS {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20PX 0;
+    gap: 50px;
+}
+
+#description_short {
+    color: #313131;
+    margin-top: 15px;
+    background-color: var(--color-background-light);
+    border: 1px solid var(--border-width-1);
+    padding: 10px;
+    height: 150px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.detailDescriptionshort {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+
+}
+
+.content_descriptionShort {
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contet_bullets {
+    width: 100%;
+    max-width: 700px;
+
+}
+
+.cirle-bg {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--color-text-light);
+}
+
+
+
+#vinetas_product {
+    border-radius: 0px;
+    border: none;
+    border-bottom: 1px solid var(--border-width-1);
+    background-color: var(--color-background-white);
+    margin: 5px 0;
+}
+
+.conten_newvineta {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    width: 100%;
+    margin: 5px;
+}
+
+.btn_new_vineta {
+    background-color: #fff;
+    box-shadow: none;
+    border: none;
+    width: 100%;
+    text-align: end;
+    color: var(--color-blue-vibrant);
+    font-size: 13px;
+    cursor: pointer;
+}

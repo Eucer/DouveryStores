@@ -36,7 +36,7 @@ const categories = [
   },
 ];
 
-const ProductMaxQty = [
+export const ProductMaxQty = [
   {
     id: 0,
     name: 'Unlimited',
@@ -652,7 +652,7 @@ const ProductCategory = ({
   );
 };
 
-const ProductData = ({
+export const ProductData = ({
   prevStep,
   nextStep,
   productStore,

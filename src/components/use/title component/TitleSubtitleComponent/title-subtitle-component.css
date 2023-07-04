@@ -1,0 +1,22 @@
+.crrts-title {
+    display: grid;
+    padding: 0px;
+
+}
+
+
+.ofrs {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+}
+
+.srs-md {
+    display: none;
+}
+
+.text_consult {
+    color: #008CBA;
+    text-decoration: none;
+}
