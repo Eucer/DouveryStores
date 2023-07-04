@@ -59,3 +59,12 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
+
+@media screen and (max-width: 1289px) {
+    .container_view_product {
+
+        grid-template-columns: 0.5fr 1fr;
+
+
+    }
+}
