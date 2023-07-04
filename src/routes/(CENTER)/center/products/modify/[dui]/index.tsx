@@ -207,6 +207,11 @@ export default component$(() => {
             prevStep={prevStep}
             nextStep={nextStep}
           />
+          <Product_physical_details_of_the_product
+            action="edit"
+            productStore={productStore}
+            productDataHandlers={productDataHandlers}
+          />
         </div>
         <div class="center">
           <Product_data
@@ -214,6 +219,7 @@ export default component$(() => {
             productStore={productStore}
             productDataHandlers={productDataHandlers}
           />
+          <br />
           <Product_description_short
             action="edit"
             productStore={productStore}
@@ -228,11 +234,8 @@ export default component$(() => {
           <Product_data_no_edit productStore={productStore} />
         </div>
       </div>
-      <Product_physical_details_of_the_product
-        action="edit"
-        productStore={productStore}
-        productDataHandlers={productDataHandlers}
-      />
+
+      <div class="session_02"></div>
     </div>
   );
 });

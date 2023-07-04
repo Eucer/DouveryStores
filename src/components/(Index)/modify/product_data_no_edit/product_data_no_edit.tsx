@@ -1,5 +1,6 @@
 import { component$, useStylesScoped$ } from '@builder.io/qwik';
 import style from './product_data_no_edit.css?inline';
+import { TextCL } from '~/components/textCL/textCL';
 export const Product_data_no_edit = component$(({ productStore }: any) => {
   useStylesScoped$(style);
   return (
@@ -26,6 +27,13 @@ export const Product_data_no_edit = component$(({ productStore }: any) => {
           </li>
           <li>
             <strong>Sub Categoria:</strong> {productStore.productSubCategory}
+          </li>
+          <li>
+            <strong>Condicion:</strong>{' '}
+            <TextCL text={productStore.productCondition} />
+          </li>
+          <li>
+            <strong>GTIN:</strong> {productStore.productGTIN}
           </li>
           <li>
             <strong>Crado por:</strong> {productStore.productUploaded_by}

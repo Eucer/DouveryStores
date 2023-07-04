@@ -75,7 +75,7 @@ textarea {
 
 .content__imputs {
     display: grid;
-    width: 400px;
+    max-width: 400px;
     gap: 20px;
 
 }
@@ -90,7 +90,7 @@ textarea {
 
 .content__inputs_discount {
     display: grid;
-    width: 600px;
+    max-width: 600px;
     gap: 20px;
 
 }

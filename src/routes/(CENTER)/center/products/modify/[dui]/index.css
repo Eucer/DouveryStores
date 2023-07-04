@@ -42,7 +42,7 @@
 .rigth {
     width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: 10px;
     justify-content: flex-start;
     align-items: center;
@@ -53,4 +53,9 @@
     width: 100%;
     height: 1px;
     background-color: #00000014;
+}
+
+.session_02 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
