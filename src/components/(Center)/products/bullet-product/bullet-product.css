@@ -6,17 +6,18 @@ textarea {
     height: 40px;
     padding: 5px 10px;
     font-size: 16px;
-    color: #333;
+    color: #000;
     background-color: var(--color-background-light);
     border: 1px solid #E0E0E0;
     border-radius: 5px;
     box-sizing: border-box;
+    opacity: .7;
 }
 
 
 
 #vinetas_product {
-    color: #00000070;
+
     font-size: 14px;
 }
 
@@ -30,8 +31,8 @@ textarea {
 }
 
 .cirle-bg {
-    width: 7px;
-    height: 7px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
     background-color: var(--color-text-light);
 }
@@ -73,7 +74,8 @@ textarea {
     justify-content: center;
     cursor: pointer;
     color: #000000;
-    opacity: 0.2;
+
+    opacity: 0.7;
 }
 
 .btn_deleted_bullet:hover {

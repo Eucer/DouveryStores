@@ -957,7 +957,6 @@ const ProductDetails = ({
         </div>
 
         <div class="contet_bullets">
-          <label for="vinetas_product">Viñetas sobre el producto:</label>
           <BulletProduct productStore={productStore} />
           {action.value?.fieldErrors?.bullets && (
             <span class="error">{action.value?.fieldErrors?.bullets}</span>

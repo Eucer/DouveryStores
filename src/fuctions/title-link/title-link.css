@@ -1,0 +1,16 @@
+.titleLink {
+    font-size: 12px;
+    color: #0f11119a;
+}
+
+.link {
+    text-align: end;
+    color: #008CBA;
+    cursor: pointer;
+
+}
+
+.link:hover {
+
+    text-decoration: underline;
+}

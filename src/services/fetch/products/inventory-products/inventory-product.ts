@@ -1,4 +1,4 @@
-import { urlServerLocal } from "~/services/util/server/server";
+import {  urlServerNode } from "~/services/util/server/server";
 
 export async function fetchStoreInventoryProducts(
   category: string,
@@ -16,7 +16,7 @@ export async function fetchStoreInventoryProducts(
     console.log(query);
   const response = await fetch(
     `
-   ${urlServerLocal}/api-store/all-products?page=${page}&query=${query}&category=${category}&subcategory=${subcategory}&price=${orderPrice}&rating=${rating}&order=${order}&brand=${brand}`,
+   ${urlServerNode}/api-store/all-products?page=${page}&query=${query}&category=${category}&subcategory=${subcategory}&price=${orderPrice}&rating=${rating}&order=${order}&brand=${brand}`,
     {
       method: 'GET',
       signal: controller?.signal,

@@ -25,6 +25,17 @@ li {
     border-bottom: 1px solid var(--border-width-1);
 }
 
+li {
+    font-size: 14px;
+    color: #313131;
+}
+
+li strong {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2B2730;
+}
+
 .ofrs {
     display: flex;
     gap: 10px;

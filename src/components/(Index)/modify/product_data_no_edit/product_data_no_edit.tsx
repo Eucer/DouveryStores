@@ -1,5 +1,7 @@
 import { component$, useStylesScoped$ } from '@builder.io/qwik';
 import style from './product_data_no_edit.css?inline';
+import { TextCL } from '~/components/textCL/textCL';
+import { formatDateWithMinutes } from '~/fuctions/date/format-date';
 export const Product_data_no_edit = component$(({ productStore }: any) => {
   useStylesScoped$(style);
   return (
@@ -28,14 +30,22 @@ export const Product_data_no_edit = component$(({ productStore }: any) => {
             <strong>Sub Categoria:</strong> {productStore.productSubCategory}
           </li>
           <li>
+            <strong>Condicion:</strong>{' '}
+            <TextCL text={productStore.productCondition} />
+          </li>
+          <li>
+            <strong>GTIN:</strong> {productStore.productGTIN}
+          </li>
+          <li>
             <strong>Crado por:</strong> {productStore.productUploaded_by}
           </li>
           <li>
-            <strong>Dia creado:</strong> {productStore.productCreatedAt}
+            <strong>Dia creado:</strong>{' '}
+            {formatDateWithMinutes(productStore.productCreatedAt)}
           </li>{' '}
           <li>
             <strong>Ultima actualizacion:</strong>{' '}
-            {productStore.productUpdatedAt}
+            {formatDateWithMinutes(productStore.productUpdatedAt)}
           </li>
         </ul>
       </div>

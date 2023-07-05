@@ -22,6 +22,7 @@ import { Product_data_no_edit } from '~/components/(Index)/modify/product_data_n
 import { Product_button_edit } from '~/components/(Index)/modify/product_button_edit/product_button_edit';
 import { Product_physical_details_of_the_product } from '~/components/(Index)/modify/product_physical_details_of_the_product/product_physical_details_of_the_product';
 import { Product_description_short } from '~/components/(Index)/modify/product_description_short/product_description_short';
+import { Product_keywords } from '~/components/(Index)/modify/product_keywords/product_keywords';
 
 export const useProductInfo = routeLoader$(async ({ params, cookie }) => {
   const dui = params.dui;
@@ -70,7 +71,8 @@ export default component$(() => {
     pd_deatilImgBox: '',
     productShortDescription: productData.value.description,
     productDescriptionFull: '',
-    productKeywords: [],
+    productKeywords: productData.value.keywords.split(' '),
+
     productBullets: productData.value.vinetas,
     productHighlights: [],
     productCondition: 'new',
@@ -214,25 +216,31 @@ export default component$(() => {
             productStore={productStore}
             productDataHandlers={productDataHandlers}
           />
-          <Product_description_short
+          <br />
+          <Product_physical_details_of_the_product
             action="edit"
             productStore={productStore}
-            productProductDetailsHandlers={productProductDetailsHandlers}
+            productDataHandlers={productDataHandlers}
           />
         </div>
         <div class="right">
-          <br />
           <Product_button_edit />
-          <div class="separator_edit"></div>
+
           <br />
           <Product_data_no_edit productStore={productStore} />
         </div>
       </div>
-      <Product_physical_details_of_the_product
-        action="edit"
-        productStore={productStore}
-        productDataHandlers={productDataHandlers}
-      />
+
+      <div class="session_02">
+        <br />
+        <Product_description_short
+          action="edit"
+          productStore={productStore}
+          productProductDetailsHandlers={productProductDetailsHandlers}
+        />
+        <br />
+        <Product_keywords productStore={productStore} />
+      </div>
     </div>
   );
 });

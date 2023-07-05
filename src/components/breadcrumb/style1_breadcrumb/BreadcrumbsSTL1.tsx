@@ -30,7 +30,7 @@ export const BreadcrumbsSTL1 = component$(() => {
             {index < pathnames.length - 1 ? (
               <>
                 <a href={to}>{breadcrumb}</a>
-                {' > '}
+                {' / '}
               </>
             ) : (
               <span>{breadcrumb}</span>

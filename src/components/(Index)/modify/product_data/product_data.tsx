@@ -13,7 +13,6 @@ export const Product_data = component$(
       onProductMaxQtyChange,
 
       onProductBrandChange,
-      onProductConditionChange,
     } = productDataHandlers;
 
     return (
@@ -71,7 +70,7 @@ export const Product_data = component$(
           </div>
           <br />
           <div>
-            <label>Marca registrada en el producto</label>
+            <label>Marca registrada en el producto:</label>
             <input
               type="text"
               value={productStore.productBrand}
@@ -108,18 +107,6 @@ export const Product_data = component$(
                 ))}
               </select>
             </div>
-          </div>
-          <div>
-            <label>Condicion del producto</label>
-
-            <select
-              class="select__weight"
-              id="dimension"
-              value={productStore.productCondition}
-              onChange$={onProductConditionChange}
-            >
-              <option value="new">Nuevo</option>
-            </select>
           </div>
           <div>
             <label>GTIN del producto:</label>
