@@ -6,6 +6,7 @@ import {
   useStylesScoped$,
 } from '@builder.io/qwik';
 import style from './bullet-product.css?inline';
+import { TitleSubtitleComponent } from '~/components/use/title component/TitleSubtitleComponent/title-subtitle-component';
 
 export const BulletProduct = component$(({ productStore }: any) => {
   useStylesScoped$(style);
@@ -42,6 +43,10 @@ export const BulletProduct = component$(({ productStore }: any) => {
 
   return (
     <div>
+      <TitleSubtitleComponent
+        title="Bullets
+"
+      />
       {bullets?.setBullets?.map((bullet: any, index: any) => (
         <div key={index} class="conten_vinetas">
           <div class="cirle-bg"> </div>

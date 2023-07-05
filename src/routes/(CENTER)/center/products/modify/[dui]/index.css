@@ -1,11 +1,14 @@
 .container__all {
     width: 100%;
+    max-width: 1900px;
     min-height: 60rem;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 10px;
     padding: 15px 20px 100px 20px;
     background-color: var(--color-background-white);
+
 }
 
 .container_view_product {
@@ -39,10 +42,11 @@
     align-items: center;
 }
 
-.rigth {
+.right {
     width: 100%;
+    max-width: 350px;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     gap: 10px;
     justify-content: flex-start;
     align-items: center;
@@ -57,7 +61,7 @@
 
 .session_02 {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+
 }
 
 @media screen and (max-width: 1289px) {

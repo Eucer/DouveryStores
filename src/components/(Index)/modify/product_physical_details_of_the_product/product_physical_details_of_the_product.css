@@ -74,7 +74,7 @@ textarea {
 
 .content__imputs {
     display: grid;
-    width: 400px;
+
     gap: 20px;
 
 }

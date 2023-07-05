@@ -70,7 +70,7 @@ export const Product_data = component$(
           </div>
           <br />
           <div>
-            <label>Marca registrada en el producto</label>
+            <label>Marca registrada en el producto:</label>
             <input
               type="text"
               value={productStore.productBrand}

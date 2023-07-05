@@ -29,11 +29,13 @@ export const Product_description_short = component$(
             , la exactitud de esta información es obligatoria.
           </span>
         </div>
+        <br />
         <div class="detailDescriptionshort">
           <div class="content_descriptionShort">
-            <label for="description_short">
-              Descripción corta: (Máximo 400 caracteres)
-            </label>
+            <TitleSubtitleComponent
+              title="Descripción corta
+"
+            />
             <textarea
               id="description_short"
               value={productStore.productShortDescription}
@@ -50,7 +52,6 @@ export const Product_description_short = component$(
           </div>
 
           <div class="contet_bullets">
-            <label for="vinetas_product">Viñetas sobre el producto:</label>
             <BulletProduct productStore={productStore} />
             {action.value?.fieldErrors?.bullets && (
               <span class="error">{action.value?.fieldErrors?.bullets}</span>

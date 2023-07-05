@@ -3,7 +3,7 @@ import { Grid4_img } from '~/components/(Center)/products/generate-product/uploa
 import { Horizontal_img } from '~/components/(Center)/products/generate-product/upload_img/horizontal_img/horizontal_img';
 import { Vertical_img } from '~/components/(Center)/products/generate-product/upload_img/vertical_img/vertical_img';
 import style from './product_images.css?inline';
-import { TitleSubtitleComponent } from '~/components/use/title component/TitleSubtitleComponent/title-subtitle-component';
+import { TitleLink } from '~/fuctions/title-link/title-link';
 export const Product_images = component$(
   ({
     productStore,
@@ -76,12 +76,13 @@ export const Product_images = component$(
 
     return (
       <div class="Form__IMAGESPRODUCTS">
-        <br />
         <div class="detailImages">
-          <TitleSubtitleComponent
-            title=""
-            subtitle="Modifica las imagenes del producto."
+          <TitleLink
+            title="Descubre cuándo es recomendable cambiar las imágenes de tus productos."
+            nameLink="Saber más."
+            link="https://help.douvery.com/"
           />
+          <br />
           <br />
           <div class="content_img">{selectComponent()}</div>
         </div>
