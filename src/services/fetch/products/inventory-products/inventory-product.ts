@@ -13,7 +13,7 @@ export async function fetchStoreInventoryProducts(
   
   controller?: AbortController
 ): Promise<any> {
-    console.log(query);
+  
   const response = await fetch(
     `
    ${urlServerNode}/api-store/all-products?page=${page}&query=${query}&category=${category}&subcategory=${subcategory}&price=${orderPrice}&rating=${rating}&order=${order}&brand=${brand}`,

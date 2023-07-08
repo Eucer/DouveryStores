@@ -1,4 +1,4 @@
-import { urlServerNode } from '~/services/util/server/server';
+import { urlServerLocal } from '~/services/util/server/server';
 
 export async function fetchViewProductDui(
   dui: string,
@@ -8,7 +8,7 @@ export async function fetchViewProductDui(
 ): Promise<any> {
   const response = await fetch(
     `
-   ${urlServerNode}/api-store/view/product-edit?dui=${dui}`,
+   ${urlServerLocal}/api-store/view/product-edit?dui=${dui}`,
     {
       method: 'GET',
       signal: controller?.signal,

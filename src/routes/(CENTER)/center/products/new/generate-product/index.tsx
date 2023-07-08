@@ -111,7 +111,7 @@ export const useAction = globalAction$(
     });
 
     const response = await res.json();
-    console.log(response);
+
     if (!response.ok) {
       return fail(400, {
         message: 'Invalid credentials or user not found',
