@@ -14,7 +14,7 @@ import {
   z,
   globalAction$,
 } from '@builder.io/qwik-city';
-import { urlServerLocal } from '~/services/util/server/server';
+import { urlServerNode } from '~/services/util/server/server';
 import { Vertical_img } from '~/components/(Center)/products/generate-product/upload_img/vertical_img/vertical_img';
 import { Horizontal_img } from '~/components/(Center)/products/generate-product/upload_img/horizontal_img/horizontal_img';
 import { Grid4_img } from '~/components/(Center)/products/generate-product/upload_img/grid4_img/grid4_img';
@@ -85,7 +85,7 @@ export const useAction = globalAction$(
     },
     { fail, headers }
   ) => {
-    const res = await fetch(`${urlServerLocal}/api-store/product-request`, {
+    const res = await fetch(`${urlServerNode}/api-store/product-request`, {
       method: 'POST',
       headers: {
         'x-auth-token': tquser,
@@ -111,7 +111,7 @@ export const useAction = globalAction$(
     });
 
     const response = await res.json();
-    console.log(response);
+
     if (!response.ok) {
       return fail(400, {
         message: 'Invalid credentials or user not found',

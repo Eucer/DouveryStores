@@ -11,12 +11,14 @@ export const Paginator1 = component$(
       const newPage = currentPage - 1;
       onPageChange.value = newPage;
       window.history.pushState(null, '', `?pg=${newPage}`);
+      window.scrollTo(0, 0);
     });
 
     const onPageChangePlus = $(() => {
       const newPage = currentPage + 1;
       onPageChange.value = newPage;
       window.history.pushState(null, '', `?pg=${newPage}`);
+      window.scrollTo(0, 0);
     });
     return (
       <div class="paginator">

@@ -1,9 +1,11 @@
 .keywords-input {
     width: 100%;
-    max-width: 500px;
-    border: 1px solid #cccccc;
-    padding: 10px;
+    max-width: 800px;
+
+    border: 1px solid var(--border-width-2);
+    padding: 50px;
     box-sizing: border-box;
+    border-radius: 5px;
 }
 
 .keywords-input ul {
@@ -25,6 +27,12 @@
 .keywords-input ul li .keyword-close-icon {
     margin-left: 10px;
     cursor: pointer;
+    background-color: #fff;
+    border: 1px solid #d5d9d9;
+    border-radius: 8px;
+    box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+    border-radius: 50%;
+    padding: 0px 5px;
 }
 
 .keywords-input input {

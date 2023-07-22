@@ -28,7 +28,7 @@ textarea {
     font-size: 14px;
     color: #000;
     margin-top: 15px;
-    background-color: var(--color-background-light);
+    background-color: var(--color-background-card);
     border: 1px solid #E0E0E0;
     box-sizing: border-box;
     border-radius: 5px;

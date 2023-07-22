@@ -25,7 +25,6 @@ export const Header_info = component$(({ title }: any) => {
           </button>
           -<div class="product_new__title"> {title}</div>{' '}
         </div>
-        {/* Añade el botón aquí */}
       </div>
     </div>
   );

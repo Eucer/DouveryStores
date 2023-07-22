@@ -31,8 +31,17 @@ export const Product_physical_details_of_the_product = component$(
           value={productStore.dimensionUnit}
           onChange$={onDimensionUnitChange}
         >
-          <option value="cm">Centímetros (cm)</option>
-          <option value="in">Pulgadas (in)</option>
+          {productStore.dimensionUnit === 'cm' ? (
+            <>
+              <option value="cm">Centímetros (cm)</option>
+              <option value="in">Pulgadas (in)</option>
+            </>
+          ) : (
+            <>
+              <option value="in">Pulgadas (in)</option>
+              <option value="cm">Centímetros (cm)</option>
+            </>
+          )}
         </select>
         <div class="inputs_dimension">
           <div>
@@ -76,7 +85,7 @@ export const Product_physical_details_of_the_product = component$(
         <br />
         <br />
         <div class="inputs_widths">
-          <label>Peso del producto:</label>
+          <label>Peso del producto: ({productStore.weightUnit})</label>
           <div class="input_wei">
             <input
               type="number"
@@ -90,8 +99,17 @@ export const Product_physical_details_of_the_product = component$(
               value={productStore.weightUnit}
               onChange$={onWeightUnitChange}
             >
-              <option value="kg">Kg</option>
-              <option value="lb">Lb</option>
+              {productStore.weightUnit === 'lb' ? (
+                <>
+                  <option value="lb">Lb</option>
+                  <option value="kg">Kg</option>
+                </>
+              ) : (
+                <>
+                  <option value="kg">Kg</option>
+                  <option value="lb">Lb</option>
+                </>
+              )}
             </select>
           </div>
         </div>

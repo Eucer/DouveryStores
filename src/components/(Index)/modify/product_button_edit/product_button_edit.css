@@ -254,3 +254,16 @@ button {
     /* Cambia a tu color de preferencia */
     text-decoration: underline;
 }
+
+.success {
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    background-color: #009688;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+
+}
