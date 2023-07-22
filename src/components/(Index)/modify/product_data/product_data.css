@@ -13,7 +13,7 @@
 
 label {
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 400;
     color: #2B2730;
     padding-right: 10px;
 
@@ -28,7 +28,7 @@ textarea {
     font-size: 14px;
     color: #000;
     margin-top: 15px;
-    background-color: var(--color-background-light);
+    background-color: var(--color-background-card);
     border: 1px solid #E0E0E0;
     box-sizing: border-box;
     border-radius: 5px;

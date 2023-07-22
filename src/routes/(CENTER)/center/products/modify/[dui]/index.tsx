@@ -9,7 +9,13 @@ import style from './index.css?inline';
 import { Header_info } from '~/components/(Center)/header_info/header_info';
 
 import { Product_images } from '~/components/(Index)/modify/product_images/product_images';
-import { globalAction$, routeLoader$, z, zod$ } from '@builder.io/qwik-city';
+import {
+  type DocumentHead,
+  globalAction$,
+  routeLoader$,
+  z,
+  zod$,
+} from '@builder.io/qwik-city';
 import { DATA_ACCESS_COOKIE_SESSION_USER } from '~/services/session/dataRequests';
 import {
   decodeToken,
@@ -24,8 +30,9 @@ import { Product_physical_details_of_the_product } from '~/components/(Index)/mo
 import { Product_description_short } from '~/components/(Index)/modify/product_description_short/product_description_short';
 import { Product_keywords } from '~/components/(Index)/modify/product_keywords/product_keywords';
 import { TitleSubtitleComponent } from '~/components/use/title component/TitleSubtitleComponent/title-subtitle-component';
-import { urlServerLocal } from '~/services/util/server/server';
+import { urlServerNode } from '~/services/util/server/server';
 import { useGetCurrentUser } from '~/routes/layout';
+import { ModifyProduct__ProgressBarSteps } from '~/components/(Center)/products/modify-product/progress-bar-steps/progress-bar-steps';
 
 export const useAction = globalAction$(
   async (
@@ -49,7 +56,7 @@ export const useAction = globalAction$(
     },
     { fail, params }
   ) => {
-    const res = await fetch(`${urlServerLocal}/api-store/edit/product`, {
+    const res = await fetch(`${urlServerNode}/api-store/edit/product`, {
       method: 'PUT',
       headers: {
         'x-auth-token': tquser,
@@ -361,9 +368,7 @@ export default component$(() => {
       price: productStore.productPrice
         ? productStore.productPrice
         : (undefined as any),
-      discount: productStore.productDiscount
-        ? productStore.productDiscount
-        : (undefined as any),
+      discount: productStore.productDiscount ? productStore.productDiscount : 0,
       category: productStore.productCategory
         ? productStore.productCategory
         : (undefined as any),
@@ -387,45 +392,84 @@ export default component$(() => {
       },
     });
   });
-  console.log({
-    dimensionUnit: productStore.dimensionUnit as any,
-    weigthUnit: productStore.weightUnit as any,
-    maxQuantitySale: productData.value.maxQuantitySale as any,
-  });
+
   return (
     <div class="container__all">
-      <Header_info
-        title={'Modificar producto' + ' - ' + productStore.productDui}
-      />
+      <div class="title_and_infos">
+        <div class="title">
+          <Header_info title="Editar" />
+        </div>
+
+        <div class="progress__bar"></div>
+      </div>
       <button onClick$={handleSend}></button>
 
       <div class="container_view_product">
         <div class="left">
-          <Product_images
-            action={action}
-            previewIMG={previewIMG}
-            previewIMGs={previewIMGs}
-            storeImagePrimary={previewIMG}
-            storeImagesSecondary={previewIMGs}
-            productStore={productStore}
-            productProductDetailsHandlers={productProductDetailsHandlers}
-            prevStep={prevStep}
-            nextStep={nextStep}
-          />
+          <ModifyProduct__ProgressBarSteps step={step.value} setStep={step} />
         </div>
-        <div class="center">
-          <Product_data
-            action={action}
-            productStore={productStore}
-            productDataHandlers={productDataHandlers}
-          />
-          <br />
-          <Product_physical_details_of_the_product
-            action={action}
-            productStore={productStore}
-            productDataHandlers={productDataHandlers}
-          />
+        <div class="content__center">
+          {step.value == 1 && (
+            <>
+              {' '}
+              <TitleSubtitleComponent
+                title="Update or add new images for this product"
+                subtitle="Make your product unique through images."
+              />
+              <br />
+              <Product_images
+                action={action}
+                previewIMG={previewIMG}
+                previewIMGs={previewIMGs}
+                storeImagePrimary={previewIMG}
+                storeImagesSecondary={previewIMGs}
+                productStore={productStore}
+                productProductDetailsHandlers={productProductDetailsHandlers}
+                prevStep={prevStep}
+                nextStep={nextStep}
+              />
+            </>
+          )}
+          {step.value == 2 && (
+            <>
+              {' '}
+              <Product_data
+                action={action}
+                productStore={productStore}
+                productDataHandlers={productDataHandlers}
+              />
+            </>
+          )}
+
+          {step.value == 3 && (
+            <Product_physical_details_of_the_product
+              action={action}
+              productStore={productStore}
+              productDataHandlers={productDataHandlers}
+            />
+          )}
+
+          {step.value == 4 && (
+            <>
+              <Product_description_short
+                action={action}
+                productStore={productStore}
+                productProductDetailsHandlers={productProductDetailsHandlers}
+              />
+            </>
+          )}
+          {step.value == 5 && (
+            <>
+              <TitleSubtitleComponent
+                title="Keywords for this product"
+                subtitle="Add keywords to help customers find your product."
+              />
+              <br />
+              <Product_keywords productStore={productStore} />
+            </>
+          )}
         </div>
+
         <div class="right">
           <Product_button_edit action={action} handleSend={handleSend} />
 
@@ -433,24 +477,17 @@ export default component$(() => {
           <Product_data_no_edit productStore={productStore} />
         </div>
       </div>
-
-      <div class="session_02">
-        <br />
-        <Product_description_short
-          action={action}
-          productStore={productStore}
-          productProductDetailsHandlers={productProductDetailsHandlers}
-        />
-        <br />
-        <TitleSubtitleComponent
-          title="Keywords for this product
-        
-"
-          subtitle="Add keywords to help customers find your product."
-        />
-        <br />
-        <Product_keywords productStore={productStore} />
-      </div>
     </div>
   );
 });
+
+export const head: DocumentHead = {
+  title: 'Modificar producto - Douvery Stores',
+  meta: [
+    {
+      name: 'description',
+      content:
+        'Recursos infinitos para tu tienda, vende con facilidad en Douvery.',
+    },
+  ],
+};

@@ -256,12 +256,14 @@ button {
 }
 
 .success {
-    color: #4CAF50;
+    color: #fff;
     font-size: 15px;
     font-weight: bold;
     width: 100%;
     text-align: center;
-    background-color: #4caf4f6b;
+    background-color: #009688;
     padding: 10px;
+    border-radius: 5px;
     margin-top: 10px;
+
 }

@@ -77,13 +77,6 @@ export const Product_images = component$(
     return (
       <div class="Form__IMAGESPRODUCTS">
         <div class="detailImages">
-          <TitleLink
-            title="Descubre cuándo es recomendable cambiar las imágenes de tus productos."
-            nameLink="Saber más."
-            link="https://help.douvery.com/"
-          />
-          <br />
-          <br />
           <div class="content_img">{selectComponent()}</div>
         </div>
         <br />
@@ -101,7 +94,13 @@ export const Product_images = component$(
             </select>
           </div>
         </div>
+        <br /> <br />
         <br />
+        <TitleLink
+          title="Descubre cuándo es recomendable cambiar las imágenes de tus productos."
+          nameLink="Saber más."
+          link="https://help.douvery.com/"
+        />
       </div>
     );
   }
