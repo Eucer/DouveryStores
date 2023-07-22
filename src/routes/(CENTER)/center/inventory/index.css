@@ -43,7 +43,7 @@ ul {
 
 .container__grid {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .filter-section {
