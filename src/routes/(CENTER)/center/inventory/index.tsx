@@ -218,9 +218,114 @@ export default component$(() => {
                 </li>
               ))}
             </div>
+            <TitleSubtitleComponent
+              title="Ayuda"
+              subtitle="Soluciona tus inquietudes."
+            />
+
+            <div class="content__access_helps">
+              <div class="fast__access">
+                <div class="helps">
+                  <br />
+                  <div class="container__helps">
+                    <div class="user-info">
+                      <img
+                        width={50}
+                        height={20}
+                        src={
+                          'https://res.cloudinary.com/douvery/image/upload/v1690019200/rohteywths2baenkeydt.png'
+                        }
+                        alt="user avatar in Douvery Stores"
+                      />
+                      <div class="info">
+                        <span class="user-name">Germys Garcia</span>
+                        <span class="user-company">(Expert to help)</span>
+                        <span class="user-status">
+                          <span class="status available"></span> Available
+                        </span>
+                      </div>
+                    </div>
+                    <br />
+                  </div>
+                  <div class="content_button_user">
+                    <button>
+                      <span class="button-icon">
+                        {' '}
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="17"
+                          height="17"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="1.5"
+                            d="M22.152 3.553L11.178 21.004l-1.67-8.596L2 7.898l20.152-4.345ZM9.456 12.444l12.696-8.89"
+                          />
+                        </svg>{' '}
+                      </span>
+                      <span class="button-text">Contactarme</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="product-section">
+          <div class="container__fast__access">
+            <button>
+              <span class="button-icon">
+                {' '}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 15.01l1.41 1.41L11 14.84V19h2v-4.16l1.59 1.59L16 15.01L12.01 11L8 15.01z"
+                  />
+                </svg>
+              </span>
+              <span class="button-text">Subir nuevo producto</span>
+            </button>
+            <p>Or</p>
+
+            <button>
+              <span class="button-icon">
+                {' '}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="17"
+                  height="17s"
+                  viewBox="0 0 14 14"
+                >
+                  <g
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect
+                      width="13"
+                      height="13"
+                      x=".5"
+                      y=".5"
+                      rx="1"
+                      transform="rotate(180 7 7)"
+                    />
+                    <path d="M3 3h2M3 5.5h4.5m4 0l-3 5l-3.5-2l-2 3" />
+                  </g>
+                </svg>{' '}
+              </span>
+              <span class="button-text">Mis ultimas ventas</span>
+            </button>
+          </div>
           <div class="header_section">
             {' '}
             <div class="search_container">
@@ -351,6 +456,7 @@ export default component$(() => {
           </div>
           <br />
           <br />
+
           <Resource
             value={prodcureducer}
             onPending={() => <div class="loader"></div>}
@@ -363,14 +469,14 @@ export default component$(() => {
             onResolved={(data: any) => (
               <>
                 {' '}
-                <ul>
+                <ul class="container_all_product">
                   {data.allProducts.length === 0 ? (
                     <p>No hay productos para mostrar.</p>
                   ) : (
                     <ul
                       class={
                         layout == '2'
-                          ? 'container-product-layout-grid'
+                          ? 'container-product-layout-vert'
                           : 'container-product-layout-vert'
                       }
                     >
@@ -457,116 +563,6 @@ export default component$(() => {
               </>
             )}
           />
-        </div>
-        <div class="content__access_helps">
-          <div class="fast__access">
-            <br />
-            <TitleSubtitleComponent title="Acceso rápido" subtitle="" />
-            <div class="separator_section"></div>
-
-            <div class="container__fast__access">
-              <button>
-                <span class="button-icon">
-                  {' '}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 15.01l1.41 1.41L11 14.84V19h2v-4.16l1.59 1.59L16 15.01L12.01 11L8 15.01z"
-                    />
-                  </svg>
-                </span>
-                <span class="button-text">Subir nuevo producto</span>
-              </button>
-              <p>Or</p>
-
-              <button>
-                <span class="button-icon">
-                  {' '}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="17"
-                    height="17s"
-                    viewBox="0 0 14 14"
-                  >
-                    <g
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <rect
-                        width="13"
-                        height="13"
-                        x=".5"
-                        y=".5"
-                        rx="1"
-                        transform="rotate(180 7 7)"
-                      />
-                      <path d="M3 3h2M3 5.5h4.5m4 0l-3 5l-3.5-2l-2 3" />
-                    </g>
-                  </svg>{' '}
-                </span>
-                <span class="button-text">Mis ultimas ventas</span>
-              </button>
-            </div>
-          </div>
-          <div class="separator_section"></div>
-          <div class="helps">
-            <TitleSubtitleComponent
-              title="Ayuda"
-              subtitle="Soluciona tus inquietudes."
-            />
-
-            <br />
-            <div class="container__helps">
-              <div class="user-info">
-                <img
-                  width={50}
-                  height={20}
-                  src={
-                    'https://res.cloudinary.com/douvery/image/upload/v1690019200/rohteywths2baenkeydt.png'
-                  }
-                  alt="user avatar in Douvery Stores"
-                />
-                <div class="info">
-                  <span class="user-name">Germys Garcia</span>
-                  <span class="user-company">(Expert to help)</span>
-                  <span class="user-status">
-                    <span class="status available"></span> Available
-                  </span>
-                </div>
-              </div>
-              <br />
-            </div>
-            <div class="content_button_user">
-              <button>
-                <span class="button-icon">
-                  {' '}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="17"
-                    height="17"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                      d="M22.152 3.553L11.178 21.004l-1.67-8.596L2 7.898l20.152-4.345ZM9.456 12.444l12.696-8.89"
-                    />
-                  </svg>{' '}
-                </span>
-                <span class="button-text">Contactarme</span>
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </div>
