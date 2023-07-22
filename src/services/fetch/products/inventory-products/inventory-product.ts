@@ -16,7 +16,7 @@ export async function fetchStoreInventoryProducts(
   
   const response = await fetch(
     `
-   ${urlServerNode}/api-store/all-products?page=${page}&query=${query}&category=${category}&subcategory=${subcategory}&price=${orderPrice}&rating=${rating}&order=${order}&brand=${brand}`,
+   ${urlServerNode}/api-store/all-products?page=${page}&query=${query}&category=${category}&subcategory=${subcategory}&price=${orderPrice}&rating=${rating}&order=${order}&brand=${brand}&limit=5`,
     {
       method: 'GET',
       signal: controller?.signal,
