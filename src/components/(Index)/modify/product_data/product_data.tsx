@@ -1,6 +1,7 @@
 import { component$, useStylesScoped$ } from '@builder.io/qwik';
 import style from './product_data.css?inline';
-import { ProductMaxQty } from '~/routes/(CENTER)/center/products/new/generate-product';
+import { maxQuantitySelect } from '~/utils/constants/productNewConstants';
+
 export const Product_data = component$(
   ({ productStore, productDataHandlers, action }: any) => {
     useStylesScoped$(style);
@@ -100,7 +101,7 @@ export const Product_data = component$(
                 value={productStore.productMaxQty}
                 onChange$={onProductMaxQtyChange}
               >
-                {ProductMaxQty.map((data, index) => (
+                {maxQuantitySelect.map((data, index) => (
                   <option key={index} value={index}>
                     {data.name}
                   </option>
