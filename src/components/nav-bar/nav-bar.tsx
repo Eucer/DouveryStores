@@ -2,7 +2,7 @@ import { component$, useStylesScoped$ } from '@builder.io/qwik';
 
 import styles from './nav-bar.css?inline';
 import { useGetCurrentUser } from '~/routes/layout';
-import { ProfileDropdownNavBar } from '../dropdowns/dropdown-navbar/dropdown-navbar';
+//import { ProfileDropdownNavBar } from '../dropdowns/dropdown-navbar/dropdown-navbar';
 export const NavBar = component$(() => {
   useStylesScoped$(styles);
   const user = useGetCurrentUser().value;

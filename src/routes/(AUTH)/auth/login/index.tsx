@@ -14,7 +14,7 @@ import { DouveryAuthLogo } from '~/components/DouveryAuthLogo/douvery-auth-logo'
 import { TermsConditions } from '~/components/Terms&Conditions/terms-Conditions';
 import {
   DATA_ACCESS_COOKIE_SESSION_USER,
-  setCookiesDataStore,
+
   setCookiesDataUser,
 } from '~/services/session/dataRequests';
 

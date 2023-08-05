@@ -1,10 +1,10 @@
 import { component$, useStylesScoped$ } from '@builder.io/qwik';
-import { useGetCurrentStore, useGetCurrentUser } from '~/routes/layout';
+import { useGetCurrentUser } from '~/routes/layout';
 import styles from './dropdown-menu.css?inline';
 export const DropdownMenuCenter = component$(() => {
   useStylesScoped$(styles);
   const user = useGetCurrentUser().value;
-  const store = useGetCurrentStore().value;
+
   const avatarSrc =
     user?.avatar ||
     'https://res.cloudinary.com/douvery/image/upload/v1686355888/vnzd3ccdmwigt2z7ihb2.png';
@@ -22,10 +22,10 @@ export const DropdownMenuCenter = component$(() => {
       <div class="dropdown-menu-info">
         <span class="user-name">{user?.name}</span>{' '}
         <span class="user-company">Administrator in </span>
-        <span class="user-company">{store?.name} </span>
+
       </div>
       <div class="separator" />
-      <p> {store?.name} </p>
+
       <a href="#">
         <svg
           xmlns="http://www.w3.org/2000/svg"

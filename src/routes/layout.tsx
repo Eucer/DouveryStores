@@ -9,13 +9,13 @@ import {
   DATA_ACCESS_COOKIE_SESSION_USER,
 } from '~/services/session/dataRequests';
 import type { UserACC } from '~/services/util/types/user';
-import { verifyAuthToken } from '~/services/util/token/verifyAuthToken';
+import { decodeAuthToken } from '~/services/util/token/verifyAuthToken';
 
 export const useGetCurrentUser = routeLoader$<UserACC | any>(
   async ({ cookie }) => {
     const accessCookie = cookie.get(DATA_ACCESS_COOKIE_SESSION_USER)?.value;
     if (accessCookie) {
-      return verifyAuthToken(accessCookie);
+      return decodeAuthToken(accessCookie);
     }
     return null;
   }

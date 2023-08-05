@@ -1,18 +1,14 @@
-import jwt from "jsonwebtoken";
-import { JWT_X_AUTH_TOKEN } from "~/config";
+import jwtDecode from "jwt-decode";
 
-export function verifyAuthToken(token: any) {
-  const secret = JWT_X_AUTH_TOKEN;
-
+export function decodeAuthToken(token: any) {
   if (typeof token !== "string") {
-    throw new Error("Token must be a string, received type " + typeof token);
+    throw new Error(`Token must be a string, received type ${typeof token}`);
   }
 
   try {
-    const decoded = jwt.verify(token, secret);
-
+    const decoded = jwtDecode(token);
     return decoded;
   } catch (error: any) {
-    console.log("Invalid token: " + error.message);
+    console.log(`Invalid token: ${error.message}`);
   }
 }
