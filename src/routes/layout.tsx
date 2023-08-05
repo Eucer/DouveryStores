@@ -3,37 +3,29 @@ import { Footer } from '~/components/footer/footer';
 
 import style from './index.css?inline';
 import { routeLoader$ } from '@builder.io/qwik-city';
+
 import {
-  decodeToken,
-  passwordKEY,
-  serverKey,
-} from '~/services/util/fuction/token';
-import {
-  DATA_ACCESS_COOKIE_SESSION_STORE,
+
   DATA_ACCESS_COOKIE_SESSION_USER,
 } from '~/services/session/dataRequests';
 import type { UserACC } from '~/services/util/types/user';
+import { verifyAuthToken } from '~/services/util/token/verifyAuthToken';
 
-export const useGetCurrentUser = routeLoader$<UserACC | null>(
+export const useGetCurrentUser = routeLoader$<UserACC | any>(
   async ({ cookie }) => {
     const accessCookie = cookie.get(DATA_ACCESS_COOKIE_SESSION_USER)?.value;
-
     if (accessCookie) {
-      return decodeToken(accessCookie, passwordKEY, serverKey);
+      return verifyAuthToken(accessCookie);
     }
     return null;
   }
 );
-export const useGetCurrentStore = routeLoader$<UserACC | null>(
-  async ({ cookie }) => {
-    const accessCookie = cookie.get(DATA_ACCESS_COOKIE_SESSION_STORE)?.value;
 
-    if (accessCookie) {
-      return decodeToken(accessCookie, passwordKEY, serverKey);
-    }
-    return null;
-  }
-);
+export const useGetCurrentTokenUser = routeLoader$(async ({ cookie }) => {
+  const acccessToken = cookie.get(DATA_ACCESS_COOKIE_SESSION_USER)?.value;
+  return acccessToken;
+});
+
 
 export default component$(() => {
   useStylesScoped$(style);

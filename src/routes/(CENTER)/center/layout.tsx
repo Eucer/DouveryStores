@@ -1,9 +1,10 @@
 import { component$, Slot, useStylesScoped$ } from '@builder.io/qwik';
 import type { RequestHandler } from '@builder.io/qwik-city';
 import { NavBarCenter } from '~/components/(Center)/navbar-center/navbar-center';
-import { DATA_ACCESS_COOKIE_SESSION_STORE } from '~/services/session/dataRequests';
+
+import { DATA_ACCESS_COOKIE_SESSION_USER } from '~/services/session/dataRequests';
 export const onGet: RequestHandler = async ({ cookie, redirect }) => {
-  const acccessToken = cookie.get(DATA_ACCESS_COOKIE_SESSION_STORE)?.value;
+  const acccessToken = cookie.get(DATA_ACCESS_COOKIE_SESSION_USER)?.value;
   if (!acccessToken) {
     throw redirect(302, '/');
   }
@@ -26,8 +27,12 @@ export default component$(() => {
    }
   `
   );
+
+
+
   return (
     <div class="container_super_all">
+
       <header>
         <NavBarCenter />
       </header>

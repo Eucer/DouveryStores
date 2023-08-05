@@ -1,13 +1,13 @@
 import { $, component$, useStore, useStylesScoped$ } from '@builder.io/qwik';
 
 import styles from './navbar-center.css?inline';
-import { useGetCurrentStore, useGetCurrentUser } from '~/routes/layout';
+import { useGetCurrentUser } from '~/routes/layout';
 import { DouveryArrowDown } from '~/components/icons/arrow-down';
 import { DropdownMenuCenter } from './dropdownMenu/dropdown-menu';
 export const NavBarCenter = component$(() => {
   useStylesScoped$(styles);
   const user = useGetCurrentUser().value;
-  const store = useGetCurrentStore().value;
+
   const isSearchOpen = useStore({ setIsSearchOpen: false });
   const isOpenDraw = useStore({ isOpenDraw: false });
   const handleMenuToggle = $(() => {
@@ -24,6 +24,8 @@ export const NavBarCenter = component$(() => {
       onclick$={() => (isOpenDraw.isOpenDraw = false)}
     ></div>
   ) : null;
+
+
   return (
     <>
       {backdrop}
@@ -446,7 +448,7 @@ export const NavBarCenter = component$(() => {
           </li>
           <li class="tabs-nav">
             <span>
-              Administración de {store?.name} <DouveryArrowDown size={20} />
+              Administración de {user?.name} <DouveryArrowDown size={20} />
             </span>
             <div class="tab-content">
               <div class="content">
@@ -891,9 +893,8 @@ export const NavBarCenter = component$(() => {
               <input
                 type="text"
                 placeholder="Search..."
-                class={`search-input ${
-                  isSearchOpen.setIsSearchOpen ? 'open' : ''
-                }`}
+                class={`search-input ${isSearchOpen.setIsSearchOpen ? 'open' : ''
+                  }`}
               />
             )}
 
@@ -926,7 +927,7 @@ export const NavBarCenter = component$(() => {
             />
             <div class="info" onClick$={handleMenuToggle}>
               <span class="user-name">{user?.name}</span>
-              <span class="user-company">{store?.name} </span>
+              <span class="user-company">{user?.name} </span>
               <span class="user-company">( Admin )</span>
             </div>
             <DouveryArrowDown size={20} />

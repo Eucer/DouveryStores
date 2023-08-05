@@ -4,17 +4,10 @@ import Cookies from 'universal-cookie';
 export const DATA_ACCESS_COOKIE_SESSION_USER = 'SS_US';
 export const DATA_ACCESS_COOKIE_SESSION_STORE = 'SS_ST';
 
-export const setsCookiesData = (name: string, dataAccessCookies: string) => {
+export const getCookieData = (cookieName: string) => {
   const cookies = new Cookies();
-  cookies.set(name, dataAccessCookies, {
-    path: '/',
-  });
-};
-
-export const getCookieData = (name: string) => {
-  const cookies = new Cookies();
-  return cookies.get(name);
-};
+  return cookies.get(cookieName);
+}
 
 // USER DATA
 export const setCookiesDataUser = (dataAccess: string, cookie: Cookie) => {

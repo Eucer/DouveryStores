@@ -17,12 +17,7 @@ import {
   zod$,
 } from '@builder.io/qwik-city';
 import { DATA_ACCESS_COOKIE_SESSION_USER } from '~/services/session/dataRequests';
-import {
-  decodeToken,
-  passwordKEY,
-  serverKey,
-} from '~/services/util/fuction/token';
-import { fetchViewProductDui } from '~/services/fetch/products/view-product/view-product';
+
 import { Product_data } from '~/components/(Index)/modify/product_data/product_data';
 import { Product_data_no_edit } from '~/components/(Index)/modify/product_data_no_edit/product_data_no_edit';
 import { Product_button_edit } from '~/components/(Index)/modify/product_button_edit/product_button_edit';
@@ -33,6 +28,7 @@ import { TitleSubtitleComponent } from '~/components/use/title component/TitleSu
 import { urlServerNode } from '~/services/util/server/server';
 import { useGetCurrentUser } from '~/routes/layout';
 import { ModifyProduct__ProgressBarSteps } from '~/components/(Center)/products/modify-product/progress-bar-steps/progress-bar-steps';
+import { fetchStoreProductsByDui } from '~/services/fetch/products/view-product/view-product';
 
 export const useAction = globalAction$(
   async (
@@ -89,7 +85,7 @@ export const useAction = globalAction$(
         message: 'Invalid credentials or user not found',
       });
     }
-    console.log(response);
+
     if (res.status === 200) {
       return {
         message: 'Product edited successfully',
@@ -174,9 +170,9 @@ export const useAction = globalAction$(
 export const useProductInfo = routeLoader$(async ({ params, cookie }) => {
   const dui = params.dui;
   const accessCookie = cookie.get(DATA_ACCESS_COOKIE_SESSION_USER)?.value;
-  const user = decodeToken(accessCookie, passwordKEY, serverKey);
-  const product = await fetchViewProductDui(dui as any, user);
 
+  const product = await fetchStoreProductsByDui(dui as any, accessCookie ? accessCookie : "");
+  console.log(product);
   return product;
 });
 
@@ -193,14 +189,14 @@ export default component$(() => {
   });
 
   const productData = useProductInfo();
-
+  console.log(productData.value);
   const productStore = useStore({
     productDui: productData.value.dui,
     productCreatedAt: productData.value.createdAt,
     productUpdatedAt: productData.value.updatedAt,
     productUploaded_by: productData.value.uploaded_by,
-    productCategory: productData.value.category,
-    productSubCategory: productData.value.subCategory,
+    productCategory: productData.value?.category[0].categoryName,
+    productSubCategory: productData.value?.subCategory[0].subCategoryName,
     selectedCategoryIndex: -1,
     selectedSubCategoryIndex: -1,
     productName: productData.value.name,
@@ -219,14 +215,15 @@ export default component$(() => {
     pd_deatilImgBox: '',
     productShortDescription: productData.value.description,
     productDescriptionFull: '',
-    productKeywords: productData.value.keywords.split(' '),
+    productKeywords: productData?.value?.keywords?.split(' '),
 
     productBullets: productData.value.vinetas,
     productHighlights: [],
     productCondition: 'new',
   });
+  console.log(productData.value);
   const previewIMG = useStore({
-    previewIMGPrimary: productData.value.images[0],
+    previewIMGPrimary: productData.value.images[0].url,
   });
 
   const previewIMGs = useStore({

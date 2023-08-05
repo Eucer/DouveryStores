@@ -1,12 +1,12 @@
 import { component$, useStylesScoped$ } from '@builder.io/qwik';
 
 import styles from './nav-bar.css?inline';
-import { useGetCurrentStore, useGetCurrentUser } from '~/routes/layout';
+import { useGetCurrentUser } from '~/routes/layout';
 import { ProfileDropdownNavBar } from '../dropdowns/dropdown-navbar/dropdown-navbar';
 export const NavBar = component$(() => {
   useStylesScoped$(styles);
   const user = useGetCurrentUser().value;
-  const store = useGetCurrentStore().value;
+
   return (
     <>
       <nav class="navbar">
@@ -40,7 +40,7 @@ export const NavBar = component$(() => {
         <div class="nav-search-cart-login">
           {user ? (
             <>
-              <ProfileDropdownNavBar user={user} store={store} />
+
             </>
           ) : (
             <>

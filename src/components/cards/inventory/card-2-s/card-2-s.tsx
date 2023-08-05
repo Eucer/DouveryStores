@@ -1,7 +1,7 @@
 import { component$, useStylesScoped$ } from '@builder.io/qwik';
 import styles from './card-2-s.css?inline';
 import { UsePrice } from '~/components/use/price/price';
-import { TextCL } from '~/components/textCL/textCL';
+
 import { DouveryCheckMark } from '~/components/icons/checkMark';
 
 export const Card2S = component$(({ product }: any) => {
@@ -15,7 +15,7 @@ export const Card2S = component$(({ product }: any) => {
           <img
             width={200}
             height={200}
-            src={product.images[0]}
+            src={product.images[0].url}
             alt="Product Image"
             class="product-image"
           />
@@ -42,7 +42,7 @@ export const Card2S = component$(({ product }: any) => {
           <a href={''}>
             {' '}
             <h2 class="product-title">
-              <TextCL text={product.name} />{' '}
+              {product.name}
             </h2>
           </a>
           <p class="product_brand">
@@ -86,7 +86,7 @@ export const Card2S = component$(({ product }: any) => {
             <div class={'status-card'}>
               <h3 class="status-title">Estado:</h3>
               <p class={'status-text' + ' ' + product.status}>
-                <TextCL text={product.status} />
+                {product.status}
               </p>
             </div>
             <div class="ctr-opa">|</div>
