@@ -244,8 +244,8 @@ export default component$(() => {
                   {action.isRunning
                     ? 'Loading...'
                     : action.value?.message
-                    ? 'Error, intente de nuevo'
-                    : 'Enviar'}{' '}
+                      ? 'Error, intente de nuevo'
+                      : 'Enviar'}{' '}
                 </button>
               </div>
             </>

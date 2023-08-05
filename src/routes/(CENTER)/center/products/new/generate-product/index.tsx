@@ -14,112 +14,77 @@ import {
   z,
   globalAction$,
 } from '@builder.io/qwik-city';
-import { urlServerNode } from '~/services/util/server/server';
+import { urlServerLocalPostgres } from '~/services/util/server/server';
 import { Vertical_img } from '~/components/(Center)/products/generate-product/upload_img/vertical_img/vertical_img';
 import { Horizontal_img } from '~/components/(Center)/products/generate-product/upload_img/horizontal_img/horizontal_img';
 import { Grid4_img } from '~/components/(Center)/products/generate-product/upload_img/grid4_img/grid4_img';
 import { BulletProduct } from '~/components/(Center)/products/bullet-product/bullet-product';
 
 import { DouveryRight3 } from '~/components/icons/arrow-right-3';
-import { useGetCurrentUser } from '~/routes/layout';
+import { useGetCurrentTokenUser, useGetCurrentUser } from '~/routes/layout';
+import { categorySelect, maxQuantitySelect } from '~/utils/constants/productNewConstants';
 
-const categories = [
-  {
-    id: 1,
-    name: 'Electrónica',
-    subcategories: ['Teléfonos', 'Televisores', 'Laptops'],
-  },
-  {
-    id: 2,
-    name: 'Ropa',
-    subcategories: ['Hombres', 'Mujeres', 'Niños'],
-  },
-];
 
-export const ProductMaxQty = [
-  {
-    id: 0,
-    name: 'Unlimited',
-  },
-  {
-    id: 1,
-    name: '1',
-  },
-  {
-    id: 2,
-    name: '2',
-  },
-  {
-    id: 3,
-    name: '3',
-  },
-  {
-    id: 4,
-    name: '4',
-  },
-  {
-    id: 5,
-    name: '5',
-  },
-];
 
 export const useAction = globalAction$(
   async (
     {
       tquser,
-      gtin,
       name,
       brand,
-      description,
-      images,
-      quantity,
-      maxQuantitySale,
       price,
-      discount,
+      quantity,
       category,
       subCategory,
-      productDetails,
-      item_condition,
-      bullets,
-      basicFeatures,
+      images
     },
     { fail, headers }
   ) => {
-    const res = await fetch(`${urlServerNode}/api-store/product-request`, {
+
+    const mutation = `
+  mutation CreateProduct($name: String! , $brand: String!,$price: Float!, $quantity: Int!, $category: String!, $subCategory: String!, $images: [String!]!) {
+    createProduct(name: $name, brand: $brand , price: $price, quantity: $quantity, category: $category, subCategory: $subCategory, images: $images ) {
+      status
+      message
+      code
+      
+    }
+  }
+`;
+    const variables = {
+      name: name,
+      brand: brand,
+      price: price,
+      quantity: quantity,
+      category: category,
+      subCategory: subCategory,
+      images: images
+    };
+
+
+    const res = await fetch(`${urlServerLocalPostgres}/graphql`, {
       method: 'POST',
       headers: {
-        'x-auth-token': tquser,
+        'Authorization': 'x-user-auth ' + tquser,
         'Content-Type': 'application/json',
       },
+
       body: JSON.stringify({
-        gtin,
-        name,
-        brand,
-        description,
-        images,
-        quantity,
-        maxQuantitySale,
-        price,
-        discount,
-        category,
-        subCategory,
-        productDetails,
-        item_condition,
-        bullets,
-        basicFeatures,
+        query: mutation,
+        variables: variables,
       }),
     });
-
     const response = await res.json();
-
-    if (!response.ok) {
+    console.log(response);
+    if (!response.data.createProduct.status) {
       return fail(400, {
-        message: 'Invalid credentials or user not found',
+        message: 'Invalid credentials or user not found' + response.data.createProduct.message,
       });
     }
 
     headers.set('location', '/center/success/request-product');
-  },
+  }
+  ,
   zod$({
     tquser: z.string({
       required_error: 'Required',
@@ -194,7 +159,7 @@ export const useAction = globalAction$(
 export default component$(() => {
   useStylesScoped$(style);
 
-  const step = useSignal(1);
+  const step = useSignal(4);
   const nextStep = $(() => {
     step.value++;
   });
@@ -203,33 +168,41 @@ export default component$(() => {
     step.value--;
   });
   const productStore = useStore({
-    productCategory: '',
-    productSubCategory: '',
-    selectedCategoryIndex: -1,
-    selectedSubCategoryIndex: -1,
-    productName: '',
-    productPrice: 0,
-    productBrand: '',
-    productGTIN: '',
-    productDiscount: 0,
-    productMaxQty: 'Unlimited',
-    productQty: 0,
+    productCategory: 'Electrónica de Product',
+    productSubCategory: 'Electrónica',
+    selectedCategoryIndex: 1,
+    selectedSubCategoryIndex: 1,
+    productName: 'Product Name Frontend',
+    productPrice: 1,
+    productBrand: 'asdada',
+    productGTIN: 'wasdsads',
+    productDiscount: 1,
+    productMaxQty: "1",
+    productQty: 1,
     dimensionUnit: 'cm',
-    productHeight: 0,
-    productWidth: 0,
-    productDepth: 0,
+    productHeight: 1,
+    productWidth: "1",
+    productDepth: 1,
     weightUnit: 'lb',
-    productWeight: 0,
-    pd_deatilImgBox: '',
-    productShortDescription: '',
-    productDescriptionFull: '',
-    productKeywords: [],
-    productBullets: [],
-    productHighlights: [],
+    productWeight: 1,
+    pd_deatilImgBox: 'vertical_view',
+    productShortDescription: 'lorem ipsum',
+    productDescriptionFull: 'lorem ipsum',
+    productKeywords: [
+      'lorem ipsum',
+    ],
+    productBullets: [
+      'lorem ipsum',
+    ],
+    productHighlights: [
+      'lorem ipsum',
+    ],
     productCondition: 'new',
   });
   const previewIMG = useStore({
-    previewIMGPrimary: [],
+    previewIMGPrimary: [
+      'https://res.cloudinary.com/douvery/image/upload/v1676107572/Optimum%20Nutrition%20Gold%20Standard%20100%20prote%C3%ADna%20de%20suero%20en%20polvo%2C%20chocolate%20avellana%2C%202%20libras%20%28el%20embalaje%20puede%20variar%29/kfsgeo9zwdb7zrebl5d5.webp',
+    ],
   });
 
   const previewIMGs = useStore({
@@ -241,7 +214,7 @@ export default component$(() => {
       const selectedCatIndex = Number(e.target.value);
       productStore.selectedCategoryIndex = selectedCatIndex;
       if (selectedCatIndex >= 0) {
-        productStore.productCategory = categories[selectedCatIndex].name;
+        productStore.productCategory = categorySelect[selectedCatIndex].name;
       } else {
         productStore.productCategory = '';
         productStore.selectedSubCategoryIndex = -1;
@@ -252,8 +225,8 @@ export default component$(() => {
       productStore.selectedSubCategoryIndex = selectedSubCatIndex;
       if (selectedSubCatIndex >= 0) {
         productStore.productSubCategory =
-          categories[productStore.selectedCategoryIndex].subcategories[
-            selectedSubCatIndex
+          categorySelect[productStore.selectedCategoryIndex].subcategories[
+          selectedSubCatIndex
           ];
       } else {
         productStore.productSubCategory = '';
@@ -366,11 +339,13 @@ export default component$(() => {
   };
   const action = useAction();
   const user = useGetCurrentUser().value;
+  user
+  const userToken = useGetCurrentTokenUser().value
   const images = previewIMGs.previewIMGs.flat().map((item) => item);
 
   const handleSend = $(async () => {
     await action.submit({
-      tquser: user?.token as any,
+      tquser: userToken as string,
       gtin: productStore.productGTIN
         ? productStore.productGTIN
         : (undefined as any),
@@ -390,7 +365,7 @@ export default component$(() => {
       quantity: productStore.productQty
         ? productStore.productQty
         : (undefined as any),
-      maxQuantitySale: productStore.productMaxQty,
+      maxQuantitySale: productStore.productMaxQty ? productStore.productMaxQty : (undefined as any),
       price: productStore.productPrice
         ? productStore.productPrice
         : (undefined as any),
@@ -536,13 +511,13 @@ export default component$(() => {
                         </span>
                       </li>
                       {!productStore.productName ||
-                      !productStore.productPrice ||
-                      !productStore.productQty ||
-                      !productStore.productMaxQty ||
-                      !productStore.productGTIN ||
-                      !productStore.productHeight ||
-                      !productStore.productWidth ||
-                      !productStore.productDepth ? (
+                        !productStore.productPrice ||
+                        !productStore.productQty ||
+                        !productStore.productMaxQty ||
+                        !productStore.productGTIN ||
+                        !productStore.productHeight ||
+                        !productStore.productWidth ||
+                        !productStore.productDepth ? (
                         <li>
                           <span class="error">
                             Asegúrate de comprobar la sección de "Product Data"
@@ -552,7 +527,7 @@ export default component$(() => {
                         ''
                       )}{' '}
                       {!productStore.productCategory ||
-                      !productStore.productSubCategory ? (
+                        !productStore.productSubCategory ? (
                         <li>
                           <span class="error">
                             Asegúrate de comprobar la sección de "Product
@@ -601,7 +576,7 @@ const ProductCategory = ({
         onChange$={onProductCategoryChange}
       >
         <option value="-1">Seleccione una categoría</option>
-        {categories.map((category, index) => (
+        {categorySelect.map((category, index) => (
           <option key={index} value={index}>
             {category.name}
           </option>
@@ -619,7 +594,7 @@ const ProductCategory = ({
             onChange$={onProductSubCategoryChange}
           >
             <option value="-1">Seleccione una subcategoría</option>
-            {categories[productStore.selectedCategoryIndex].subcategories.map(
+            {categorySelect[productStore.selectedCategoryIndex].subcategories.map(
               (subCat, index) => (
                 <option key={index} value={index}>
                   {subCat}
@@ -771,7 +746,7 @@ export const ProductData = ({
               value={productStore.productMaxQty}
               onChange$={onProductMaxQtyChange}
             >
-              {ProductMaxQty.map((data, index) => (
+              {maxQuantitySelect.map((data, index) => (
                 <option key={index} value={index}>
                   {data.name}
                 </option>

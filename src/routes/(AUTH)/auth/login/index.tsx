@@ -17,9 +17,10 @@ import {
   setCookiesDataStore,
   setCookiesDataUser,
 } from '~/services/session/dataRequests';
-import { urlServerNode } from '~/services/util/server/server';
+
 import { fetchSuggestionsName } from '~/services/fetch/suggestions/store/fech-suggestions-store';
 import { IconsSearch } from '~/components/icons/search';
+import { loginUser } from '~/services/session/login';
 
 export interface Store {
   email: string;
@@ -33,40 +34,25 @@ export const onGet: RequestHandler = async ({ cookie, redirect }) => {
 };
 
 export const useLogin = globalAction$(
-  async ({ nameStore, email, password }, { fail, cookie, headers, url }) => {
-    const response = await fetch(`${urlServerNode}/douvery/api-store/signin`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        nameStore: nameStore,
-        email: email,
-        password: password,
-      }),
-    });
+  async ({ email, password }, { fail, cookie, headers, url }) => {
+    try {
+      const dataAccess = await loginUser(email, password);
 
-    const dataAccess = await response.json();
+      setCookiesDataUser(dataAccess.accessToken, cookie);
 
-    if (!response.ok) {
+
+      const query = url.searchParams.get('rr') || '/';
+      headers.set('location', query);
+    } catch (error) {
       return fail(401, {
-        message: 'Email o password no válidos',
+        message: 'Email or password not valid',
       });
     }
-
-    setCookiesDataUser(dataAccess.userInfo, cookie);
-    setCookiesDataStore(dataAccess.storeInfo, cookie);
-
-    const query = url.searchParams.get('rr') || '/';
-    headers.set('location', query);
   },
   zod$({
-    nameStore: z.string({
-      required_error: 'Name store requerido',
-    }),
     email: z
       .string({
-        required_error: 'Email requerido',
+        required_error: 'Email required',
       })
       .email({
         message: 'Please enter a valid email',
@@ -76,6 +62,7 @@ export const useLogin = globalAction$(
     }),
   })
 );
+
 interface IState {
   searchInput: string;
   searchResults: string[];
@@ -113,11 +100,7 @@ export default component$(() => {
     };
   });
 
-  const handleKeyUp = $((e: any) => {
-    state.showSuggestions = true;
-    state.searchInput = e.target.value;
-    state.searchResults = [];
-  });
+
 
   const handleSuggestionClick = $((suggestion: any) => {
     state.searchInput = suggestion;
@@ -136,18 +119,7 @@ export default component$(() => {
 
         <Form action={action}>
           <div class="form-group">
-            <label for="nameStore">Name Store</label>
-            <input
-              onKeyUp$={handleKeyUp}
-              type="text"
-              id="nameStore"
-              name="nameStore"
-              class="form-control"
-              value={state.searchInput}
-            />
-            {action.value?.fieldErrors?.nameStore && (
-              <span class="error">{action.value?.fieldErrors?.nameStore}</span>
-            )}
+
 
             {state.showSuggestions && state.searchResults?.length > 0 && (
               <div class="suggestions">
@@ -209,8 +181,8 @@ export default component$(() => {
                 {action.isRunning
                   ? 'Loading...'
                   : action.value?.message
-                  ? 'Error'
-                  : 'Log in'}
+                    ? 'Error'
+                    : 'Log in'}
               </span>
             </button>
           </div>

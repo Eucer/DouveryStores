@@ -1,37 +1,45 @@
-import {  urlServerNode } from "~/services/util/server/server";
+import { urlServerLocalPostgres } from "~/services/util/server/server";
 
 export async function fetchStoreInventoryProducts(
-  category: string,
-  subcategory: string,
-  query: string,
-  orderPrice: string,
-  rating: string,
-  order: string,
-  page: number,
-  brand: string,
-  user: string ,
-  
-  controller?: AbortController
+  tokenUser: string
 ): Promise<any> {
-  
-  const response = await fetch(
-    `
-   ${urlServerNode}/api-store/all-products?page=${page}&query=${query}&category=${category}&subcategory=${subcategory}&price=${orderPrice}&rating=${rating}&order=${order}&brand=${brand}`,
-    {
-      method: 'GET',
-      signal: controller?.signal,
-      headers: {
-        'x-auth-token': user ,
-        'Content-Type': 'application/json',
-      },
+  const query = `
+  query FetchProducts {
+    products {
+      _id
+      dui
+      name
+      brand
+      price
+      quantity
+      images {
+        url
+      }
     }
-  );
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch inventory products');
   }
+`;
 
-  const results = await response.json();
+  try {
+    const response = await fetch(`${urlServerLocalPostgres}/graphql`, {
+      method: "POST",
+      headers: {
+        Authorization: "x-user-auth " + tokenUser,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: query,
+      }),
+    });
 
-  return results;
+    if (!response.ok) {
+      throw new Error("Failed to fetch inventory products");
+    }
+
+    const data = await response.json();
+
+    return data.data.products;
+  } catch (error) {
+    console.error("Error fetching inventory products:", error);
+    throw error;
+  }
 }
