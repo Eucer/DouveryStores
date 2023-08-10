@@ -22,7 +22,10 @@ import { BulletProduct } from '~/components/(Center)/products/bullet-product/bul
 
 import { DouveryRight3 } from '~/components/icons/arrow-right-3';
 import { useGetCurrentTokenUser, useGetCurrentUser } from '~/routes/layout';
-import { categorySelect, maxQuantitySelect } from '~/utils/constants/productNewConstants';
+import {
+  categorySelect,
+  maxQuantitySelect,
+} from '~/utils/constants/productNewConstants';
 
 
 
@@ -33,58 +36,120 @@ export const useAction = globalAction$(
       name,
       brand,
       price,
+      description,
+      maxQuantitySale,
       quantity,
       category,
       subCategory,
-      images
+      images,
+      bullets,
+      item_condition,
+      basicFeatures,
+      gtin,
     },
     { fail, headers }
   ) => {
-
     const mutation = `
-  mutation CreateProduct($name: String! , $brand: String!,$price: Float!, $quantity: Int!, $category: String!, $subCategory: String!, $images: [String!]!) {
-    createProduct(name: $name, brand: $brand , price: $price, quantity: $quantity, category: $category, subCategory: $subCategory, images: $images ) {
-      status
-      message
-      code
-      
-    }
-  }
-`;
+      mutation CreateProduct(
+        $name: String!, 
+        $brand: String!,
+        $description: String!,
+        $price: Float!, 
+        $quantity: Int!, 
+        $maxQuantitySale: String!,
+        $gtin: String!,
+        $condition: String!,
+        $weight: String!,
+        $width: String!,
+        $height: String!,
+        $depth: String!,
+        $category: String!, 
+        $subCategory: String!, 
+        $images: [String!]!, 
+        $bullets:[String!]!
+      ) {
+        createProduct(
+          name: $name, 
+          brand: $brand, 
+          price: $price, 
+          description: $description,
+          quantity: $quantity,
+          maxQuantitySale: $maxQuantitySale,
+          gtin: $gtin,
+          condition: $condition,
+          weight: $weight,
+          width: $width,
+          height: $height,
+          depth: $depth,
+          category: $category, 
+          subCategory: $subCategory, 
+          images: $images, 
+          bullets: $bullets
+        ) {
+          status
+          message
+          code
+        }
+      }
+    `;
+
     const variables = {
       name: name,
       brand: brand,
       price: price,
+      description: description,
       quantity: quantity,
+      maxQuantitySale: maxQuantitySale,
+      gtin: gtin,
+      condition: item_condition,
+      weight: basicFeatures.weight,
+      width: basicFeatures.width,
+      height: basicFeatures.height,
+      depth: basicFeatures.depth,
       category: category,
       subCategory: subCategory,
-      images: images
+      images: images,
+      bullets: bullets
     };
-
-
     const res = await fetch(`${urlServerLocalPostgres}/graphql`, {
       method: 'POST',
       headers: {
-        'Authorization': 'x-user-auth ' + tquser,
+        Authorization: 'x-user-auth ' + tquser,
         'Content-Type': 'application/json',
       },
-
       body: JSON.stringify({
         query: mutation,
         variables: variables,
       }),
     });
+
+
+
+
+    console.log(res);
     const response = await res.json();
-    console.log(response);
-    if (!response.data.createProduct.status) {
+    console.log(
+      response
+    );
+
+
+    if (response.errors || !response.data.createProduct.status) {
+      let errorMessage = 'Unknown error occurred';
+
+      // Si hay un mensaje de error en la respuesta, úsalo
+      if (response.errors && response.errors[0] && response.errors[0].message) {
+        errorMessage = response.errors[0].message;
+      } else if (response.data.createProduct.message) {
+        errorMessage += ' - ' + response.data.createProduct.message;
+      }
+
       return fail(400, {
-        message: 'Invalid credentials or user not found' + response.data.createProduct.message,
+        message: errorMessage,
       });
     }
 
     headers.set('location', '/center/success/request-product');
-  }
-  ,
+  },
   zod$({
     tquser: z.string({
       required_error: 'Required',
@@ -149,7 +214,7 @@ export const useAction = globalAction$(
       depth: z.string({
         required_error: 'Required',
       }),
-      weigth: z.string({
+      weight: z.string({
         required_error: 'Required',
       }),
     }),
@@ -168,8 +233,8 @@ export default component$(() => {
     step.value--;
   });
   const productStore = useStore({
-    productCategory: 'Electrónica de Product',
-    productSubCategory: 'Electrónica',
+    productCategory: '',
+    productSubCategory: '',
     selectedCategoryIndex: 1,
     selectedSubCategoryIndex: 1,
     productName: 'Product Name Frontend',
@@ -177,27 +242,21 @@ export default component$(() => {
     productBrand: 'asdada',
     productGTIN: 'wasdsads',
     productDiscount: 1,
-    productMaxQty: "1",
+    productMaxQty: '1',
     productQty: 1,
     dimensionUnit: 'cm',
     productHeight: 1,
-    productWidth: "1",
+    productWidth: '1',
     productDepth: 1,
     weightUnit: 'lb',
     productWeight: 1,
     pd_deatilImgBox: 'vertical_view',
     productShortDescription: 'lorem ipsum',
     productDescriptionFull: 'lorem ipsum',
-    productKeywords: [
-      'lorem ipsum',
-    ],
-    productBullets: [
-      'lorem ipsum',
-    ],
-    productHighlights: [
-      'lorem ipsum',
-    ],
-    productCondition: 'new',
+    productKeywords: ['lorem ipsum'],
+    productBullets: ['lorem ipsum'],
+    productHighlights: ['lorem ipsum'],
+    productCondition: '',
   });
   const previewIMG = useStore({
     previewIMGPrimary: [
@@ -339,10 +398,10 @@ export default component$(() => {
   };
   const action = useAction();
   const user = useGetCurrentUser().value;
-  user
-  const userToken = useGetCurrentTokenUser().value
+  user;
+  const userToken = useGetCurrentTokenUser().value;
   const images = previewIMGs.previewIMGs.flat().map((item) => item);
-
+  console.log(productStore.productShortDescription);
   const handleSend = $(async () => {
     await action.submit({
       tquser: userToken as string,
@@ -365,7 +424,9 @@ export default component$(() => {
       quantity: productStore.productQty
         ? productStore.productQty
         : (undefined as any),
-      maxQuantitySale: productStore.productMaxQty ? productStore.productMaxQty : (undefined as any),
+      maxQuantitySale: productStore.productMaxQty
+        ? productStore.productMaxQty
+        : (undefined as any),
       price: productStore.productPrice
         ? productStore.productPrice
         : (undefined as any),
@@ -395,12 +456,14 @@ export default component$(() => {
         depth: (productStore.productDepth +
           '' +
           productStore.dimensionUnit) as any,
-        weigth: (productStore.productWeight +
+        weight: (productStore.productWeight +
           '' +
           productStore.weightUnit) as any,
       },
     });
   });
+
+
 
   // const editorRef = useSignal<Element>();
   // const handleBoldClick = $(() => {
@@ -594,13 +657,13 @@ const ProductCategory = ({
             onChange$={onProductSubCategoryChange}
           >
             <option value="-1">Seleccione una subcategoría</option>
-            {categorySelect[productStore.selectedCategoryIndex].subcategories.map(
-              (subCat, index) => (
-                <option key={index} value={index}>
-                  {subCat}
-                </option>
-              )
-            )}
+            {categorySelect[
+              productStore.selectedCategoryIndex
+            ].subcategories.map((subCat, index) => (
+              <option key={index} value={index}>
+                {subCat}
+              </option>
+            ))}
           </select>
           {action.value?.fieldErrors?.subCategory && (
             <span class="error">{action.value?.fieldErrors?.subCategory}</span>
@@ -650,7 +713,7 @@ export const ProductData = ({
     onProductBrandChange,
     onProductConditionChange,
   } = productDataHandlers;
-
+  console.log(productStore.productCondition);
   return (
     <div class="Form__DATAPRODUCTS">
       <div class="content_form">
@@ -762,7 +825,7 @@ export const ProductData = ({
             id="dimension"
             value={productStore.productCondition}
             onChange$={onProductConditionChange}
-          >
+          >  <option value="-1">Seleccione una categoría</option>
             <option value="new">Nuevo</option>
           </select>
         </div>

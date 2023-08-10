@@ -7,7 +7,7 @@ import { DouveryCheckMark } from '~/components/icons/checkMark';
 export const Card2S = component$(({ product }: any) => {
   useStylesScoped$(styles);
   const discoun = product.price - product.price * (product.discount / 100);
-
+  console.log(product.images);
   return (
     <div class="container-all">
       <div class="card">
@@ -15,7 +15,7 @@ export const Card2S = component$(({ product }: any) => {
           <img
             width={200}
             height={200}
-            src={product.images[0].url}
+            src={product.images[0] ? product.images[0].url : 'https://res.cloudinary.com/dou/image/upload/v1691513844/NOIMAGES_mx9znd.webp'}
             alt="Product Image"
             class="product-image"
           />

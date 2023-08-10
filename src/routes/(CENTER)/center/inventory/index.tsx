@@ -392,7 +392,7 @@ export default component$(() => {
             <div class="separator_section"></div>
 
             <div class="container__fast__access">
-              <button>
+              <a class="link_button" href='/center/products/new/generate-product/'>
                 <span class="button-icon">
                   {' '}
                   <svg
@@ -408,10 +408,10 @@ export default component$(() => {
                   </svg>
                 </span>
                 <span class="button-text">Subir nuevo producto</span>
-              </button>
+              </a>
               <p>Or</p>
 
-              <button>
+              <a class="link_button" >
                 <span class="button-icon">
                   {' '}
                   <svg
@@ -439,7 +439,7 @@ export default component$(() => {
                   </svg>{' '}
                 </span>
                 <span class="button-text">Mis ultimas ventas</span>
-              </button>
+              </a>
             </div>
           </div>
           <div class="separator_section"></div>

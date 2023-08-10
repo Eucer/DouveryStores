@@ -1,4 +1,4 @@
-import { urlServerLocalPostgres } from "~/services/util/server/server";
+import { urlServerLocalPostgres } from '~/services/util/server/server';
 
 export async function fetchStoreProductsByDui(
   dui: string,
@@ -7,21 +7,28 @@ export async function fetchStoreProductsByDui(
   const query = `
   query byDuiProduct($dui: String!) {
     byDuiProduct(dui: $dui) {
-      _id
+      dui
+     
       name
       brand
       price
+      description
+      bullets
      category {
       categoryName
     }
     subCategory {
       subCategoryName
     }
-   
-    
       images {
        url
       }
+      basicFeatures {
+    weight
+    width
+    height
+    depth
+  }
     }
   }
 `;
@@ -31,10 +38,10 @@ export async function fetchStoreProductsByDui(
 
   try {
     const response = await fetch(`${urlServerLocalPostgres}/graphql`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        Authorization: "x-user-auth " + tokenUser,
-        "Content-Type": "application/json",
+        Authorization: 'x-user-auth ' + tokenUser,
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         query: query,
@@ -43,14 +50,14 @@ export async function fetchStoreProductsByDui(
     });
     console.log(response);
     if (!response.ok) {
-      throw new Error("Failed to fetch inventory products");
+      throw new Error('Failed to fetch inventory products');
     }
 
     const data = await response.json();
-
+    console.log(data);
     return data.data.byDuiProduct[0];
   } catch (error) {
-    console.error("Error fetching inventory products:", error);
+    console.error('Error fetching inventory products:', error);
     throw error;
   }
 }

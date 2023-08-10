@@ -130,7 +130,7 @@ ul {
 
 .product-section {
     width: 100%;
-    max-width: 1000px;
+
     display: flex;
     flex-direction: column;
 
@@ -467,7 +467,7 @@ a:focus-visible {
 
 }
 
-button {
+.link_button {
 
     background-color: #fff;
     border: 1px solid #d5d9d9;
@@ -496,11 +496,11 @@ button {
 
 
 
-button:hover {
+.link_button:hover {
     background-color: #f7fafa;
 }
 
-button:focus {
+.link_button:focus {
     border-color: #009595;
     box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
     outline: 0;

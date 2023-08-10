@@ -2,7 +2,16 @@ export const categorySelect = [
   {
     id: 1,
     name: "Electronics",
-    subcategories: ["Phones", "TVs", "Laptops", "Cameras", "Audio"],
+    subcategories: [
+      "Phones",
+      "TVs",
+      "Laptops",
+      "Cameras",
+      "Audio",
+      "Keyboards",
+      "Headphones",
+      "Gadgets",
+    ],
   },
   {
     id: 2,
@@ -38,6 +47,88 @@ export const categorySelect = [
     id: 8,
     name: "Books",
     subcategories: ["Novels", "Non-fiction", "Children's", "Educational"],
+  },
+  {
+    id: 9,
+    name: "Footwear",
+    subcategories: [
+      "Men's Shoes",
+      "Women's Shoes",
+      "Children's Shoes",
+      "Athletic Shoes",
+      "Sandals",
+    ],
+  },
+  {
+    id: 10,
+    name: "Jewelry and Accessories",
+    subcategories: ["Necklaces", "Bracelets", "Earrings", "Rings", "Watches"],
+  },
+  {
+    id: 11,
+    name: "Bags and Luggage",
+    subcategories: [
+      "Handbags",
+      "Backpacks",
+      "Luggage",
+      "Wallets",
+      "Briefcases",
+    ],
+  },
+  {
+    id: 12,
+    name: "Fitness",
+    subcategories: [
+      "Fitness Equipment",
+      "Yoga Mats",
+      "Weights",
+      "Resistance Bands",
+      "Fitness Wear",
+    ],
+  },
+  {
+    id: 13,
+    name: "Outdoor",
+    subcategories: [
+      "Camping Gear",
+      "Hiking Gear",
+      "Fishing",
+      "Outdoor Furniture",
+      "Barbecue",
+    ],
+  },
+  {
+    id: 14,
+    name: "Pet Supplies",
+    subcategories: [
+      "Dog Food",
+      "Cat Toys",
+      "Bird Cages",
+      "Aquariums",
+      "Pet Clothing",
+    ],
+  },
+  {
+    id: 15,
+    name: "Musical Instruments",
+    subcategories: [
+      "Guitars",
+      "Pianos",
+      "Drums",
+      "Wind Instruments",
+      "String Instruments",
+    ],
+  },
+  {
+    id: 16,
+    name: "Gourmet and Groceries",
+    subcategories: [
+      "Coffee and Tea",
+      "Spices",
+      "Dairy",
+      "Organic Products",
+      "Desserts",
+    ],
   },
 ];
 

@@ -195,8 +195,8 @@ export default component$(() => {
     productCreatedAt: productData.value.createdAt,
     productUpdatedAt: productData.value.updatedAt,
     productUploaded_by: productData.value.uploaded_by,
-    productCategory: productData.value?.category[0].categoryName,
-    productSubCategory: productData.value?.subCategory[0].subCategoryName,
+    productCategory: productData.value?.category.categoryName,
+    productSubCategory: productData.value?.subCategory.subCategoryName,
     selectedCategoryIndex: -1,
     selectedSubCategoryIndex: -1,
     productName: productData.value.name,
@@ -213,11 +213,11 @@ export default component$(() => {
     weightUnit: productData.value.basicFeatures?.util?.weigthUnit || '',
     productWeight: productData.value.basicFeatures?.util?.weigth || 0,
     pd_deatilImgBox: '',
-    productShortDescription: productData.value.description,
+    productShortDescription: productData.value?.description,
     productDescriptionFull: '',
     productKeywords: productData?.value?.keywords?.split(' '),
 
-    productBullets: productData.value.vinetas,
+    productBullets: productData.value.bullets,
     productHighlights: [],
     productCondition: 'new',
   });
@@ -229,8 +229,12 @@ export default component$(() => {
   const previewIMGs = useStore({
     previewIMGs: Array(7)
       .fill(null)
-      .map((_, index) => productData.value.images[index + 1] || []),
+      .map((_, index) => {
+        // Verificar si el índice es válido y si existe la URL
+        return (productData.value?.images && productData.value.images[index + 1]?.url) || "";
+      })
   });
+
   const productDataHandlers = {
     onProductNameChange: $((e: any) => {
       productStore.productName = e.target.value;
