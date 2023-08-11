@@ -14,6 +14,7 @@ export async function fetchStoreProductsByDui(
       price
       description
       bullets
+      gtin
      category {
       categoryName
     }
