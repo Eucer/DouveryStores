@@ -187,7 +187,7 @@ export default component$(() => {
       storeCountry: store.storeCountry,
       storeLocation: store.storeLocation,
     });
-    console.log(value);
+    value
   });
   return (
     <>

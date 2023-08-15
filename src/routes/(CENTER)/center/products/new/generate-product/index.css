@@ -89,7 +89,7 @@ textarea {
     padding: 5px 10px;
     font-size: 16px;
     color: #000;
-
+    background-color: var(--color-background-card);
     border: 1px solid #E0E0E0;
     border-radius: 5px;
     box-sizing: border-box;
@@ -112,7 +112,8 @@ textarea {
 }
 
 #description_short {
-    background-color: var(--color-background-white);
+    background-color: var(--color-background-card);
+    border: 1px solid #E0E0E0;
     padding: 20px;
 }
 
@@ -132,7 +133,7 @@ select {
     font-size: 14px;
     color: #00000096;
     border-radius: 5px;
-    background-color: var(--color-background-light);
+    background-color: var(--color-background-card);
     border: 1px solid #E0E0E0;
     margin-bottom: 20px;
 
@@ -162,7 +163,7 @@ select {
     font-size: 14px;
     color: #00000096;
     border-radius: 5px;
-    background-color: var(--color-background-light);
+    background-color: var(--color-background-card);
     border: 1px solid #E0E0E0;
     margin-bottom: 20px;
 

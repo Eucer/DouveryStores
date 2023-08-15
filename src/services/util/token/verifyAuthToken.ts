@@ -24,7 +24,6 @@ export function decodeAuthToken(token: any): DecodedToken | null {
 
     return decoded;
   } catch (error: any) {
-    console.log(`Invalid token: ${error.message}`);
     if (error.message === "Token has expired") {
       // Aquí puedes mostrar el popup
       ShowSessionExpiremodal("Su sesión ha expirado"); // Asumo que esta función muestra el modal

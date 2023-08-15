@@ -15,6 +15,8 @@ export async function fetchStoreProductsByDui(
       description
       bullets
       gtin
+      quantity
+      maxQuantitySale
      category {
       categoryName
     }
@@ -29,7 +31,22 @@ export async function fetchStoreProductsByDui(
     width
     height
     depth
+    condition
   }
+  status{
+    active
+  }
+  dates {
+     createdAt
+     updatedAt
+     
+     uploadedBy {
+       profile {
+         name
+       }
+      
+     }
+   }
     }
   }
 `;
@@ -49,13 +66,13 @@ export async function fetchStoreProductsByDui(
         variables: variants,
       }),
     });
-    console.log(response);
+
     if (!response.ok) {
       throw new Error('Failed to fetch inventory products');
     }
 
     const data = await response.json();
-    console.log(data);
+
     return data.data.byDuiProduct[0];
   } catch (error) {
     console.error('Error fetching inventory products:', error);

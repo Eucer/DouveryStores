@@ -178,12 +178,12 @@
     font-size: 12px;
 }
 
-.pending {
+.reviewing {
     color: #ea516a;
 
 }
 
-.approved {
+.active {
     color: #03940a;
 
 }

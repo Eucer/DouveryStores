@@ -12,6 +12,10 @@ export async function fetchStoreInventoryProducts(
       brand
       price
       quantity
+      status {
+      active
+      status
+    }
       images {
         url
       }

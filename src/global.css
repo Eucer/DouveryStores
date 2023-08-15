@@ -26,44 +26,64 @@
   --color-background-down: #f1f5f9;
   --color-background-light: #fcfcfc;
   --color-background-lightest: #f4f4f4;
+  --color-background-lightest-2: #f5f5f5;
   --color-background-card: rgba(247, 248, 248, 0.952);
-
+  --color-background-card2: #f1f5f980;
   --color-button-pay: #008080;
   --color-button-cart: #1a49ab;
+  --color-button-blue: #00478d;
   --color-stars: #008080;
   --color-action-show-more: #008080;
-
-  --color-text-dark: rgba(0, 0, 0, .8);
-  --color-text-medium-dark: rgba(0, 0, 0, .45);
+  --color-text-dark: rgba(0, 0, 0, 0.8);
+  --color-text-medium-dark: rgba(0, 0, 0, 0.45);
   --color-text-medium-light: #565959;
   --color-text-light: #333333;
   --color-text-lightest: #0f1111;
-
-
-  --color-text-opaque: #3C4048;
+  --color-text-opaque: #3c4048;
   --color-text-highlight-secondary: #202123;
-
-
-  --color-blue-clear: #2185D5;
+  --color-blue-clear: #2185d5;
   --color-blue: #0b347b;
-  --color-blue-vibrant: #2146C7;
+  --color-blue-vibrant: #2146c7;
+  --color-blue-link: #0066cc;
   --color-black: #212529;
   --color-white: #fff;
-  --color-grey: var(--color-text-opaque)666;
+  --color-grey: var(--color-text-opaque) 666;
   --color-orange: #e84118;
-  --color-green: #38E54D;
+  --color-green: #38e54d;
   --color-green-2: #06738f;
   --color-green-3: #00a650;
   --color-violet: #1613d3;
-  --color-rose: #F8485E;
-  --color-red: #EE2B47;
+  --color-rose: #f8485e;
+  --color-red: #ee2b47;
+  --color-save-product: rgb(211, 11, 11);
+  --color-error: #ff0000;
 
+  /* Anchos de borde */
   --border-width-0: #00000008;
   --border-width-1: #00000010;
   --border-width-2: #00000018;
   --border-width-3: #00000024;
   --border-width-4: #d9d9d9;
 
+  /* Tamaños de fuente */
+  --font-size-xxs: 10px;
+  --font-size-xs: 14px;
+  --font-size-sm: 16px;
+  --font-size-md: 17.5px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-xxl: 23px;
+  --font-size-xxxl: 25px;
+
+
+  /* Anchos de borde */
+  --border-width-0: #00000008;
+  --border-width-1: #00000010;
+  --border-width-2: #00000018;
+  --border-width-3: #00000024;
+  --border-width-4: #d9d9d9;
+
+  /* Tamaños de fuente */
   --font-size-xxs: 10px;
   --font-size-xs: 13px;
   --font-size-sm: 15px;
@@ -71,9 +91,33 @@
   --font-size-lg: 18px;
   --font-size-xl: 18px;
 
+  /* Pesos de fuente */
   --font-weight-light: 400;
   --font-weight-normal: 500;
   --font-weight-bold: 600;
+
+  /* Spacing */
+  --spacing-xxs: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 32px;
+  --spacing-xl: 48px;
+
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 16px;
+
+  --transition-duration-fast: 0.2s;
+  --transition-duration-normal: 0.4s;
+  --transition-duration-slow: 0.6s;
+
+  --z-index-top: 9999;
+  --z-index-modal: 9000;
+  --z-index-dropdown: 8000;
+  --z-index-sticky: 100;
+  --z-index-header: 50;
+  --z-index-footer: 10;
 }
 
 .swiper {

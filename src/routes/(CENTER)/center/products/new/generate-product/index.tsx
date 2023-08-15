@@ -36,6 +36,7 @@ export const useAction = globalAction$(
       name,
       brand,
       price,
+      discount,
       description,
       maxQuantitySale,
       quantity,
@@ -58,6 +59,7 @@ export const useAction = globalAction$(
         $quantity: Int!, 
         $maxQuantitySale: String!,
         $gtin: String!,
+        $discount: Int!,
         $condition: String!,
         $weight: String!,
         $width: String!,
@@ -72,6 +74,7 @@ export const useAction = globalAction$(
           name: $name, 
           brand: $brand, 
           price: $price, 
+          discount: $discount,
           description: $description,
           quantity: $quantity,
           maxQuantitySale: $maxQuantitySale,
@@ -97,6 +100,7 @@ export const useAction = globalAction$(
       name: name,
       brand: brand,
       price: price,
+      discount: discount,
       description: description,
       quantity: quantity,
       maxQuantitySale: maxQuantitySale,
@@ -126,11 +130,9 @@ export const useAction = globalAction$(
 
 
 
-    console.log(res);
+
     const response = await res.json();
-    console.log(
-      response
-    );
+
 
 
     if (response.errors || !response.data.createProduct.status) {
@@ -401,7 +403,7 @@ export default component$(() => {
   user;
   const userToken = useGetCurrentTokenUser().value;
   const images = previewIMGs.previewIMGs.flat().map((item) => item);
-  console.log(productStore.productShortDescription);
+
   const handleSend = $(async () => {
     await action.submit({
       tquser: userToken as string,
@@ -465,14 +467,6 @@ export default component$(() => {
 
 
 
-  // const editorRef = useSignal<Element>();
-  // const handleBoldClick = $(() => {
-  //   document.execCommand('bold') as any;
-  //   const editorContent = editorRef.value && editorRef.value.innerHTML;
-  //   console.log(editorContent);
-  // });
-
-  // console.log(editorRef.value);
 
   return (
     <>
@@ -713,7 +707,7 @@ export const ProductData = ({
     onProductBrandChange,
     onProductConditionChange,
   } = productDataHandlers;
-  console.log(productStore.productCondition);
+
   return (
     <div class="Form__DATAPRODUCTS">
       <div class="content_form">
@@ -810,7 +804,7 @@ export const ProductData = ({
               onChange$={onProductMaxQtyChange}
             >
               {maxQuantitySelect.map((data, index) => (
-                <option key={index} value={index}>
+                <option key={index} value={data.name}>
                   {data.name}
                 </option>
               ))}

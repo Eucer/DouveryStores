@@ -172,7 +172,7 @@ export const useProductInfo = routeLoader$(async ({ params, cookie }) => {
   const accessCookie = cookie.get(DATA_ACCESS_COOKIE_SESSION_USER)?.value;
 
   const product = await fetchStoreProductsByDui(dui as any, accessCookie ? accessCookie : "");
-  console.log(product);
+
   return product;
 });
 
@@ -189,12 +189,20 @@ export default component$(() => {
   });
 
   const productData = useProductInfo();
-  console.log(productData.value);
+  function extractDimensionUnit(dimension: string) {
+    return dimension.split(/[0-9]+/).pop() || '';
+  }
+
+  function extractWeightUnit(weight: string) {
+    return weight.split(/[0-9]+/).pop() || '';
+  }
+
+
   const productStore = useStore({
     productDui: productData.value.dui,
-    productCreatedAt: productData.value.createdAt,
-    productUpdatedAt: productData.value.updatedAt,
-    productUploaded_by: productData.value.uploaded_by,
+    productCreatedAt: productData.value.dates.createdAt,
+    productUpdatedAt: productData.value.dates.updatedAt,
+    productUploaded_by: productData.value.dates.uploadedBy.profile.name,
     productCategory: productData.value?.category.categoryName,
     productSubCategory: productData.value?.subCategory.subCategoryName,
     selectedCategoryIndex: -1,
@@ -206,22 +214,22 @@ export default component$(() => {
     productDiscount: productData.value.discount || 0,
     productMaxQty: productData.value.maxQuantitySale,
     productQty: productData.value.quantity,
-    dimensionUnit: productData.value.basicFeatures?.util?.dimensionUnit || '',
-    productHeight: productData.value.basicFeatures?.util?.height || 0,
-    productWidth: productData.value.basicFeatures?.util?.width || 0,
-    productDepth: productData.value.basicFeatures?.util?.depth || 0,
-    weightUnit: productData.value.basicFeatures?.util?.weigthUnit || '',
-    productWeight: productData.value.basicFeatures?.util?.weigth || 0,
+    dimensionUnit: extractDimensionUnit(productData.value.basicFeatures?.height || ''),
+    productHeight: parseFloat(productData.value.basicFeatures?.height || 0),
+    productWidth: parseFloat(productData.value.basicFeatures?.width || 0),
+    productDepth: parseFloat(productData.value.basicFeatures?.depth || 0),
+    weightUnit: extractWeightUnit(productData.value.basicFeatures?.weight || ''),
+    productWeight: parseFloat(productData.value.basicFeatures?.weight || 0),
     pd_deatilImgBox: '',
     productShortDescription: productData.value?.description,
     productDescriptionFull: '',
-    productKeywords: productData?.value?.keywords?.split(' '),
+    productKeywords: productData.value?.meta?.seoKeywords || [],
 
     productBullets: productData.value.bullets,
     productHighlights: [],
-    productCondition: 'new',
+    productCondition: productData.value.basicFeatures?.condition || '',
   });
-  console.log(productData.value);
+
   const previewIMG = useStore({
     previewIMGPrimary: productData.value.images[0].url,
   });
@@ -404,80 +412,86 @@ export default component$(() => {
         <div class="progress__bar"></div>
       </div>
       <button onClick$={handleSend}></button>
+      {productData.value.status?.active ? (
+        <>
+          <div class="container_view_product">
+            <div class="left">
+              <ModifyProduct__ProgressBarSteps step={step.value} setStep={step} />
+            </div>
+            <div class="content__center">
+              {step.value == 1 && (
+                <>
+                  {' '}
+                  <TitleSubtitleComponent
+                    title="Update or add new images for this product"
+                    subtitle="Make your product unique through images."
+                  />
+                  <br />
+                  <Product_images
+                    action={action}
+                    previewIMG={previewIMG}
+                    previewIMGs={previewIMGs}
+                    storeImagePrimary={previewIMG}
+                    storeImagesSecondary={previewIMGs}
+                    productStore={productStore}
+                    productProductDetailsHandlers={productProductDetailsHandlers}
+                    prevStep={prevStep}
+                    nextStep={nextStep}
+                  />
+                </>
+              )}
+              {step.value == 2 && (
+                <>
+                  {' '}
+                  <Product_data
+                    action={action}
+                    productStore={productStore}
+                    productDataHandlers={productDataHandlers}
+                  />
+                </>
+              )}
 
-      <div class="container_view_product">
-        <div class="left">
-          <ModifyProduct__ProgressBarSteps step={step.value} setStep={step} />
-        </div>
-        <div class="content__center">
-          {step.value == 1 && (
-            <>
-              {' '}
-              <TitleSubtitleComponent
-                title="Update or add new images for this product"
-                subtitle="Make your product unique through images."
-              />
+              {step.value == 3 && (
+                <Product_physical_details_of_the_product
+                  action={action}
+                  productStore={productStore}
+                  productDataHandlers={productDataHandlers}
+                />
+              )}
+
+              {step.value == 4 && (
+                <>
+                  <Product_description_short
+                    action={action}
+                    productStore={productStore}
+                    productProductDetailsHandlers={productProductDetailsHandlers}
+                  />
+                </>
+              )}
+              {step.value == 5 && (
+                <>
+                  <TitleSubtitleComponent
+                    title="Keywords for this product"
+                    subtitle="Add keywords to help customers find your product."
+                  />
+                  <br />
+                  <Product_keywords productStore={productStore} />
+                </>
+              )}
+            </div>
+
+            <div class="right">
+              <Product_button_edit action={action} handleSend={handleSend} />
+
               <br />
-              <Product_images
-                action={action}
-                previewIMG={previewIMG}
-                previewIMGs={previewIMGs}
-                storeImagePrimary={previewIMG}
-                storeImagesSecondary={previewIMGs}
-                productStore={productStore}
-                productProductDetailsHandlers={productProductDetailsHandlers}
-                prevStep={prevStep}
-                nextStep={nextStep}
-              />
-            </>
-          )}
-          {step.value == 2 && (
-            <>
-              {' '}
-              <Product_data
-                action={action}
-                productStore={productStore}
-                productDataHandlers={productDataHandlers}
-              />
-            </>
-          )}
+              <Product_data_no_edit productStore={productStore} />
+            </div>
+          </div>
+        </>
+      ) : (
+        <div>El producto no está activo</div>
+      )}
 
-          {step.value == 3 && (
-            <Product_physical_details_of_the_product
-              action={action}
-              productStore={productStore}
-              productDataHandlers={productDataHandlers}
-            />
-          )}
-
-          {step.value == 4 && (
-            <>
-              <Product_description_short
-                action={action}
-                productStore={productStore}
-                productProductDetailsHandlers={productProductDetailsHandlers}
-              />
-            </>
-          )}
-          {step.value == 5 && (
-            <>
-              <TitleSubtitleComponent
-                title="Keywords for this product"
-                subtitle="Add keywords to help customers find your product."
-              />
-              <br />
-              <Product_keywords productStore={productStore} />
-            </>
-          )}
-        </div>
-
-        <div class="right">
-          <Product_button_edit action={action} handleSend={handleSend} />
-
-          <br />
-          <Product_data_no_edit productStore={productStore} />
-        </div>
-      </div>
     </div>
   );
 });

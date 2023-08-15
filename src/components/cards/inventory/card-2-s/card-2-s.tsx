@@ -3,11 +3,12 @@ import styles from './card-2-s.css?inline';
 import { UsePrice } from '~/components/use/price/price';
 
 import { DouveryCheckMark } from '~/components/icons/checkMark';
+import { TextCL } from '~/components/textCL/textCL';
 
 export const Card2S = component$(({ product }: any) => {
   useStylesScoped$(styles);
   const discoun = product.price - product.price * (product.discount / 100);
-  console.log(product.images);
+
   return (
     <div class="container-all">
       <div class="card">
@@ -85,8 +86,8 @@ export const Card2S = component$(({ product }: any) => {
             {' '}
             <div class={'status-card'}>
               <h3 class="status-title">Estado:</h3>
-              <p class={'status-text' + ' ' + product.status}>
-                {product.status}
+              <p class={'status-text' + ' ' + product.status.status}>
+                <TextCL text={product.status.status} />
               </p>
             </div>
             <div class="ctr-opa">|</div>

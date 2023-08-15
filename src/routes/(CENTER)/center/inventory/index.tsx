@@ -291,6 +291,7 @@ export default component$(() => {
               <>
                 {' '}
                 <ul>
+
                   {data.length === 0 ? (
                     <p>No hay productos para mostrar.</p>
                   ) : (
@@ -302,75 +303,77 @@ export default component$(() => {
                       }
                     >
                       {data.map((product: any) => (
-                        <>
-                          <li class="card_product" key={product.id}>
-                            <Card2S product={product} />
-                            {product.status == 'pending' ? (
-                              ''
-                            ) : (
-                              <>
-                                {' '}
-                                <div class="separator_hz" />
-                                <div class="option_product">
-                                  <div class="button_modifi">
-                                    <a
-                                      href={`/center/products/modify/${product.dui}/`}
+
+
+                        <li class="card_product" key={product.dui}>
+
+                          <Card2S product={product} />
+
+                          {product.status?.active ? (
+
+                            <>
+                              {' '}
+                              <div class="separator_hz" />
+                              <div class="option_product">
+                                <div class="button_modifi">
+                                  <a
+                                    href={`/center/products/modify/${product.dui}/`}
+                                  >
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      width="14"
+                                      height="14"
+                                      viewBox="0 0 14 14"
                                     >
-                                      <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="14"
-                                        height="14"
-                                        viewBox="0 0 14 14"
+                                      <g
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
                                       >
-                                        <g
-                                          fill="none"
-                                          stroke="currentColor"
-                                          stroke-linecap="round"
-                                          stroke-linejoin="round"
-                                        >
-                                          <path d="m7.5 9l-3 .54L5 6.5L10.73.79a1 1 0 0 1 1.42 0l1.06 1.06a1 1 0 0 1 0 1.42Z" />
-                                          <path d="M12 9.5v3a1 1 0 0 1-1 1H1.5a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h3" />
-                                        </g>
-                                      </svg>
-                                      Moficar
-                                    </a>
-                                  </div>
-                                  <div class="button_statistics">
-                                    <a
-                                      href={`/center/products/statistics/${product.dui}/`}
-                                    >
-                                      <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="14"
-                                        height="14"
-                                        viewBox="0 0 24 24"
-                                      >
-                                        <g
-                                          fill="none"
-                                          stroke="currentColor"
-                                          stroke-linecap="round"
-                                          stroke-linejoin="round"
-                                          stroke-width="2"
-                                        >
-                                          <path
-                                            stroke-miterlimit="5.759"
-                                            d="M3 3v16a2 2 0 0 0 2 2h16"
-                                          />
-                                          <path
-                                            stroke-miterlimit="5.759"
-                                            d="m7 14l4-4l4 4l6-6"
-                                          />
-                                          <path d="M18 8h3v3" />
-                                        </g>
-                                      </svg>
-                                      Statistics
-                                    </a>
-                                  </div>
+                                        <path d="m7.5 9l-3 .54L5 6.5L10.73.79a1 1 0 0 1 1.42 0l1.06 1.06a1 1 0 0 1 0 1.42Z" />
+                                        <path d="M12 9.5v3a1 1 0 0 1-1 1H1.5a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h3" />
+                                      </g>
+                                    </svg>
+                                    Moficar
+                                  </a>
                                 </div>
-                              </>
-                            )}
-                          </li>
-                        </>
+                                <div class="button_statistics">
+                                  <a
+                                    href={`/center/products/statistics/${product.dui}/`}
+                                  >
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      width="14"
+                                      height="14"
+                                      viewBox="0 0 24 24"
+                                    >
+                                      <g
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                      >
+                                        <path
+                                          stroke-miterlimit="5.759"
+                                          d="M3 3v16a2 2 0 0 0 2 2h16"
+                                        />
+                                        <path
+                                          stroke-miterlimit="5.759"
+                                          d="m7 14l4-4l4 4l6-6"
+                                        />
+                                        <path d="M18 8h3v3" />
+                                      </g>
+                                    </svg>
+                                    Statistics
+                                  </a>
+                                </div>
+                              </div>
+                            </>
+                          ) : null}
+                        </li>
+
                       ))}
 
                       <Paginator1
