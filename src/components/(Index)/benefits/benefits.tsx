@@ -25,7 +25,7 @@ export const BenefitsINDEX = component$(() => {
           <div class="content">
             <h3>Mayor Visibilidad</h3>
             <p>
-              En Douvery Stores, tu producto tiene el potencial de ser
+              En Douvery shops, tu producto tiene el potencial de ser
               descubierto por un público en crecimiento. Únete hoy y crece con
               nosotros.
             </p>

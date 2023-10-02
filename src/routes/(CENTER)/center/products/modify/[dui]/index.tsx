@@ -197,7 +197,7 @@ export default component$(() => {
     return weight.split(/[0-9]+/).pop() || '';
   }
 
-
+  console.log(productData.value);
   const productStore = useStore({
     productDui: productData.value.dui,
     productCreatedAt: productData.value.dates.createdAt,
@@ -406,7 +406,7 @@ export default component$(() => {
     <div class="container__all">
       <div class="title_and_infos">
         <div class="title">
-          <Header_info title="Editar" />
+          <Header_info title="Editar producto" />
         </div>
 
         <div class="progress__bar"></div>

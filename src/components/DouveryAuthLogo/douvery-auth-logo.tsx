@@ -5,7 +5,6 @@ export const DouveryAuthLogo = component$(() => {
   useStylesScoped$(styles);
   return (
     <div class=" ctr-douvery">
-
       <a
         href="/"
         aria-label="Go home"
@@ -14,10 +13,9 @@ export const DouveryAuthLogo = component$(() => {
       >
         <DouveryLogo40x40 size={40} color="var(--color-primary)" />
         <span class="ml-2 text-xl font-bold tracking-wide text-gray-800 ">
-          Douvery Stores
+          Douvery Shops
         </span>
       </a>
-
     </div>
   );
 });

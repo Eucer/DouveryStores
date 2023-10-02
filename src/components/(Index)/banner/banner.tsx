@@ -34,6 +34,11 @@ export const Banner = component$(() => {
   return (
     <div class="carousel__image-container">
       <div class="iframe-container">
+        <img
+          src="https://res.cloudinary.com/dou/image/upload/v1696266930/AnyConv.com__Disen%CC%83o_sin_ti%CC%81tulo_2_gdurek.webp"
+          alt=""
+          class="carousel__image"
+        />
         <div class="data_content">
           <div class="overlay">
             <h1 class="title">Recursos infinitos para tu tienda</h1>

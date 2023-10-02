@@ -4,6 +4,8 @@ import styles from './navbar-center.css?inline';
 import { useGetCurrentUser } from '~/routes/layout';
 import { DouveryArrowDown } from '~/components/icons/arrow-down';
 import { DropdownMenuCenter } from './dropdownMenu/dropdown-menu';
+import { DouveryIcon } from '~/components/icons/douvery';
+import { LogoNavbar } from '~/components/nav-bar/logo-navbar/logo-navbar';
 export const NavBarCenter = component$(() => {
   useStylesScoped$(styles);
   const user = useGetCurrentUser().value;
@@ -25,88 +27,11 @@ export const NavBarCenter = component$(() => {
     ></div>
   ) : null;
 
-
   return (
     <>
       {backdrop}
       <nav class="navbar">
-        <a href="/">
-          <div class="logo">
-            <svg
-              width="30"
-              height="30"
-              viewBox="0 0 201 213"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g clip-path="url(#clip0_16_2)">
-                <mask
-                  id="mask0_16_2"
-                  style="mask-type:luminance"
-                  maskUnits="userSpaceOnUse"
-                  x="0"
-                  y="0"
-                  width="201"
-                  height="213"
-                >
-                  <path
-                    d="M154.615 0H46.3846C20.7671 0 0 22.4384 0 50.1176V162.882C0 190.562 20.7671 213 46.3846 213H154.615C180.233 213 201 190.562 201 162.882V50.1176C201 22.4384 180.233 0 154.615 0Z"
-                    fill="white"
-                  />
-                </mask>
-                <g mask="url(#mask0_16_2)">
-                  <path
-                    d="M-34.7885 -4.47482V217.475C-34.7885 243.837 -17.8456 265.206 3.05448 265.206H197.946C218.846 265.206 235.788 243.837 235.788 217.475V-4.47482C235.788 -30.8359 218.846 -52.2059 197.946 -52.2059H3.05448C-17.8456 -52.2059 -34.7885 -30.8359 -34.7885 -4.47482Z"
-                    fill="#212A3E"
-                  />
-                  <path
-                    d="M44.4519 110.988L44.4519 56.3823"
-                    stroke="#0567FF"
-                    stroke-width="13"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M44.4519 152.505V108.588"
-                    stroke="#00C9C9"
-                    stroke-width="13"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <mask
-                    id="mask1_16_2"
-                    style="mask-type:luminance"
-                    maskUnits="userSpaceOnUse"
-                    x="62"
-                    y="45"
-                    width="109"
-                    height="121"
-                  >
-                    <path
-                      d="M170.731 45.8326H62.9974V165.564H170.731V45.8326Z"
-                      fill="white"
-                    />
-                  </mask>
-                  <g mask="url(#mask1_16_2)">
-                    <path
-                      d="M61.8461 165.673V45.9412H108.404C118.42 45.9412 127.244 47.5195 134.824 50.6491C142.457 53.8057 148.845 58.0855 153.988 63.489C159.104 68.9191 162.975 75.2587 165.574 82.5348C168.227 89.7571 169.58 97.4611 169.58 105.647C169.58 114.795 168.091 123.034 165.141 130.363C162.244 137.719 158.13 144.032 152.797 149.302C147.438 154.518 141.022 158.557 133.524 161.393C125.999 164.255 117.635 165.673 108.404 165.673H61.8461ZM135.798 105.647C135.798 101.019 135.149 96.8191 133.849 93.0206C132.604 89.1687 130.817 85.9319 128.435 83.2838C126.107 80.5821 123.265 78.4688 119.882 76.9709C116.471 75.4193 112.654 74.6168 108.404 74.6168H95.0867V136.997H108.404C112.735 136.997 116.579 136.221 119.99 134.643C123.455 133.092 126.324 130.898 128.652 128.116C130.953 125.281 132.712 121.964 133.957 118.165C135.176 114.313 135.798 110.14 135.798 105.647Z"
-                      fill="white"
-                    />
-                  </g>
-                </g>
-              </g>
-              <defs>
-                <clipPath id="clip0_16_2">
-                  <rect width="201" height="213" fill="white" />
-                </clipPath>
-              </defs>
-            </svg>
-
-            <p>Douvery Stores</p>
-          </div>
-        </a>
+        <LogoNavbar />
 
         <ul class="nav-links">
           <li class="tabs-nav">
@@ -117,7 +42,7 @@ export const NavBarCenter = component$(() => {
               {' '}
               <div class="content">
                 <p>Creación y Configuración de Productos </p>
-                <a href="/center/products/new/generate-product">
+                <a href="/center/products/new/new-product">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -893,8 +818,9 @@ export const NavBarCenter = component$(() => {
               <input
                 type="text"
                 placeholder="Search..."
-                class={`search-input ${isSearchOpen.setIsSearchOpen ? 'open' : ''
-                  }`}
+                class={`search-input ${
+                  isSearchOpen.setIsSearchOpen ? 'open' : ''
+                }`}
               />
             )}
 

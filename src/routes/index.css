@@ -9,8 +9,24 @@
 }
 
 .hr-div {
-    margin: 0 10px;
+    margin: 100px 10px;
     width: 100%;
+    max-width: 1580px;
     height: 1px;
-    background: #00000013;
+    background: #678fbc52;
+
+}
+
+@keyframes change-background-color-blue {
+    0% {
+        background-color: #678EBC;
+    }
+
+    50% {
+        background-color: #264875;
+    }
+
+    100% {
+        background-color: #102340;
+    }
 }

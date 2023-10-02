@@ -395,7 +395,7 @@ export default component$(() => {
             <div class="separator_section"></div>
 
             <div class="container__fast__access">
-              <a class="link_button" href='/center/products/new/generate-product/'>
+              <a class="link_button" href='/center/products/new/new-product/'>
                 <span class="button-icon">
                   {' '}
                   <svg

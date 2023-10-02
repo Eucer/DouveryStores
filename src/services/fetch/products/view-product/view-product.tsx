@@ -6,7 +6,7 @@ export async function fetchStoreProductsByDui(
 ): Promise<any> {
   const query = `
   query byDuiProduct($dui: String!) {
-    byDuiProduct(dui: $dui) {
+    findProductDui(dui: $dui) {
       dui
      
       name
@@ -17,6 +17,7 @@ export async function fetchStoreProductsByDui(
       gtin
       quantity
       maxQuantitySale
+      discount
      category {
       categoryName
     }
@@ -73,7 +74,7 @@ export async function fetchStoreProductsByDui(
 
     const data = await response.json();
 
-    return data.data.byDuiProduct[0];
+    return data.data.findProductDui[0];
   } catch (error) {
     console.error('Error fetching inventory products:', error);
     throw error;

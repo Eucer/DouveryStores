@@ -1,7 +1,7 @@
 import { component$, useStylesScoped$ } from '@builder.io/qwik';
-import { Grid4_img } from '~/components/(Center)/products/generate-product/upload_img/grid4_img/grid4_img';
-import { Horizontal_img } from '~/components/(Center)/products/generate-product/upload_img/horizontal_img/horizontal_img';
-import { Vertical_img } from '~/components/(Center)/products/generate-product/upload_img/vertical_img/vertical_img';
+import { Grid4_img } from '~/components/(Center)/products/new-product/upload_img/grid4_img/grid4_img';
+import { Horizontal_img } from '~/components/(Center)/products/new-product/upload_img/horizontal_img/horizontal_img';
+import { Vertical_img } from '~/components/(Center)/products/new-product/upload_img/vertical_img/vertical_img';
 import style from './product_images.css?inline';
 import { TitleLink } from '~/fuctions/title-link/title-link';
 export const Product_images = component$(

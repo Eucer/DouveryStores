@@ -187,7 +187,7 @@ export default component$(() => {
       storeCountry: store.storeCountry,
       storeLocation: store.storeLocation,
     });
-    value
+    value;
   });
   return (
     <>
@@ -244,8 +244,8 @@ export default component$(() => {
                   {action.isRunning
                     ? 'Loading...'
                     : action.value?.message
-                      ? 'Error, intente de nuevo'
-                      : 'Enviar'}{' '}
+                    ? 'Error, intente de nuevo'
+                    : 'Enviar'}{' '}
                 </button>
               </div>
             </>
@@ -522,7 +522,7 @@ const ShippingInfo = ({ action, handlersStore, store }: any) => {
 };
 
 export const head: DocumentHead = {
-  title: 'Register Store - Douvery Stores',
+  title: 'Register Store - Douvery Shops',
   meta: [
     {
       name: 'description',

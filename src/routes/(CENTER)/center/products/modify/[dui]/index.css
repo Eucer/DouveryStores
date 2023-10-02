@@ -1,6 +1,5 @@
 .container__all {
     width: 100%;
-    max-width: 1900px;
     min-height: 60rem;
     display: flex;
     flex-direction: column;
@@ -43,26 +42,17 @@
 }
 
 .container_view_product {
-    padding-top: 10px;
     max-width: 100%;
-
     display: grid;
-    grid-template-columns: 200px auto 300px;
-
-    padding: 0px 80px;
+    grid-template-columns: 300px auto 369px;
     gap: 20px;
 
 }
 
 .left {
-    padding: 20px 0px;
-    width: 200px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    justify-content: flex-start;
-    align-items: center;
-
 }
 
 .content__center {

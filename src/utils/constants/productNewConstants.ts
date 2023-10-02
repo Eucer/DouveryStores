@@ -14,6 +14,17 @@ export const categorySelect = [
     ],
   },
   {
+    id: 18,
+    name: "Gaming",
+    subcategories: [
+      "Consoles",
+      "Games",
+      "Accessories",
+      "Gaming Chairs",
+      "Gaming Wheels",
+    ],
+  },
+  {
     id: 2,
     name: "Clothing",
     subcategories: ["Men", "Women", "Children", "Babies", "Underwear"],
@@ -46,7 +57,15 @@ export const categorySelect = [
   {
     id: 8,
     name: "Books",
-    subcategories: ["Novels", "Non-fiction", "Children's", "Educational"],
+    subcategories: [
+      "Novels",
+      "Non-fiction",
+      "Self-help",
+      "Children's",
+      "Educational",
+      "Personal Development",
+      "Psychology",
+    ],
   },
   {
     id: 9,
@@ -62,8 +81,16 @@ export const categorySelect = [
   {
     id: 10,
     name: "Jewelry and Accessories",
-    subcategories: ["Necklaces", "Bracelets", "Earrings", "Rings", "Watches"],
+    subcategories: [
+      "Necklaces",
+      "Bracelets",
+      "Earrings",
+      "Rings",
+      "Watches",
+      "Smartwatches",
+    ],
   },
+
   {
     id: 11,
     name: "Bags and Luggage",
@@ -128,6 +155,26 @@ export const categorySelect = [
       "Dairy",
       "Organic Products",
       "Desserts",
+    ],
+  },
+  {
+    id: 19,
+    name: "Computers & Hardware",
+    subcategories: [
+      "Laptops",
+      "Desktops",
+      "Processors",
+      "Graphics Cards",
+      "Memory (RAM)",
+      "Motherboards",
+      "Storage (SSD/HDD)",
+      "Power Supplies",
+      "Cooling Systems",
+      "Cases",
+      "Monitors",
+      "Peripherals (Keyboard, Mouse, etc.)",
+      "Cables & Connectors",
+      "Networking",
     ],
   },
 ];

@@ -9,7 +9,7 @@ export const HowItWorksIndex = component$(() => {
       <div class="timeline">
         <div class="container left">
           <div class="content">
-            <h2>1 - Unirse a Douvery Stores</h2>
+            <h2>1 - Unirse a Douvery Shops</h2>
             <p>
               Regístrate para obtener una cuenta de vendedor en nuestra
               plataforma.

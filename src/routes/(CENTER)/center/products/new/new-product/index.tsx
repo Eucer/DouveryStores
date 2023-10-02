@@ -7,7 +7,7 @@ import {
 } from '@builder.io/qwik';
 import { BreadcrumbsSTL1 } from '~/components/breadcrumb/style1_breadcrumb/BreadcrumbsSTL1';
 import style from './index.css?inline';
-import { ProgressBarSteps } from '~/components/(Center)/products/generate-product/progress-bar-steps/progress-bar-steps';
+import { ProgressBarSteps } from '~/components/(Center)/products/new-product/progress-bar-steps/progress-bar-steps';
 import {
   zod$,
   type DocumentHead,
@@ -15,9 +15,9 @@ import {
   globalAction$,
 } from '@builder.io/qwik-city';
 import { urlServerLocalPostgres } from '~/services/util/server/server';
-import { Vertical_img } from '~/components/(Center)/products/generate-product/upload_img/vertical_img/vertical_img';
-import { Horizontal_img } from '~/components/(Center)/products/generate-product/upload_img/horizontal_img/horizontal_img';
-import { Grid4_img } from '~/components/(Center)/products/generate-product/upload_img/grid4_img/grid4_img';
+import { Vertical_img } from '~/components/(Center)/products/new-product/upload_img/vertical_img/vertical_img';
+import { Horizontal_img } from '~/components/(Center)/products/new-product/upload_img/horizontal_img/horizontal_img';
+import { Grid4_img } from '~/components/(Center)/products/new-product/upload_img/grid4_img/grid4_img';
 import { BulletProduct } from '~/components/(Center)/products/bullet-product/bullet-product';
 
 import { DouveryRight3 } from '~/components/icons/arrow-right-3';
@@ -185,7 +185,7 @@ export const useAction = globalAction$(
       required_error: 'Required',
     }),
     discount: z.number({
-      required_error: 'Required',
+
     }),
     category: z.string({
       required_error: 'Required',
@@ -226,7 +226,7 @@ export const useAction = globalAction$(
 export default component$(() => {
   useStylesScoped$(style);
 
-  const step = useSignal(4);
+  const step = useSignal(1);
   const nextStep = $(() => {
     step.value++;
   });
@@ -239,13 +239,13 @@ export default component$(() => {
     productSubCategory: '',
     selectedCategoryIndex: 1,
     selectedSubCategoryIndex: 1,
-    productName: 'Product Name Frontend',
+    productName: '',
     productPrice: 1,
-    productBrand: 'asdada',
-    productGTIN: 'wasdsads',
-    productDiscount: 1,
-    productMaxQty: '1',
-    productQty: 1,
+    productBrand: '',
+    productGTIN: '898978968968965',
+    productDiscount: 0,
+    productMaxQty: '',
+    productQty: 0,
     dimensionUnit: 'cm',
     productHeight: 1,
     productWidth: '1',
@@ -253,10 +253,10 @@ export default component$(() => {
     weightUnit: 'lb',
     productWeight: 1,
     pd_deatilImgBox: 'vertical_view',
-    productShortDescription: 'lorem ipsum',
-    productDescriptionFull: 'lorem ipsum',
-    productKeywords: ['lorem ipsum'],
-    productBullets: ['lorem ipsum'],
+    productShortDescription: '',
+    productDescriptionFull: '',
+    productKeywords: [''],
+    productBullets: [''],
     productHighlights: ['lorem ipsum'],
     productCondition: '',
   });
@@ -474,7 +474,7 @@ export default component$(() => {
         <div class="title_and_infos">
           <div class="title">
             <BreadcrumbsSTL1 />
-            <div class="product_new__title">Generate product</div>
+            <div class="product_new__title">New product</div>
           </div>
 
           {/* <button onClick$={handleBoldClick}>Bold</button>

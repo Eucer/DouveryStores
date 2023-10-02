@@ -1,6 +1,7 @@
 import { component$, useStylesScoped$ } from '@builder.io/qwik';
 import { DouveryIconVerifyBrand } from '~/components/icons/verify';
 import style from './about-store.css?inline';
+import { AssetsDouveryLgoSmall } from '~/components/douvery-assets/lgos/douvery-lgo-small';
 export const CardAboutStore = component$(() => {
   useStylesScoped$(style);
   return (
@@ -8,22 +9,18 @@ export const CardAboutStore = component$(() => {
       <div class="information">
         <div class="container-info-title">
           <div class="logo">
-            <img
-              width={60}
-              height={60}
-              src="https://res.cloudinary.com/douvery/image/upload/v1682700013/users/PEPITO-635c0ac87482cdf128be119a/moupkmy3bqsmwczvjggs.svg"
-              alt={'Douvery logo'}
-            />
+            <AssetsDouveryLgoSmall size="30" />
             <a href="#">Douvery</a>
             <DouveryIconVerifyBrand size="20" />
           </div>
           <p>
-            Welcome to the Official Douvery Store! We take pride in being the
-            only officially registered store under this name at douvery.com. At
-            Douvery, you'll find a wide range of high-quality products and
-            services offered by our company. We are committed to customer
-            satisfaction and work tirelessly to ensure your shopping experience
-            is exceptional.
+            ¡Bienvenido a la tienda oficial de Douvery! Estamos orgullosos de
+            ser la única tienda registrada oficialmente con este nombre en
+            douvery.com. En Douvery encontrará una amplia gama de productos y
+            servicios de alta calidad que ofrece nuestra empresa. Estamos
+            comprometidos con la satisfacción del cliente y trabajamos
+            incansablemente para garantizar que su experiencia de compra sea
+            excepcional.
           </p>
         </div>
 

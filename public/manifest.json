@@ -1,9 +1,28 @@
 {
   "$schema": "https://json.schemastore.org/web-manifest-combined.json",
-  "name": "Douvery Stores",
-  "short_name": "Douvery Stores",
-  "start_url": ".",
+  "name": "Douvery",
+  "short_name": "Douvery",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#fff",
-  "description": " Impulsando tus productos, mejorando tus servicios, construyendo el futuro juntos."
+  "description": "Disfruta, compra y comparte tu felicidad con nosotros, bienvenido a Douvery.",
+  "theme_color": "#fff",
+  "icons": [
+    {
+      "src": "logo/logo192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logo/logo192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo/logo512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }

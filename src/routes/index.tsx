@@ -25,7 +25,7 @@ export default component$(() => {
       </header>
       <div class="container-all">
         <Banner />
-        <div class="hr-div" />
+        <br />
         <BeautifulShops />
         <div class="hr-div" />
         <BenefitsINDEX />
@@ -39,7 +39,7 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-  title: 'Inicio - Douvery Stores',
+  title: 'Inicio - Douvery Shops',
   meta: [
     {
       name: 'description',

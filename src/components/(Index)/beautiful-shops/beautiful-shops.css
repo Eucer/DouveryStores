@@ -1,6 +1,7 @@
 .container__all {
 
     width: 100%;
+    max-width: 1560px;
     padding: 50px 50px;
     display: flex;
     flex-direction: column;
@@ -17,8 +18,9 @@
     width: 100%;
     text-align: start;
 }
-.show_more{
-    color: var(--color-secondary);
+
+.show_more {
+    color: var(--color-action-show-more);
 }
 
 .container__all p {

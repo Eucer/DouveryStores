@@ -1,4 +1,4 @@
-import { urlServerLocalPostgres } from "../util/server/server";
+import { urlServerLocalPostgres } from '../util/server/server';
 
 export async function loginUser(email: string, password: string): Promise<any> {
   const mutation = `
@@ -17,21 +17,21 @@ export async function loginUser(email: string, password: string): Promise<any> {
   };
 
   const response = await fetch(`${urlServerLocalPostgres}/graphql`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       query: mutation,
       variables: variables,
     }),
   });
-
+  console.log(response);
   if (!response.ok) {
-    throw new Error("Failed to log in");
+    throw new Error('Failed to log in');
   }
 
   const data = await response.json();
-
+  console.log(data);
   return data.data.loginUserStore;
 }
